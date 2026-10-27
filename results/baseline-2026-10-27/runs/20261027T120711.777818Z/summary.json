@@ -1,0 +1,13 @@
+{
+  "samples": 1486,
+  "states_seen": [
+    "WAITING",
+    "RUNNING",
+    "OBSTACLE_STOP"
+  ],
+  "last_state": "OBSTACLE_STOP",
+  "final_forward_displacement_m": 0.9345249999998977,
+  "maximum_visual_area_ratio": 0.06056134259259259,
+  "last_measured_forward_velocity_m_s": 0.0,
+  "note": "A stop command is not proof of physical stopping or safe clearance."
+}

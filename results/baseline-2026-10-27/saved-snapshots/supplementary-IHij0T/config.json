@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "image_topic": "/camera/image_raw",
+  "odom_topic": "/odom",
+  "cmd_topic": "/cmd_vel",
+  "speed": 0.05,
+  "goal_distance": 4.0,
+  "sensor_timeout": 2.0,
+  "red_area_threshold": 0.06,
+  "roi_top": 0.25,
+  "heading_gain": 1.0,
+  "max_angular_speed": 0.3,
+  "max_trial_seconds": 120.0,
+  "log_dir": "~/baseline-results",
+  "use_sim_time": true,
+  "run_id": "20261027T125230.325259Z",
+  "status": "LOCAL_BASELINE_NOT_FORMAL_EVALUATION"
+}

@@ -1,0 +1,9 @@
+Robot: TurtleBot3 Waffle Pi
+Robot spawn: x=0.0, y=0.0; verify initial heading toward +X
+Obstacle center: x=4.0, y=0.0, z=0.0
+Speed: 0.05 m/s
+Red area threshold: 0.0600
+Goal distance override: 4.0 m
+Rendering: LIBGL_ALWAYS_SOFTWARE=1
+Image viewer: closed
+Each trial: restart Gazebo and controller

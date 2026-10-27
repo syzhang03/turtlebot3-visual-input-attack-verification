@@ -136,3 +136,22 @@ To reduce this risk, the system will compare only their overlapping forward regi
 
 If fine-grained sensor alignment proves too difficult, we will simplify the experiment to a fixed forward route with a single distinctive obstacle, comparing the camera's binary obstacle/clear decision with LiDAR distance measurements in a predefined forward sector. Persistent disagreement between the two sensors will be treated as suspicious.
 
+
+
+## Implemented baseline and preliminary validation
+
+The repository now includes a camera-based forward-navigation prototype for
+Ubuntu 24.04 / ROS 2 Jazzy / Gazebo Harmonic. It uses HSV red-obstacle detection,
+odometry-based endpoint stopping, `TwistStamped` commands, and CSV logging.
+Perception and control currently share one node; attacks and LiDAR mitigation
+remain future work described in the proposal above.
+
+- [Build, run, interfaces, parameters and limitations](docs/baseline.md)
+- [Preliminary trial evidence and provenance](results/baseline-2026-10-27/README.md)
+- [Pinned TurtleBot3 source revisions](configs/turtlebot3.repos)
+- [AI assistance and human validation](docs/ai-usage.md)
+
+Wu Haonan ran the Ubuntu tests and simulation trials. All 10 unit tests passed
+in the supplied Ubuntu transcript. The evidence includes raw logs for clear-route,
+obstacle-approach, observation-only and immediate-stop development runs. This is
+not the final attack/defense evaluation or a general collision-avoidance claim.

@@ -1,0 +1,24 @@
+# ROS / Python generated output
+build/
+install/
+log/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+
+# Large recordings and VM files; retain small CSV/JSON evidence
+*.db3
+*.mcap
+*.bag
+*.vmdk
+*.vmem
+*.vmss
+*.vmsn
+*.iso
+
+# Editor / operating system files
+.DS_Store
+Thumbs.db
+.vscode/
