@@ -1,0 +1,2 @@
+Obstacle contact: no
+Observation: The robot moved forward and stopped completely before touching the obstacle.

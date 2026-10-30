@@ -1,0 +1,11 @@
+{
+  "samples": 15869,
+  "states_seen": [
+    "DISABLED"
+  ],
+  "last_state": "DISABLED",
+  "final_forward_displacement_m": 2.9294485588279718e-18,
+  "maximum_visual_area_ratio": 0.06323784722222223,
+  "last_measured_forward_velocity_m_s": 8.933550615572699e-21,
+  "note": "A stop command is not proof of physical stopping or safe clearance."
+}
