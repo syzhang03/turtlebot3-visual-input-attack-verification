@@ -44,6 +44,51 @@ class TrialTests(unittest.TestCase):
     def test_wrap_heading_at_pi_boundary(self):
         self.assertAlmostEqual(wrap_angle(6.2), -0.083185307, places=7)
 
+    def test_disabled_goal_does_not_stop_at_or_beyond_endpoint(self):
+        trial = Trial(goal=4.0, speed=1.0, enable_goal_stop=False)
+        for distance in (0, 3.99, 4.0, 4.016, 5.0):
+            self.assertEqual(trial.step(True, True, 0, 0, False, distance), 1.0)
+            self.assertEqual(trial.state, 'RUNNING')
+
+    def test_visual_stop_still_latches_when_goal_disabled(self):
+        trial = Trial(goal=4.0, speed=1.0, enable_goal_stop=False)
+        trial.step(True, True, 0, 0, False, 4.016)
+        self.assertEqual(trial.step(True, True, 0, 0, True, 4.1), 0.0)
+        self.assertEqual(trial.state, 'OBSTACLE_STOP')
+        self.assertEqual(trial.step(True, True, 0, 0, False, 4.2), 0.0)
+
+    def test_timeout_and_fault_still_stop_with_goal_disabled(self):
+        for image_age, odom_age, distance, reason in (
+            (2.1, 0, 4.1, 'SENSOR_TIMEOUT'),
+            (0, 2.1, 4.1, 'SENSOR_TIMEOUT'),
+            (0, 0, float('nan'), 'FAULT'),
+        ):
+            trial = Trial(goal=4.0, enable_goal_stop=False)
+            trial.step(True, True, 0, 0, False, 4.0)
+            self.assertEqual(trial.step(True, True, image_age, odom_age, False, distance), 0.0)
+            self.assertEqual(trial.state, reason)
+
+    def test_later_visual_callback_does_not_replace_first_stop_reason(self):
+        for initial in Trial.STOP_STATES:
+            trial = Trial()
+            trial.stop(initial)
+            trial.stop('OBSTACLE_STOP')
+            self.assertEqual(trial.state, initial)
+            self.assertEqual(trial.step(True, True, 0, 0, True, 0), 0.0)
+
+    def test_visual_callback_between_ticks_is_latched(self):
+        trial = Trial(enable_goal_stop=False)
+        trial.step(True, True, 0, 0, False, 0)
+        trial.stop('OBSTACLE_STOP')
+        self.assertEqual(trial.step(True, True, 0, 0, False, 0.1), 0.0)
+        trial.stop('FAULT')
+        self.assertEqual(trial.state, 'OBSTACLE_STOP')
+
+    def test_goal_stop_requires_boolean(self):
+        for value in ('false', 0, 1, None):
+            with self.assertRaises(ValueError):
+                Trial(enable_goal_stop=value)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,5 +1,7 @@
 # Camera-based forward-navigation baseline
 
+> 本页保留 2026-10-27 初版基线的依赖与复现说明。当前延迟重放场景、1.0 m/s、0.4 阈值与终点停车关闭的步骤见 [当前固定场景](experiment-baseline.md)。
+
 This initial implementation drives TurtleBot3 Waffle Pi along its initial heading, stops at an odometry-defined endpoint or on a red visual obstacle, and records commands and observations. It is a controlled-scene prototype, not a general obstacle detector. LiDAR does not participate in its controller. Camera attacks, a cross-sensor monitor, and the final four-group evaluation are not implemented.
 
 The baseline combines visual perception and control in one node at this stage. A future camera relay can connect through the configurable `image_topic`. Separating the perception and control nodes remains a possible integration change relative to the proposal.

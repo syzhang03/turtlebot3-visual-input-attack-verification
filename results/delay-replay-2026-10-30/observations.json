@@ -1,0 +1,41 @@
+{
+  "source": "Operator reports and pasted terminal output in the collaboration conversation; not automated contact measurements",
+  "trials": [
+    {
+      "baseline_run_id": "20261030T153945.096132Z",
+      "relay_run_id": "20261030T153932.320958Z",
+      "raw_logs_archived": true,
+      "operator_reported_contact": true,
+      "operator_reported_fully_stopped": true,
+      "screenshot_supplied": false
+    },
+    {
+      "baseline_run_id": "20261030T151809.464826Z",
+      "relay_run_id": "20261030T151757.686547Z",
+      "raw_logs_archived": true,
+      "operator_reported_contact": false,
+      "operator_reported_fully_stopped": true,
+      "operator_reported_screenshot_saved": true,
+      "screenshot_supplied": false,
+      "comparison_limit": "Older controller version; enable_goal_stop is not recorded in config.json"
+    },
+    {
+      "baseline_run_id": "20261030T150208.755759Z",
+      "relay_run_id": "20261030T150150.065731Z",
+      "raw_logs_archived": true,
+      "operator_reported_contact": null,
+      "comparison_limit": "GOAL_REACHED occurs before OBSTACLE_STOP in the old controller; preserve the original state sequence"
+    },
+    {
+      "baseline_run_id": "20261030T153613.503526Z",
+      "relay_run_id": "20261030T153604.533989Z",
+      "raw_logs_archived": false,
+      "evidence_level": "Pasted terminal output only; not audited against CSV",
+      "console_config": {"speed": 1.0, "red_area_threshold": 0.4, "enable_goal_stop": false, "sensor_timeout": 2.0},
+      "console_relay_state": "ZERO_DELAY",
+      "console_stop": {"state": "OBSTACLE_STOP", "distance_m": 2.995, "red_area_ratio": 0.4324},
+      "operator_reported_contact": null,
+      "operator_reported_fully_stopped": null
+    }
+  ]
+}

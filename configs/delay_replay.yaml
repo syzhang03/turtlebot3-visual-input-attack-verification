@@ -1,0 +1,12 @@
+delay_replay:
+  ros__parameters:
+    use_sim_time: true
+    input_topic: /camera/image_raw
+    output_topic: /attack/image_raw
+    output_reliability: reliable
+    delay_s: 1.0
+    start_s: 0.0
+    duration_s: 60.0
+    max_frames: 300
+    max_buffer_bytes: 268435456
+    log_dir: ~/replay-results

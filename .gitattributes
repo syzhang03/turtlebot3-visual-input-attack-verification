@@ -12,3 +12,6 @@
 *.jpg binary
 results/** -text whitespace=cr-at-eol
 results/**/events.csv linguist-generated=true
+results/**/frames.csv linguist-generated=true
+# Preserve the deployed scene bytes used by the documented cleanup hash.
+worlds/intersection-white-line.sdf -text whitespace=cr-at-eol

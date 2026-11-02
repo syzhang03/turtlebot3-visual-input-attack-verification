@@ -1,6 +1,22 @@
 # 本版更新内容
 
-This document summarizes the implemented changes and validation evidence in the `wu-haonan-visual-baseline` branch. The shared project proposal is in [README.md](README.md).
+## 延迟重放与仿真核对（实验 2026-10-30，整理 2026-11-02）
+
+- 新增独立 `delay_replay` 相机中继：按输入帧的仿真时间选择历史图像，保留当前消息头。
+- 支持延迟、开始时间、持续时间、缓存帧数和载荷内存上限；记录逐帧实际延迟及攻击状态。
+- 缓冲不足时实时转发并标记；重复时间戳不输出，时间倒退或格式变化时清空缓冲。
+- 中继输出和控制器输入使用 reliable、深度 1；新增逐帧耗时及双路相机检查工具。
+- 一条命令加载房子、道路、白线和 X=4.0 m 的红方块。当前实验统一速度 **1.0 m/s**、视觉阈值 **0.4**、终点停车 **关闭**，首次停止原因锁定。
+- 最新 1 秒试验配置和原始日志已核对：运动至首次停车的 47 个匹配图像帧实际重放延迟为 **1.022–1.353 仿真秒**，平均 **1.099 秒**。首次停止为 `OBSTACLE_STOP`，触发位移约 **4.000 m**。
+- 停车前最后一个采样仍记录前进指令 1.0 m/s、里程计速度约 -0.00164 m/s；随后控制指令归零，停车起的 17,185 条记录均为零速度指令。操作者报告接触方块并完全停住；日志本身不提供精确接触时刻。
+- 原始日志、配置、SHA-256 和可重算核对结果见 [本阶段证据](results/delay-replay-2026-10-30/README.md)。旧 0.5 秒及旧 1 秒试验分开归档；旧 1 秒试验首先触发终点停车。
+- 运行步骤见 [当前固定场景](docs/experiment-baseline.md)；机制与核对方法见 [延迟重放指南](docs/delay-replay.md)。
+- 本地测试及环境限制记录在 [验证记录](results/delay-replay-2026-10-30/validation/README.md)。实际 Gazebo 运行由操作者在 Ubuntu 完成；本次 Windows 检查不等同于重新运行 ROS/Gazebo。
+- 已完成延迟注入和单次接触案例核对。尚未完成同版本重复对照、自动接触/净距测量及 LiDAR 防御评估，不报告攻击成功率。
+
+以下为此前已交付的视觉基线及其验证记录。
+
+The sections below retain the earlier visual-baseline delivery and its evidence. The shared project proposal remains in [README.md](README.md).
 
 ## Implementation delivered
 
@@ -40,7 +56,7 @@ I exported the Ubuntu run data and supplied observations and screenshots. With C
 
 The evidence index also records missing screenshots and the saved-copy discrepancy. The earlier saved CSV and the full export of the supplementary run are two snapshots of one trial, not separate trials.
 
-## Current completion boundary
+## Historical baseline completion boundary (2026-10-27)
 
 This version delivers the visual-navigation baseline and its preliminary validation evidence. Camera-input attacks, LiDAR cross-sensor verification, automated collision/clearance and latency evaluation, and the formal attack/defense comparison have not been implemented or validated in this version.
 

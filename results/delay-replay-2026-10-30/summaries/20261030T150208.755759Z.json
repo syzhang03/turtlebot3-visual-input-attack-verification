@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "baseline_run_id": "20261030T150208.755759Z",
+  "relay_run_id": "20261030T150150.065731Z",
+  "baseline_config": {
+    "enabled": true,
+    "image_topic": "/attack/image_raw",
+    "image_reliability": "reliable",
+    "odom_topic": "/odom",
+    "cmd_topic": "/cmd_vel",
+    "speed": 1.0,
+    "goal_distance": 4.0,
+    "sensor_timeout": 2.0,
+    "red_area_threshold": 0.4,
+    "roi_top": 0.25,
+    "heading_gain": 1.0,
+    "max_angular_speed": 0.3,
+    "max_trial_seconds": 120.0,
+    "log_dir": "~/baseline-results",
+    "use_sim_time": true,
+    "run_id": "20261030T150208.755759Z",
+    "status": "LOCAL_BASELINE_NOT_FORMAL_EVALUATION"
+  },
+  "relay_config": {
+    "input_topic": "/camera/image_raw",
+    "output_topic": "/attack/image_raw",
+    "output_reliability": "reliable",
+    "delay_s": 1.0,
+    "start_s": 0.0,
+    "duration_s": 600.0,
+    "max_frames": 300,
+    "max_buffer_bytes": 268435456,
+    "log_dir": "~/replay-results",
+    "run_id": "20261030T150150.065731Z",
+    "use_sim_time": true,
+    "transport_revision": "reliable-output-v1",
+    "time_basis": "input image header stamps; schedule starts at first frame"
+  },
+  "source_files": [
+    {
+      "path": "runs/20261030T150208.755759Z/config.json",
+      "bytes": 490,
+      "sha256": "f1f5709c0b6efc00dc35f72bb58fc5ce25910de54569d3039de1d783f3e48d2c"
+    },
+    {
+      "path": "runs/20261030T150208.755759Z/events.csv",
+      "bytes": 608529,
+      "sha256": "674bbb6f8ac5f1935c03fb4e25009802b0a46ccd1c04b19030b597e75d15ac13"
+    },
+    {
+      "path": "runs/20261030T150150.065731Z/config.json",
+      "bytes": 447,
+      "sha256": "7a7feacf576a91257e9eb8e18fb51af8b02bd3011f1604e70e9435d21b443453"
+    },
+    {
+      "path": "runs/20261030T150150.065731Z/frames.csv",
+      "bytes": 156254,
+      "sha256": "9b62bee81cb92b4d2175d15f2cd6afbd86cbbe97cc1bcd104bb70ea44cd8772e"
+    }
+  ],
+  "method": {
+    "window": "First RUNNING through first stop, inclusive",
+    "join": "round(image_stamp_s * 1e9) equals relay input_stamp_ns; unique input stamps",
+    "delay": "(input_stamp_ns - selected_source_stamp_ns) / 1e9; simulation seconds",
+    "weighting": "One sample per distinct image header observed in controller CSV ticks",
+    "coverage_limit": "Control ticks may omit intermediate callbacks; this is not every received image",
+    "speed": "cmd_v/cmd_w are controller publish-call values; odom_v is reported odometry",
+    "contact": "No contact detector or independent cmd_vel recording is present",
+    "low_speed_filter": "RUNNING, distance_m > 1, cmd_v > 0.1, abs(odom_v) < 0.02"
+  },
+  "row_counts": {
+    "events": 4351,
+    "frames": 1137
+  },
+  "image_join": {
+    "unique_stamps": 41,
+    "matched": 41,
+    "unmatched": 0
+  },
+  "actual_replay_delay_sim_s": {
+    "count": 41,
+    "min": 1.022,
+    "mean": 1.094731707317073,
+    "max": 1.386
+  },
+  "matched_relay_states": [
+    "REPLAY"
+  ],
+  "matched_buffer_resets": 0,
+  "delay_arithmetic_mismatch_rows": 0,
+  "first_stop": {
+    "csv_line": 117,
+    "state": "GOAL_REACHED",
+    "wall_elapsed_s": 11.659190539001429,
+    "sim_time_s": 14.908000000000001,
+    "distance_m": 4.015655157432678,
+    "red_area_ratio": 0.37983217592592594,
+    "cmd_v": 0.0,
+    "cmd_w": 0.0,
+    "odom_v": 1.000000000000023,
+    "image_stamp_s": 14.752,
+    "odom_stamp_s": 14.9,
+    "relative_to_stop_wall_s": 0.0
+  },
+  "stop_frame": {
+    "input_stamp_ns": 14752000000,
+    "selected_source_stamp_ns": 13696000000,
+    "actual_delay_s": 1.056,
+    "content_age_at_control_tick_sim_s": 1.2120000000000015
+  },
+  "state_transitions": [
+    {
+      "csv_line": 2,
+      "state": "WAITING",
+      "wall_elapsed_s": 0.1600588549990789,
+      "sim_time_s": 10.292,
+      "distance_m": 0.0,
+      "red_area_ratio": 0.0,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 1.3234889800848443e-21,
+      "image_stamp_s": null,
+      "odom_stamp_s": 10.28,
+      "relative_to_stop_wall_s": -11.49913168400235
+    },
+    {
+      "csv_line": 3,
+      "state": "RUNNING",
+      "wall_elapsed_s": 0.25941445699936594,
+      "sim_time_s": 10.319,
+      "distance_m": 0.0,
+      "red_area_ratio": 0.03394097222222222,
+      "cmd_v": 1.0,
+      "cmd_w": 0.0,
+      "odom_v": 4.1359030627651384e-22,
+      "image_stamp_s": 10.264,
+      "odom_stamp_s": 10.3,
+      "relative_to_stop_wall_s": -11.399776082002063
+    },
+    {
+      "csv_line": 117,
+      "state": "GOAL_REACHED",
+      "wall_elapsed_s": 11.659190539001429,
+      "sim_time_s": 14.908000000000001,
+      "distance_m": 4.015655157432678,
+      "red_area_ratio": 0.37983217592592594,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 1.000000000000023,
+      "image_stamp_s": 14.752,
+      "odom_stamp_s": 14.9,
+      "relative_to_stop_wall_s": 0.0
+    },
+    {
+      "csv_line": 123,
+      "state": "OBSTACLE_STOP",
+      "wall_elapsed_s": 12.262949796000612,
+      "sim_time_s": 15.144,
+      "distance_m": 4.0175918920743845,
+      "red_area_ratio": 0.6067491319444445,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.0,
+      "image_stamp_s": 15.082,
+      "odom_stamp_s": 15.14,
+      "relative_to_stop_wall_s": 0.603759256999183
+    }
+  ],
+  "stop_window": [
+    {
+      "csv_line": 114,
+      "state": "RUNNING",
+      "wall_elapsed_s": 11.36348052899848,
+      "sim_time_s": 14.785,
+      "distance_m": 3.9060004700719917,
+      "red_area_ratio": 0.3052228009259259,
+      "cmd_v": 1.0,
+      "cmd_w": -4.180158380783981e-08,
+      "odom_v": 1.000000000000023,
+      "image_stamp_s": 14.587,
+      "odom_stamp_s": 14.78,
+      "relative_to_stop_wall_s": -0.2957100100029493
+    },
+    {
+      "csv_line": 115,
+      "state": "RUNNING",
+      "wall_elapsed_s": 11.459699437000381,
+      "sim_time_s": 14.817,
+      "distance_m": 3.926000470071989,
+      "red_area_ratio": 0.37983217592592594,
+      "cmd_v": 1.0,
+      "cmd_w": -4.096598121800828e-08,
+      "odom_v": 1.000000000000023,
+      "image_stamp_s": 14.752,
+      "odom_stamp_s": 14.8,
+      "relative_to_stop_wall_s": -0.1994911020010477
+    },
+    {
+      "csv_line": 116,
+      "state": "RUNNING",
+      "wall_elapsed_s": 11.558967824999854,
+      "sim_time_s": 14.873000000000001,
+      "distance_m": 3.9756551574338035,
+      "red_area_ratio": 0.37983217592592594,
+      "cmd_v": 1.0,
+      "cmd_w": -7.534023806999652e-06,
+      "odom_v": 0.999999999999801,
+      "image_stamp_s": 14.752,
+      "odom_stamp_s": 14.86,
+      "relative_to_stop_wall_s": -0.10022271400157479
+    },
+    {
+      "csv_line": 117,
+      "state": "GOAL_REACHED",
+      "wall_elapsed_s": 11.659190539001429,
+      "sim_time_s": 14.908000000000001,
+      "distance_m": 4.015655157432678,
+      "red_area_ratio": 0.37983217592592594,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 1.000000000000023,
+      "image_stamp_s": 14.752,
+      "odom_stamp_s": 14.9,
+      "relative_to_stop_wall_s": 0.0
+    },
+    {
+      "csv_line": 118,
+      "state": "GOAL_REACHED",
+      "wall_elapsed_s": 11.758785270998487,
+      "sim_time_s": 14.946000000000002,
+      "distance_m": 4.017626185968799,
+      "red_area_ratio": 0.37983217592592594,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.0,
+      "image_stamp_s": 14.752,
+      "odom_stamp_s": 14.94,
+      "relative_to_stop_wall_s": 0.09959473199705826
+    },
+    {
+      "csv_line": 119,
+      "state": "GOAL_REACHED",
+      "wall_elapsed_s": 11.858905010001763,
+      "sim_time_s": 14.988000000000001,
+      "distance_m": 4.017626185968799,
+      "red_area_ratio": 0.37983217592592594,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.0,
+      "image_stamp_s": 14.752,
+      "odom_stamp_s": 14.98,
+      "relative_to_stop_wall_s": 0.19971447100033402
+    },
+    {
+      "csv_line": 120,
+      "state": "GOAL_REACHED",
+      "wall_elapsed_s": 11.959318532000907,
+      "sim_time_s": 15.015,
+      "distance_m": 4.017616216662931,
+      "red_area_ratio": 0.37983217592592594,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": -0.0009969305870605183,
+      "image_stamp_s": 14.752,
+      "odom_stamp_s": 15.0,
+      "relative_to_stop_wall_s": 0.300127992999478
+    },
+    {
+      "csv_line": 121,
+      "state": "GOAL_REACHED",
+      "wall_elapsed_s": 12.05880406900178,
+      "sim_time_s": 15.076,
+      "distance_m": 4.017603677582954,
+      "red_area_ratio": 0.37983217592592594,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.0,
+      "image_stamp_s": 14.752,
+      "odom_stamp_s": 15.06,
+      "relative_to_stop_wall_s": 0.3996135300003516
+    }
+  ],
+  "after_stop": {
+    "rows": 4236,
+    "nonzero_command_rows": 0,
+    "first_odom_abs_below_0_02": {
+      "csv_line": 118,
+      "state": "GOAL_REACHED",
+      "wall_elapsed_s": 11.758785270998487,
+      "sim_time_s": 14.946000000000002,
+      "distance_m": 4.017626185968799,
+      "red_area_ratio": 0.37983217592592594,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.0,
+      "image_stamp_s": 14.752,
+      "odom_stamp_s": 14.94,
+      "relative_to_stop_wall_s": 0.09959473199705826
+    },
+    "odom_after_first_low": {
+      "count": 4235,
+      "min": -0.0009969305870605183,
+      "mean": -2.3562715428810836e-07,
+      "max": 0.0
+    },
+    "final_sample": {
+      "csv_line": 4352,
+      "state": "OBSTACLE_STOP",
+      "wall_elapsed_s": 435.15892586300106,
+      "sim_time_s": 135.542,
+      "distance_m": 4.017591786267496,
+      "red_area_ratio": 0.0,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.0,
+      "image_stamp_s": 135.4,
+      "odom_stamp_s": 135.54,
+      "relative_to_stop_wall_s": 423.49973532399963
+    }
+  },
+  "prestop_nonzero_command_low_odom_samples": [
+    {
+      "csv_line": 112,
+      "state": "RUNNING",
+      "wall_elapsed_s": 11.159530870998424,
+      "sim_time_s": 14.700000000000001,
+      "distance_m": 3.8479194964084145,
+      "red_area_ratio": 0.3052228009259259,
+      "cmd_v": 1.0,
+      "cmd_w": -2.7187135557738867e-08,
+      "odom_v": -0.0017567238429272436,
+      "image_stamp_s": 14.587,
+      "odom_stamp_s": 14.7,
+      "relative_to_stop_wall_s": -0.4996596680030052
+    },
+    {
+      "csv_line": 113,
+      "state": "RUNNING",
+      "wall_elapsed_s": 11.258965446999355,
+      "sim_time_s": 14.738000000000001,
+      "distance_m": 3.847908411573003,
+      "red_area_ratio": 0.3052228009259259,
+      "cmd_v": 1.0,
+      "cmd_w": -4.174931899515299e-08,
+      "odom_v": -0.0001547338627228001,
+      "image_stamp_s": 14.587,
+      "odom_stamp_s": 14.72,
+      "relative_to_stop_wall_s": -0.40022509200207423
+    }
+  ]
+}
