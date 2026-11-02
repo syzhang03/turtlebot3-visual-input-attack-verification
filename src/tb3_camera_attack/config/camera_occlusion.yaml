@@ -1,0 +1,11 @@
+camera_occlusion:
+  ros__parameters:
+    use_sim_time: true
+    input_topic: /camera/image_raw
+    output_topic: /camera/attacked_image
+    attack_enabled: false
+    # Normalized top-left position and size; matches the default detector ROI.
+    mask_x: 0.2
+    mask_y: 0.25
+    mask_width: 0.6
+    mask_height: 0.75
