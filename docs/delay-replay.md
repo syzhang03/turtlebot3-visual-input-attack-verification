@@ -2,6 +2,7 @@
 
 本版新增 `delay_replay` 相机中继，并为控制器增加输入 QoS、可关闭终点停车及首次停止原因锁定。组长的根 README 保持原样。
 已有 Ubuntu/ROS 2/Gazebo 试验及日志核对，见 [本阶段证据](../results/delay-replay-2026-10-30/README.md)。当前有单次接触案例，同版本重复对照仍待补齐。
+组员复现环境、运行三组延迟或接入防御节点，见 [复现与防御接入指南](reproduce-and-defense.md)。
 
 ## 数据与时间规则
 

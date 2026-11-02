@@ -1,5 +1,14 @@
 {
   "source": "Operator reports and pasted terminal output in the collaboration conversation; not automated contact measurements",
+  "stage_observations_added_2026_11_02": {
+    "source": "Operator's stage summary; white-line positions are visual observations, not an automatic crossing measurement",
+    "observations": [
+      {"delay_s": 0.0, "outcome": "Robot stopped at the white line"},
+      {"delay_s": 0.5, "outcome": "Robot passed the white line, then stopped without contacting the block"},
+      {"delay_s": 1.0, "outcome": "Robot contacted the red block and then fully stopped"}
+    ],
+    "specific_run_ids_newly_identified": false
+  },
   "trials": [
     {
       "baseline_run_id": "20261030T153945.096132Z",
