@@ -1,6 +1,6 @@
 # 延迟重放复现与防御接入
 
-本指南用于在另一台 Ubuntu 机器上复现房子、道路、白线和红方块场景，并把组员的防御节点接入现有链路。工作分支为 `delayed-frame-replay`，仓库目录以下统一使用 `~/tb3-delay-replay`。
+本指南用于在另一台 Ubuntu 机器上复现房子、道路、白线和红方块场景，并把组员的防御节点接入现有链路。工作分支为 `wuahonan-attack-1-delayed-frame-replay`，仓库目录以下统一使用 `~/tb3-delay-replay`。
 
 ## 环境与一次性准备
 
@@ -21,7 +21,7 @@ source /opt/ros/jazzy/setup.bash
 下载工作分支到 Ubuntu 本地文件系统，不在 VMware 共享挂载目录内构建：
 
 ```bash
-git clone --branch delayed-frame-replay \
+git clone --branch wuahonan-attack-1-delayed-frame-replay \
   https://github.com/syzhang03/turtlebot3-visual-input-attack-verification.git \
   ~/tb3-delay-replay
 ```
