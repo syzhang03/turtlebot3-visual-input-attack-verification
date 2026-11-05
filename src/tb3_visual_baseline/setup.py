@@ -10,5 +10,8 @@ setup(
     install_requires=['setuptools'], zip_safe=True,
     maintainer='DASE7508 team', maintainer_email='maintainer@example.com',
     description='Camera-only forward navigation baseline', license='Apache-2.0',
-    entry_points={'console_scripts': ['baseline = tb3_visual_baseline.node:main']},
+    entry_points={'console_scripts': [
+        'baseline = tb3_visual_baseline.node:main',
+        'delay_replay = tb3_visual_baseline.replay_node:main',
+    ]},
 )
