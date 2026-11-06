@@ -32,6 +32,9 @@ def main():
     parser.add_argument('--case', choices=['suite', 'obstacle', 'clear'], default='suite')
     parser.add_argument('--goal-distance', type=float)
     parser.add_argument('--ground-truth', action='store_true', help='Record evaluation-only simulator poses')
+    parser.add_argument('--controller', choices=['lidar', 'fusion'], default='lidar')
+    parser.add_argument('--calibration-mode', action='store_true')
+    parser.add_argument('--expected-stop')
     args = parser.parse_args()
     if args.delay is not None and (not math.isfinite(args.delay) or args.delay < 0):
         parser.error('--delay must be finite and nonnegative')
@@ -193,11 +196,21 @@ def main():
         elif args.case == 'clear':
             cases = [('clear_segment', 'GOAL_REACHED')]
         for case, expected in cases:
+            if args.controller == 'fusion' and case == 'obstacle':
+                expected = ('ANOMALY_STOP' if args.occlusion or (args.delay or 0) > 0
+                            else 'OBSTACLE_STOP')
+            if args.expected_stop:
+                expected = args.expected_stop
             forwarding[0] = True
             command = ['ros2', 'run', 'tb3_lidar_baseline', 'lidar_baseline', '--ros-args',
                        '--params-file', str(project / 'configs/lidar_only.yaml'),
                        '-p', 'enabled:=true', '-p', 'scan_topic:=/validation/scan',
                        '-p', f'log_dir:={output / case}']
+            if args.controller == 'fusion':
+                command[2:4] = ['tb3_camera_lidar_monitor', 'camera_lidar_monitor']
+                command[6] = str(project/'configs/camera_lidar.yaml')
+                if args.calibration_mode:
+                    command += ['-p', 'calibration_mode:=true', '-p', 'speed:=0.3']
             if case == 'clear_segment':
                 command += ['-p', f'goal_distance:={args.goal_distance or 0.5}']
             process = start(command, case)
@@ -213,7 +226,8 @@ def main():
                 if case == 'scan_interruption' and event['state'] == 'RUNNING' and not interrupted:
                     forwarding[0], interrupted = False, True
                 if event['state'] in ('GOAL_REACHED', 'OBSTACLE_STOP', 'SENSOR_TIMEOUT',
-                                      'SENSOR_INVALID', 'FAULT', 'TRIAL_TIMEOUT', 'COMMAND_CONFLICT'):
+                                      'SENSOR_INVALID', 'FAULT', 'TRIAL_TIMEOUT', 'COMMAND_CONFLICT',
+                                      'ANOMALY_STOP', 'VISUAL_STOP'):
                     spin_for(2)
                     final = last_event(case)
                     passed = (final['state'] == expected and float(final['cmd_v']) == 0
@@ -259,6 +273,7 @@ def main():
         (output / 'summary.json').write_text(json.dumps(dict(
             checked_at_utc=datetime.now(timezone.utc).isoformat(),
             status='DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION',
+            controller=args.controller, calibration_mode=args.calibration_mode,
             cases=outcomes, empty_world=args.empty_world, camera_delay_s=args.delay,
             received_attacked_images=attacked_images[0],
             camera_occlusion=args.occlusion, black_roi_images=black_roi_images[0],

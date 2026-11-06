@@ -30,8 +30,8 @@ def yaw(q):
 
 
 class LidarBaseline(Node):
-    def __init__(self):
-        super().__init__('lidar_baseline')
+    def __init__(self, node_name='lidar_baseline'):
+        super().__init__(node_name)
         defaults = dict(
             enabled=False, scan_topic='/scan', odom_topic='/odom', cmd_topic='/cmd_vel',
             base_frame='base_footprint', speed=1.0, goal_distance=4.0,
@@ -71,7 +71,8 @@ class LidarBaseline(Node):
         self.run_dir.mkdir(parents=True, exist_ok=False)
         (self.run_dir / 'config.json').write_text(json.dumps(dict(
             self.cfg, run_id=run_id, use_sim_time=self.get_parameter('use_sim_time').value,
-            revision='lidar-only-v1', status='DEVELOPMENT_NOT_FORMAL_EVALUATION'), indent=2))
+            revision=('lidar-only-v1' if node_name == 'lidar_baseline' else 'camera-lidar-monitor-v1'),
+            status='DEVELOPMENT_NOT_FORMAL_EVALUATION'), indent=2))
         self.log = (self.run_dir / 'events.csv').open('w', newline='')
         self.writer = csv.writer(self.log)
         self.writer.writerow(['wall_elapsed_s', 'sim_time_s', 'state', 'distance_m',
@@ -144,6 +145,9 @@ class LidarBaseline(Node):
         msg.twist.linear.x, msg.twist.angular.z = float(linear), float(angular)
         self.command.publish(msg)
 
+    def extra_input_status(self, wall, sim):
+        return True, True
+
     def tick(self):
         wall = time.monotonic()
         sim = self.get_clock().now().nanoseconds * 1e-9
@@ -156,6 +160,8 @@ class LidarBaseline(Node):
         fresh = (max(scan_age, odom_age) <= self.cfg['sensor_timeout_wall']
                  and all(s is not None and -0.05 <= sim - s <= self.cfg['max_stamp_age_sim']
                          for s in (self.scan_stamp, self.odom_stamp)))
+        extra_ready, extra_fresh = self.extra_input_status(wall, sim)
+        ready, fresh = ready and extra_ready, fresh and extra_fresh
         if ready and fresh and self.origin is None:
             self.origin = self.pose
         distance = 0.0

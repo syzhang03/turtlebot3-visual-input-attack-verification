@@ -1,0 +1,8 @@
+Starting >>> tb3_lidar_baseline
+Starting >>> tb3_visual_baseline
+Finished <<< tb3_lidar_baseline [1.69s]
+Finished <<< tb3_visual_baseline [1.71s]
+Starting >>> tb3_camera_lidar_monitor
+Finished <<< tb3_camera_lidar_monitor [2.43s]
+
+Summary: 3 packages finished [4.40s]
