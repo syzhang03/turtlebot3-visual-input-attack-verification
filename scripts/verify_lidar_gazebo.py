@@ -37,6 +37,7 @@ def main():
     parser.add_argument('--calibration-mode', action='store_true')
     parser.add_argument('--expected-stop')
     parser.add_argument('--fault', choices=['camera-loss', 'scan-loss', 'camera-freeze'])
+    parser.add_argument('--fault-clearance', type=float, help='Inject only after reaching this LiDAR corridor gap')
     args = parser.parse_args()
     if args.delay is not None and (not math.isfinite(args.delay) or args.delay < 0):
         parser.error('--delay must be finite and nonnegative')
@@ -46,6 +47,9 @@ def main():
         parser.error('Obstacle case requires the obstacle scene')
     if args.goal_distance is not None and (not math.isfinite(args.goal_distance) or args.goal_distance <= 0):
         parser.error('--goal-distance must be finite and positive')
+    if args.fault_clearance is not None and (not args.fault or not math.isfinite(args.fault_clearance)
+                                           or args.fault_clearance <= 0):
+        parser.error('--fault-clearance requires a fault and a positive finite distance')
     project = Path(__file__).resolve().parents[1]
     os.environ.setdefault('TURTLEBOT3_MODEL', 'waffle_pi')
     os.environ.setdefault('LIBGL_ALWAYS_SOFTWARE', '1')
@@ -216,7 +220,7 @@ def main():
             if args.expected_stop:
                 expected = args.expected_stop
             if args.fault:
-                expected = 'SENSOR_TIMEOUT'
+                expected = args.expected_stop or 'SENSOR_TIMEOUT'
             forwarding[0] = True
             command = ['ros2', 'run', 'tb3_lidar_baseline', 'lidar_baseline', '--ros-args',
                        '--params-file', str(project / 'configs/lidar_only.yaml'),
@@ -240,7 +244,9 @@ def main():
                     raise RuntimeError(f'{case} controller exited unexpectedly')
                 if not event:
                     continue
-                if args.fault and event['state'] == 'RUNNING' and not fault_active[0]:
+                if (args.fault and event['state'] == 'RUNNING' and not fault_active[0]
+                        and (args.fault_clearance is None or
+                             float(event['corridor_clearance_m']) <= args.fault_clearance)):
                     fault_active[0] = True
                     fault_sim_time = float(event['sim_time_s'])
                     if args.fault == 'scan-loss':
@@ -282,6 +288,8 @@ def main():
         if args.ground_truth and not args.empty_world:
             if min(s[3] for s in gt_samples) < .35:
                 raise RuntimeError('Simulator-pose conservative clearance below 0.35 m')
+        if args.fault and fault_sim_time is None:
+            raise RuntimeError('Requested fault was never injected')
         return 0
     finally:
         for process in reversed(processes):
@@ -297,6 +305,7 @@ def main():
             status='DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION',
             controller=args.controller, calibration_mode=args.calibration_mode,
             injected_fault=args.fault, fault_activated_sim_s=fault_sim_time,
+            fault_clearance_trigger_m=args.fault_clearance,
             cases=outcomes, empty_world=args.empty_world, camera_delay_s=args.delay,
             received_attacked_images=attacked_images[0],
             camera_occlusion=args.occlusion, black_roi_images=black_roi_images[0],
@@ -309,6 +318,7 @@ def main():
                                                       if gt_samples and not args.empty_world else None),
             all_passed=(len(outcomes) == expected_cases
                         and all(o['passed'] for o in outcomes) and attack_verified is not False
+                        and (not args.fault or fault_sim_time is not None)
                         and (not args.ground_truth or (bool(gt_samples) and (args.empty_world
                              or min(s[3] for s in gt_samples) >= .35)))),
             limitations=(['Single empty-world endpoint check; no repeated trials.'] if args.empty_world

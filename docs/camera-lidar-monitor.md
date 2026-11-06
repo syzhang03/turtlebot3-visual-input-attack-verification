@@ -66,3 +66,7 @@ ROS_DOMAIN_ID=82 GZ_PARTITION=fusion-check python3 scripts/verify_lidar_gazebo.p
 Use `--delay 0.0` for clean, or `--occlusion` with the separately sourced teammate overlay for masking. The verifier checks attack activation before movement. Calibration adds `--calibration-mode --expected-stop VISUAL_STOP` on a clean run. `--empty-world --case clear --goal-distance 4.0 --delay 0.0` checks a full empty route.
 
 This issue demonstrates implementation and development checks, not statistical superiority. Single calibrated obstacle runs and a clean empty-route check cannot establish general false-alarm rate, robustness or the necessity of fusion. Independent teammate review and the subsequent three-configuration evaluation remain required.
+
+## Repeated validation completed on 7 November
+
+The earlier single-run checks are now supplemented by 44 frozen-parameter reset trials and nine near-obstacle fault trials. All 53 passed their predeclared criteria, and both phase manifests confirmed unchanged sources during execution. All fifteen attacked-obstacle cases alerted, all fifteen empty tasks completed without alert, and pairing uniqueness/tolerance checks passed. Worst independent pose clearance lower bound was 0.748587 m. See `results/camera-lidar-2026-11-07/README.md` for detailed results, timing definitions and remaining scope limits. No controller tuning or merge occurred during this validation.
