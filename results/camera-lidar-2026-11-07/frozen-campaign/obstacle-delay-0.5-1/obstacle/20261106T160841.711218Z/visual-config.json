@@ -1,0 +1,12 @@
+{
+  "image_topic": "/validation/image",
+  "visual_stop_threshold": 0.4,
+  "visual_verify_threshold": 0.06,
+  "roi_top": 0.25,
+  "verify_near": 2.57,
+  "verify_far": 2.91,
+  "pair_tolerance": 0.12,
+  "pair_timeout": 0.6,
+  "confirmations": 3,
+  "calibration_mode": false
+}

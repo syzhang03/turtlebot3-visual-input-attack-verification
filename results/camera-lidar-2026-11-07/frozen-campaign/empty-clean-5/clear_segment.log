@@ -1,0 +1,4 @@
+[INFO] [1793981866.736799499] [camera_lidar_monitor]: Logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/camera-lidar-2026-11-07/frozen-campaign/empty-clean-5/clear_segment/20261106T161746.614938Z; enabled=True
+[INFO] [1793981867.090984398] [camera_lidar_monitor]: WAITING: distance=0.000; clearance=inf; reason=NO_SCAN
+[INFO] [1793981867.189638045] [camera_lidar_monitor]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793981873.787337857] [camera_lidar_monitor]: GOAL_REACHED: distance=4.040; clearance=inf; reason=

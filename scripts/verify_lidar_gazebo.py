@@ -6,6 +6,7 @@ Creates its own scene; sends real simulation velocity commands; closes on exit.
 """
 import argparse
 import csv
+import copy
 from datetime import datetime, timezone
 import json
 import math
@@ -35,6 +36,7 @@ def main():
     parser.add_argument('--controller', choices=['lidar', 'fusion'], default='lidar')
     parser.add_argument('--calibration-mode', action='store_true')
     parser.add_argument('--expected-stop')
+    parser.add_argument('--fault', choices=['camera-loss', 'scan-loss', 'camera-freeze'])
     args = parser.parse_args()
     if args.delay is not None and (not math.isfinite(args.delay) or args.delay < 0):
         parser.error('--delay must be finite and nonnegative')
@@ -77,6 +79,10 @@ def main():
     scans = [0]
     attacked_images = [0]
     black_roi_images = [0]
+    image_forward = peer.create_publisher(Image, '/validation/image', qos_profile_sensor_data)
+    fault_active = [False]
+    frozen_image = [None]
+    fault_sim_time = None
     gt_samples = []
     gt_queue = queue.SimpleQueue()
     gt_log = None
@@ -109,6 +115,14 @@ def main():
                 roi = pixels[int(message.height*.25):, int(message.width*.2):int(message.width*.8)]
                 if roi.size and not np.any(roi):
                     black_roi_images[0] += 1
+        if fault_active[0] and args.fault == 'camera-loss':
+            return
+        if fault_active[0] and args.fault == 'camera-freeze':
+            if frozen_image[0] is not None:
+                image_forward.publish(frozen_image[0])
+            return
+        frozen_image[0] = copy.deepcopy(message)
+        image_forward.publish(message)
 
     def receive_scan(message):
         scans[0] += 1
@@ -201,6 +215,8 @@ def main():
                             else 'OBSTACLE_STOP')
             if args.expected_stop:
                 expected = args.expected_stop
+            if args.fault:
+                expected = 'SENSOR_TIMEOUT'
             forwarding[0] = True
             command = ['ros2', 'run', 'tb3_lidar_baseline', 'lidar_baseline', '--ros-args',
                        '--params-file', str(project / 'configs/lidar_only.yaml'),
@@ -209,6 +225,7 @@ def main():
             if args.controller == 'fusion':
                 command[2:4] = ['tb3_camera_lidar_monitor', 'camera_lidar_monitor']
                 command[6] = str(project/'configs/camera_lidar.yaml')
+                command += ['-p', 'image_topic:=/validation/image']
                 if args.calibration_mode:
                     command += ['-p', 'calibration_mode:=true', '-p', 'speed:=0.3']
             if case == 'clear_segment':
@@ -223,6 +240,11 @@ def main():
                     raise RuntimeError(f'{case} controller exited unexpectedly')
                 if not event:
                     continue
+                if args.fault and event['state'] == 'RUNNING' and not fault_active[0]:
+                    fault_active[0] = True
+                    fault_sim_time = float(event['sim_time_s'])
+                    if args.fault == 'scan-loss':
+                        forwarding[0] = False
                 if case == 'scan_interruption' and event['state'] == 'RUNNING' and not interrupted:
                     forwarding[0], interrupted = False, True
                 if event['state'] in ('GOAL_REACHED', 'OBSTACLE_STOP', 'SENSOR_TIMEOUT',
@@ -230,7 +252,7 @@ def main():
                                       'ANOMALY_STOP', 'VISUAL_STOP'):
                     spin_for(2)
                     final = last_event(case)
-                    passed = (final['state'] == expected and float(final['cmd_v']) == 0
+                    passed = (final['state'] in expected.split('|') and float(final['cmd_v']) == 0
                               and abs(float(final['odom_v'])) < 0.02)
                     outcome = dict(case=case, expected=expected, passed=passed, final_event=final)
                     outcomes.append(outcome)
@@ -274,6 +296,7 @@ def main():
             checked_at_utc=datetime.now(timezone.utc).isoformat(),
             status='DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION',
             controller=args.controller, calibration_mode=args.calibration_mode,
+            injected_fault=args.fault, fault_activated_sim_s=fault_sim_time,
             cases=outcomes, empty_world=args.empty_world, camera_delay_s=args.delay,
             received_attacked_images=attacked_images[0],
             camera_occlusion=args.occlusion, black_roi_images=black_roi_images[0],

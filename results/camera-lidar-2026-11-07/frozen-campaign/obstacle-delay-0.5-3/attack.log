@@ -1,0 +1,4 @@
+[INFO] [1793981579.264505726] [delay_replay]: Replay logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/camera-lidar-2026-11-07/frozen-campaign/obstacle-delay-0.5-3/attack/20261106T161259.207496Z
+[INFO] [1793981579.274122822] [delay_replay]: Output reliability=reliable; reliable queue depth=1
+[INFO] [1793981583.259978432] [delay_replay]: BUFFER_NOT_READY; reset=False; elapsed=0.000s
+[INFO] [1793981584.005397247] [delay_replay]: REPLAY; reset=False; elapsed=0.529s

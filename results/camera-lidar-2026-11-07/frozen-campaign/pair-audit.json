@@ -1,0 +1,541 @@
+{
+  "trials": 44,
+  "all_checks_passed": true,
+  "confirmed_trials": 15,
+  "confirmation_interval_mean_sim_s": 0.19999999999999993,
+  "confirmation_interval_range_sim_s": [
+    0.19999999999999973,
+    0.20000000000000018
+  ],
+  "note": "Interval from the first pair in the confirming sequence to the confirming pair, not attack-onset detection latency.",
+  "per_trial": [
+    {
+      "trial": "camera-freeze-1",
+      "pairs": 2,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "camera-freeze-2",
+      "pairs": 1,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "camera-freeze-3",
+      "pairs": 2,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "camera-loss-1",
+      "pairs": 2,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "camera-loss-2",
+      "pairs": 3,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "camera-loss-3",
+      "pairs": 2,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-clean-1",
+      "pairs": 61,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-clean-2",
+      "pairs": 61,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-clean-3",
+      "pairs": 61,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-clean-4",
+      "pairs": 60,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-clean-5",
+      "pairs": 60,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-delay-1-1",
+      "pairs": 61,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-delay-1-2",
+      "pairs": 60,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-delay-1-3",
+      "pairs": 61,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-delay-1-4",
+      "pairs": 61,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-delay-1-5",
+      "pairs": 61,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-occlusion-1",
+      "pairs": 62,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-occlusion-2",
+      "pairs": 61,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-occlusion-3",
+      "pairs": 60,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-occlusion-4",
+      "pairs": 59,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "empty-occlusion-5",
+      "pairs": 61,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "obstacle-clean-1",
+      "pairs": 46,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "obstacle-clean-2",
+      "pairs": 46,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "obstacle-clean-3",
+      "pairs": 45,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "obstacle-clean-4",
+      "pairs": 46,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "obstacle-clean-5",
+      "pairs": 46,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "obstacle-delay-0.5-1",
+      "pairs": 36,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.20000000000000018
+    },
+    {
+      "trial": "obstacle-delay-0.5-2",
+      "pairs": 33,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.19999999999999973
+    },
+    {
+      "trial": "obstacle-delay-0.5-3",
+      "pairs": 35,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.20000000000000018
+    },
+    {
+      "trial": "obstacle-delay-0.5-4",
+      "pairs": 35,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.19999999999999973
+    },
+    {
+      "trial": "obstacle-delay-0.5-5",
+      "pairs": 34,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.19999999999999973
+    },
+    {
+      "trial": "obstacle-delay-1-1",
+      "pairs": 35,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.19999999999999973
+    },
+    {
+      "trial": "obstacle-delay-1-2",
+      "pairs": 36,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.19999999999999973
+    },
+    {
+      "trial": "obstacle-delay-1-3",
+      "pairs": 42,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.20000000000000018
+    },
+    {
+      "trial": "obstacle-delay-1-4",
+      "pairs": 35,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.19999999999999973
+    },
+    {
+      "trial": "obstacle-delay-1-5",
+      "pairs": 35,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.19999999999999973
+    },
+    {
+      "trial": "obstacle-occlusion-1",
+      "pairs": 35,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.19999999999999973
+    },
+    {
+      "trial": "obstacle-occlusion-2",
+      "pairs": 34,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.20000000000000018
+    },
+    {
+      "trial": "obstacle-occlusion-3",
+      "pairs": 34,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.20000000000000018
+    },
+    {
+      "trial": "obstacle-occlusion-4",
+      "pairs": 34,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.20000000000000018
+    },
+    {
+      "trial": "obstacle-occlusion-5",
+      "pairs": 34,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": 0.20000000000000018
+    },
+    {
+      "trial": "scan-loss-1",
+      "pairs": 1,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "scan-loss-2",
+      "pairs": 2,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "scan-loss-3",
+      "pairs": 2,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    }
+  ]
+}
