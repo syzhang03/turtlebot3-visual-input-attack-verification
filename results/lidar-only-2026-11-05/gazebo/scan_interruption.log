@@ -1,0 +1,4 @@
+[INFO] [1793873176.690302753] [lidar_baseline]: Logs: /mnt/e/7508/Group project/local-deployment/lidar-gazebo-check-1/scan_interruption/20261105T100616.620853Z; enabled=True
+[INFO] [1793873176.700440595] [lidar_baseline]: WAITING: distance=0.000; clearance=inf; reason=NO_SCAN
+[INFO] [1793873176.888969836] [lidar_baseline]: RUNNING: distance=0.000; clearance=3.138; reason=
+[INFO] [1793873177.539300868] [lidar_baseline]: SENSOR_TIMEOUT: distance=0.099; clearance=3.138; reason=
