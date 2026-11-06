@@ -1,0 +1,20 @@
+{
+  "base_commit": "d57fff4a77a56f4dcbe11ed37cfc870f935ecb33",
+  "work_branch": "defense/lidar-only",
+  "note": "Uncommitted implementation snapshot hashes; not an experiment commit identifier.",
+  "sha256": {
+    "src/tb3_lidar_baseline/package.xml": "239a79219a7fd3bdf45c83f579077549479853dffe5cd1f777ddb6934a6f9a06",
+    "src/tb3_lidar_baseline/setup.cfg": "7f6d971fb72db88e64ac79267a07dda8641af9a2d499e4e8a4eca03792a1b19c",
+    "src/tb3_lidar_baseline/setup.py": "f2e13acd2f987a72b8ec21d5f5445798e94f7d5a6da39f43d4c3bfccfac0237d",
+    "src/tb3_lidar_baseline/resource/tb3_lidar_baseline": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/core.py": "41cb9241b0fccbdf4f3823214a7b49f0eca01d1a1c713a85c85a875929fe361d",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/node.py": "b9daf96a814b44f45fddf8644a9c90d4d4bcfbcc74d9d0b6ea905b6e5de7ba03",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/tb3_lidar_baseline/test/test_core.py": "cf463904948d6ddf79db0f35db896ee68bff60c9baaf78cc547919381f5f2b68",
+    "src/tb3_lidar_baseline/test/test_ros.py": "32d2b6d2bf9ab359415270e6ad93ba631db362ff102b7a6b45a08e8892972295",
+    "configs/lidar_only.yaml": "cb30e6c4323a882537cdd891c4433fa2f072abc46beddaf08c733527f8e14b88",
+    "scripts/run_lidar_baseline.sh": "e535b1e7f1daf1b496a13e9de95e5f4cf02c0054ff07cb6dea44df3631b3a13c",
+    "scripts/build_lidar_baseline.sh": "f19981b27a975721a59dc2772804ce3ce6ece765cbf114ec4d0d0ed4cbb87c78",
+    "scripts/verify_lidar_gazebo.py": "68fe1f07c33f9ee5d584150edb5f72ddca0335cfa8a06806ebfe562216042e31"
+  }
+}

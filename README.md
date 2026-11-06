@@ -1,6 +1,10 @@
 # turtlebot3-visual-input-attack-verification
 Visual Input Manipulation Attacks on TurtleBot3 Waffle Pi and Multi-Sensor Verification
 
+## LiDAR-only implementation
+
+The `defense/lidar-only` work adds an independent LiDAR controller for [Issue #7](https://github.com/syzhang03/turtlebot3-visual-input-attack-verification/issues/7). Build/run instructions and limitations are in [docs/lidar-only.md](docs/lidar-only.md); development evidence is in [results/lidar-only-2026-11-05](results/lidar-only-2026-11-05/README.md). This controller does not use camera inputs. The Camera–LiDAR monitor remains separate future work.
+
 ## 1. Question and Motivation
 
 ### Security Question

@@ -1,0 +1,14 @@
+{
+  "description": "Source snapshot for reset-scene repetitions; local uncommitted work.",
+  "base_commit": "d57fff4a77a56f4dcbe11ed37cfc870f935ecb33",
+  "occlusion_commit": "fa0706a2b460d63d59ffab6db458b6ed3e4fedf6",
+  "sha256": {
+    "scripts/verify_lidar_gazebo.py": "11bdafcd2c951f513ef5a5de4bd2339508245eb95ec232f29365afea80fad836",
+    "scripts/run_lidar_repetitions.py": "af6eba453a4b74ed1ef59a4ee1dc4296de821ed26b9f6e7e1e1eaf80d75fbcf1",
+    "scripts/summarize_lidar_repetitions.py": "272a981be17acea46e6261a46f99ac15bf1b742bb72520f6ed2579e99f0fb470",
+    "configs/lidar_only.yaml": "cb30e6c4323a882537cdd891c4433fa2f072abc46beddaf08c733527f8e14b88",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/core.py": "41cb9241b0fccbdf4f3823214a7b49f0eca01d1a1c713a85c85a875929fe361d",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/node.py": "b9daf96a814b44f45fddf8644a9c90d4d4bcfbcc74d9d0b6ea905b6e5de7ba03",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

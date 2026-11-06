@@ -1,0 +1,26 @@
+{
+  "checked_at_utc": "2026-11-06T06:51:47.401085+00:00",
+  "conditions": {
+    "obstacle-clean": {
+      "passed": 5,
+      "total": 5
+    },
+    "obstacle-delay": {
+      "passed": 5,
+      "total": 5
+    },
+    "obstacle-occlusion": {
+      "passed": 5,
+      "total": 5
+    },
+    "empty-clean": {
+      "passed": 5,
+      "total": 5
+    }
+  },
+  "limits": [
+    "Sensor-derived gaps; no independent collision ground truth.",
+    "No added sensor noise or configured random seeds.",
+    "Only LiDAR-only is evaluated; no multi-sensor benefit claim."
+  ]
+}

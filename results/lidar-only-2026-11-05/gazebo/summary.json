@@ -1,0 +1,82 @@
+{
+  "checked_at_utc": "2026-11-05T10:06:28.005739+00:00",
+  "status": "DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION",
+  "cases": [
+    {
+      "case": "clear_segment",
+      "expected": "GOAL_REACHED",
+      "passed": true,
+      "final_event": {
+        "wall_elapsed_s": "3.9745027209999932",
+        "sim_time_s": "3.2920000000000003",
+        "state": "GOAL_REACHED",
+        "distance_m": "0.5482764932682416",
+        "corridor_clearance_m": "3.141985164642334",
+        "stop_threshold_m": "1.15",
+        "scan_usable": "True",
+        "scan_reason": "",
+        "invalid_rays": "0",
+        "cmd_v": "0.0",
+        "cmd_w": "0.0",
+        "odom_v": "-1.1657341758564144e-13",
+        "scan_age_wall_s": "0.09457716999999377",
+        "odom_age_wall_s": "0.014831450999992057",
+        "scan_stamp_s": "3.2",
+        "odom_stamp_s": "3.2800000000000002"
+      }
+    },
+    {
+      "case": "scan_interruption",
+      "expected": "SENSOR_TIMEOUT",
+      "passed": true,
+      "final_event": {
+        "wall_elapsed_s": "3.016223501000013",
+        "sim_time_s": "6.402",
+        "state": "SENSOR_TIMEOUT",
+        "distance_m": "0.10741798132163193",
+        "corridor_clearance_m": "3.1384858131634306",
+        "stop_threshold_m": "1.15",
+        "scan_usable": "True",
+        "scan_reason": "",
+        "invalid_rays": "0",
+        "cmd_v": "0.0",
+        "cmd_w": "0.0",
+        "odom_v": "0.0",
+        "scan_age_wall_s": "2.7833818660000134",
+        "odom_age_wall_s": "0.03778080800000794",
+        "scan_stamp_s": "4.4",
+        "odom_stamp_s": "6.4"
+      }
+    },
+    {
+      "case": "obstacle",
+      "expected": "OBSTACLE_STOP",
+      "passed": true,
+      "final_event": {
+        "wall_elapsed_s": "5.9164386070000035",
+        "sim_time_s": "11.515",
+        "state": "OBSTACLE_STOP",
+        "distance_m": "1.9882764936623332",
+        "corridor_clearance_m": "1.03264351391052",
+        "stop_threshold_m": "1.15",
+        "scan_usable": "True",
+        "scan_reason": "",
+        "invalid_rays": "0",
+        "cmd_v": "0.0",
+        "cmd_w": "0.0",
+        "odom_v": "0.0",
+        "scan_age_wall_s": "0.1178364489999808",
+        "odom_age_wall_s": "0.03129503399998157",
+        "scan_stamp_s": "11.4",
+        "odom_stamp_s": "11.5"
+      }
+    }
+  ],
+  "all_passed": true,
+  "limitations": [
+    "Sequential runs in one scene, not reset matched trials.",
+    "Clear segment ends before the distant red obstacle.",
+    "No contact sensor or independent ground-truth clearance measurement.",
+    "No formal attack success rate or repeated noise study."
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "checked_at_utc": "2026-11-06T06:50:59.885603+00:00",
+  "status": "DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION",
+  "cases": [
+    {
+      "case": "obstacle",
+      "expected": "OBSTACLE_STOP",
+      "passed": true,
+      "final_event": {
+        "wall_elapsed_s": "6.515731418999962",
+        "sim_time_s": "5.338",
+        "state": "OBSTACLE_STOP",
+        "distance_m": "2.616276503384325",
+        "corridor_clearance_m": "1.067618145774264",
+        "stop_threshold_m": "1.15",
+        "scan_usable": "True",
+        "scan_reason": "",
+        "invalid_rays": "0",
+        "cmd_v": "0.0",
+        "cmd_w": "0.0",
+        "odom_v": "0.0",
+        "scan_age_wall_s": "0.025536225999985618",
+        "odom_age_wall_s": "0.01940849300001446",
+        "scan_stamp_s": "5.3",
+        "odom_stamp_s": "5.32"
+      }
+    }
+  ],
+  "empty_world": false,
+  "camera_delay_s": 0.0,
+  "received_attacked_images": 158,
+  "camera_occlusion": false,
+  "black_roi_images": 0,
+  "attack_verified": true,
+  "case_selection": "obstacle",
+  "goal_distance_override": null,
+  "all_passed": true,
+  "limitations": [
+    "Sequential runs in one scene, not reset matched trials.",
+    "Clear segment ends before the distant red obstacle.",
+    "No contact sensor or independent ground-truth clearance measurement.",
+    "No formal attack success rate or repeated noise study."
+  ]
+}
