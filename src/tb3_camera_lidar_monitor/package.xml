@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>tb3_camera_lidar_monitor</name><version>0.1.0</version>
+  <description>Camera LiDAR consistency monitor for the fixed red-obstacle experiment.</description>
+  <maintainer email="maintainer@example.com">DASE7508 team</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_python</buildtool_depend>
+  <exec_depend>tb3_lidar_baseline</exec_depend><exec_depend>tb3_visual_baseline</exec_depend>
+  <exec_depend>rclpy</exec_depend><exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend><exec_depend>cv_bridge</exec_depend>
+  <exec_depend>rcl_interfaces</exec_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

@@ -1,0 +1,97 @@
+{
+  "status": "FROZEN_SCENE_VALIDATION_NOT_GENERAL_ROBUSTNESS",
+  "plan": {
+    "obstacle-clean": [
+      "--case",
+      "obstacle",
+      "--delay",
+      "0.0"
+    ],
+    "obstacle-delay-1": [
+      "--case",
+      "obstacle",
+      "--delay",
+      "1.0"
+    ],
+    "obstacle-occlusion": [
+      "--case",
+      "obstacle",
+      "--occlusion"
+    ],
+    "empty-clean": [
+      "--empty-world",
+      "--case",
+      "clear",
+      "--goal-distance",
+      "4.0",
+      "--delay",
+      "0.0"
+    ],
+    "empty-delay-1": [
+      "--empty-world",
+      "--case",
+      "clear",
+      "--goal-distance",
+      "4.0",
+      "--delay",
+      "1.0"
+    ],
+    "empty-occlusion": [
+      "--empty-world",
+      "--case",
+      "clear",
+      "--goal-distance",
+      "4.0",
+      "--occlusion"
+    ],
+    "obstacle-delay-0.5": [
+      "--case",
+      "obstacle",
+      "--delay",
+      "0.5",
+      "--expected-stop",
+      "ANOMALY_STOP|OBSTACLE_STOP"
+    ],
+    "camera-loss": [
+      "--case",
+      "obstacle",
+      "--delay",
+      "0.0",
+      "--fault",
+      "camera-loss"
+    ],
+    "scan-loss": [
+      "--case",
+      "obstacle",
+      "--delay",
+      "0.0",
+      "--fault",
+      "scan-loss"
+    ],
+    "camera-freeze": [
+      "--case",
+      "obstacle",
+      "--delay",
+      "0.0",
+      "--fault",
+      "camera-freeze"
+    ]
+  },
+  "repeats": 5,
+  "fault_repeats": 3,
+  "fixed_speed": 1.0,
+  "min_pose_margin_m": 0.35,
+  "seed": "No noise injected; no explicit random seed",
+  "short_delay_policy": "Safety stop can be anomaly or LiDAR; report detection separately",
+  "sha256": {
+    "configs/camera_lidar.yaml": "963f966a728be5a81d39a27fcb4b70efb7b8441fb4e86d09a915f97350a937fa",
+    "scripts/verify_lidar_gazebo.py": "2a3902466c6ca1cb5569442db7fac471984a596cf8909baaf79cbe002bac7bd1",
+    "scripts/run_fusion_campaign.py": "2f7e9ee74f7959b9c9edf01054072e35282f3be4a771c374ce6eb5889c64da63",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/core.py": "818218dca48bc463a1138e18cb6a37306f56730cd7b771c7b7a112e3a14b50ee",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/node.py": "bdd66ebdfd51ded8569114a3402dd2ba7d7b7c3df6169e41021a6e2abe6baa03",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/core.py": "41cb9241b0fccbdf4f3823214a7b49f0eca01d1a1c713a85c85a875929fe361d",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/node.py": "d38f63491678e2a44ef1c920796e5873f0942ec006c2e23491fda00d7632c38c",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

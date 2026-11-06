@@ -1,0 +1,1 @@
+[INFO] [1793981513.015288618] [camera_occlusion]: /camera/image_raw -> /attack/image_raw; attack_enabled=True; mask={'mask_x': 0.2, 'mask_y': 0.25, 'mask_width': 0.6, 'mask_height': 0.75}

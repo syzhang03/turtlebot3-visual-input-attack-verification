@@ -1,0 +1,52 @@
+{
+  "checked_at_utc": "2026-11-06T16:08:59.308736+00:00",
+  "status": "DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION",
+  "controller": "fusion",
+  "calibration_mode": false,
+  "injected_fault": "camera-loss",
+  "fault_activated_sim_s": 1.079,
+  "cases": [
+    {
+      "case": "obstacle",
+      "expected": "SENSOR_TIMEOUT",
+      "passed": true,
+      "final_event": {
+        "wall_elapsed_s": "3.0704751310004212",
+        "sim_time_s": "2.983",
+        "state": "SENSOR_TIMEOUT",
+        "distance_m": "0.13820099638349417",
+        "corridor_clearance_m": "inf",
+        "stop_threshold_m": "1.15",
+        "scan_usable": "True",
+        "scan_reason": "",
+        "invalid_rays": "0",
+        "cmd_v": "0.0",
+        "cmd_w": "0.0",
+        "odom_v": "0.0",
+        "scan_age_wall_s": "0.08254606799891917",
+        "odom_age_wall_s": "0.0031748990004416555",
+        "scan_stamp_s": "2.9",
+        "odom_stamp_s": "2.98"
+      }
+    }
+  ],
+  "empty_world": false,
+  "camera_delay_s": 0.0,
+  "received_attacked_images": 76,
+  "camera_occlusion": false,
+  "black_roi_images": 0,
+  "attack_verified": true,
+  "case_selection": "obstacle",
+  "goal_distance_override": null,
+  "ground_truth_samples": 252,
+  "ground_truth_robot_enclosure_radius_m": 0.3,
+  "model_collision_radius_bound_m": 0.2725947818607763,
+  "ground_truth_min_clearance_lower_bound_m": 3.4145303592420637,
+  "all_passed": true,
+  "limitations": [
+    "Sequential runs in one scene, not reset matched trials.",
+    "Clear segment ends before the distant red obstacle.",
+    "Simulator-pose conservative clearance bound; no contact sensor.",
+    "No formal attack success rate or repeated noise study."
+  ]
+}

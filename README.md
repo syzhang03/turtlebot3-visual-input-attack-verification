@@ -1,9 +1,13 @@
 # turtlebot3-visual-input-attack-verification
 Visual Input Manipulation Attacks on TurtleBot3 Waffle Pi and Multi-Sensor Verification
 
+## Camera LiDAR monitor
+
+Issue #9 adds the integrated consistency monitor on `defense/camera-lidar-monitor`. See [implementation and calibration](docs/camera-lidar-monitor.md) and [development evidence](results/camera-lidar-2026-11-06/README.md). Camera-only and LiDAR-only remain independent comparator configurations; this implementation does not establish fusion superiority.
+
 ## LiDAR-only implementation
 
-The `defense/lidar-only` work adds an independent LiDAR controller for [Issue #7](https://github.com/syzhang03/turtlebot3-visual-input-attack-verification/issues/7). Build/run instructions and limitations are in [docs/lidar-only.md](docs/lidar-only.md); development evidence is in [results/lidar-only-2026-11-05](results/lidar-only-2026-11-05/README.md). This controller does not use camera inputs. The Camera–LiDAR monitor remains separate future work.
+The `defense/lidar-only` work adds an independent LiDAR controller for [Issue #7](https://github.com/syzhang03/turtlebot3-visual-input-attack-verification/issues/7). Build/run instructions and limitations are in [docs/lidar-only.md](docs/lidar-only.md); development evidence is in [results/lidar-only-2026-11-05](results/lidar-only-2026-11-05/README.md). This controller does not use camera inputs.
 
 ## 1. Question and Motivation
 
