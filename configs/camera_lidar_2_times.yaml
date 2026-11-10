@@ -1,0 +1,35 @@
+camera_lidar_monitor:
+  ros__parameters:
+    use_sim_time: true
+    enabled: false
+    scan_topic: /scan
+    odom_topic: /odom
+    cmd_topic: /cmd_vel
+    base_frame: base_footprint
+    speed: 1.0
+    goal_distance: 4.0
+    enable_goal_stop: true
+    front_extent: 0.15
+    corridor_half_width: 0.20
+    min_clearance: 0.35
+    reaction_time: 0.30
+    braking_deceleration: 1.0
+    sensor_timeout_wall: 2.0
+    max_stamp_age_sim: 0.5
+    control_period: 0.05
+    allow_positive_infinity: true
+    heading_gain: 1.0
+    max_angular_speed: 0.3
+    max_trial_seconds: 120.0
+    log_dir: ~/fusion-results
+    image_topic: /attack/image_raw
+    visual_stop_threshold: 0.4
+    visual_verify_threshold: 0.06
+    roi_top: 0.25
+    # Frozen after the clean calibration in results/camera-lidar-2026-11-06.
+    verify_near: 2.57
+    verify_far: 2.91
+    pair_tolerance: 0.12
+    pair_timeout: 0.6
+    confirmations: 2
+    calibration_mode: false
