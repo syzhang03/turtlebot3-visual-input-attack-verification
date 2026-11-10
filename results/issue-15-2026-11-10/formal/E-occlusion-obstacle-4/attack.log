@@ -1,0 +1,7 @@
+[INFO] [1794315971.190310932] [camera_occlusion]: /camera/image_raw -> /attack/image_raw; attack_enabled=True; mask={'mask_x': 0.2, 'mask_y': 0.25, 'mask_width': 0.6, 'mask_height': 0.75}
+Exception ignored in: <function Future.__del__ at 0x7950fa59f380>
+Traceback (most recent call last):
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/task.py", line 56, in __del__
+    if self._exception is not None and not self._exception_fetched:
+       ^^^^^^^^^^^^^^^
+AttributeError: 'Task' object has no attribute '_exception'

@@ -1,0 +1,4 @@
+[INFO] [1794315688.824581046] [lidar_baseline]: Logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-15-2026-11-10/pilot/E-occlusion-obstacle-1/obstacle/20261110T130128.748393Z; enabled=True
+[INFO] [1794315688.836241231] [lidar_baseline]: WAITING: distance=0.000; clearance=inf; reason=NO_SCAN
+[INFO] [1794315689.018375619] [lidar_baseline]: RUNNING: distance=-0.000; clearance=inf; reason=
+[INFO] [1794315693.565688340] [lidar_baseline]: OBSTACLE_STOP: distance=2.628; clearance=1.127; reason=
