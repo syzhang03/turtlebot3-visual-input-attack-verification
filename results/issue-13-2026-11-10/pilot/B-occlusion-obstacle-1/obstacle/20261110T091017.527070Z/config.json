@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "image_topic": "/validation/image",
+  "image_reliability": "best_effort",
+  "odom_topic": "/odom",
+  "cmd_topic": "/cmd_vel",
+  "speed": 1.0,
+  "goal_distance": 4.0,
+  "sensor_timeout": 2.0,
+  "enable_goal_stop": true,
+  "red_area_threshold": 0.4,
+  "roi_top": 0.25,
+  "heading_gain": 1.0,
+  "max_angular_speed": 0.3,
+  "max_trial_seconds": 120.0,
+  "log_dir": "/mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-13-2026-11-10/pilot/B-occlusion-obstacle-1/obstacle",
+  "use_sim_time": true,
+  "control_revision": "configurable-goal-first-stop-latched-v1",
+  "run_id": "20261110T091017.527070Z",
+  "status": "LOCAL_BASELINE_NOT_FORMAL_EVALUATION"
+}

@@ -1,0 +1,6 @@
+[INFO] [1794302412.369234916] [visual_baseline]: Logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-13-2026-11-10/formal/A-clean-empty-4/clear_segment/20261110T092012.271551Z; enabled=True
+[INFO] [1794302412.379781349] [visual_baseline]: Image input: /validation/image; reliability=best_effort
+[INFO] [1794302412.391406973] [visual_baseline]: Control: speed=1.0; red_threshold=0.4; goal_stop=True; sensor_timeout=2.0
+[INFO] [1794302412.423414772] [visual_baseline]: WAITING: distance=0.000, red_area=0.0000
+[INFO] [1794302412.725150991] [visual_baseline]: RUNNING: distance=0.000, red_area=0.0000
+[INFO] [1794302418.823928195] [visual_baseline]: GOAL_REACHED: distance=4.020, red_area=0.0000

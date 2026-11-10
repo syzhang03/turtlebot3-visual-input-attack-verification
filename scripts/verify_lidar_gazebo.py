@@ -43,6 +43,8 @@ def main():
     parser.add_argument('--fault', choices=['camera-loss', 'scan-loss', 'camera-freeze'])
     parser.add_argument('--fault-clearance', type=float, help='Inject only after reaching this LiDAR corridor gap')
     args = parser.parse_args()
+    if args.controller == 'camera' and not args.evaluate:
+        parser.error('Camera-only is supported in --evaluate mode')
     if args.delay is not None and (not math.isfinite(args.delay) or args.delay < 0):
         parser.error('--delay must be finite and nonnegative')
     if args.occlusion and args.delay is not None:
@@ -375,7 +377,7 @@ def main():
             (output/'alerts.json').write_text(json.dumps(alerts, indent=2))
         (output / 'summary.json').write_text(json.dumps(dict(
             checked_at_utc=datetime.now(timezone.utc).isoformat(),
-            status='DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION',
+            status='FOUR_GROUP_EVALUATION' if args.evaluate else 'DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION',
             controller=args.controller, calibration_mode=args.calibration_mode,
             evaluation=args.evaluate, evaluation_end_sim_s=evaluation_end,
             command_publisher_counts=sorted(publishers_seen),
@@ -391,7 +393,7 @@ def main():
             model_collision_radius_bound_m=required_radius if args.ground_truth else None,
             ground_truth_min_clearance_lower_bound_m=(min(s[3] for s in gt_samples)
                                                       if gt_samples and not args.empty_world else None),
-            all_passed=(len(outcomes) == expected_cases
+            all_passed=None if args.evaluate else (len(outcomes) == expected_cases
                         and all(o.get('passed', False) for o in outcomes) and attack_verified is not False
                         and (not args.fault or fault_sim_time is not None)
                         and (not args.ground_truth or (bool(gt_samples) and (args.empty_world

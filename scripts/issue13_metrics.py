@@ -79,7 +79,10 @@ def measure_braking(poses, command_time):
 
 def analyze(folder, attack, empty, defense):
     s = json.loads((folder/'summary.json').read_text())
-    if not s['cases'] or s['command_publisher_counts'] != [1] or not s['attack_verified']:
+    counts = set(s['command_publisher_counts'])
+    # DDS discovery can initially report zero. Require a discovered publisher,
+    # no observed competition, and a real forward command below.
+    if not s['cases'] or 1 not in counts or counts - {0, 1} or not s['attack_verified']:
         raise ValueError('Missing outcome, verified image delivery, or sole command publisher')
     end = s['evaluation_end_sim_s']
     final = s['cases'][0]['final_event']
@@ -112,6 +115,7 @@ def analyze(folder, attack, empty, defense):
         if not empty and clearance=='indeterminate' and path_ok and stopped and final['state'] in ('OBSTACLE_STOP','VISUAL_STOP'):
             clean_success = None
     onset = None
+    detection_note = None
     if attack != 'clean':
         delivered = read_csv(folder/'image-delivery.csv')
         accepted = [r for r in read_csv(next(folder.glob('*/*/image-acceptance.csv')))
@@ -124,17 +128,27 @@ def analyze(folder, attack, empty, defense):
         candidates = [float(r['accepted_sim_s']) for r in accepted if r['header_stamp_ns'] in altered]
         if not candidates:
             raise ValueError('No manipulated frame linked to the delivered stream')
-        onset = min(candidates)
+        if candidates[0] > 0:
+            onset = candidates[0]
+        else:
+            detection_note = 'First manipulated frame was accepted before controller clock synchronization'
     alerts = json.loads((folder/'alerts.json').read_text())
     first_alert = float(alerts[0]['published_sim_s']) if alerts else None
     detection_latency = first_alert-onset if first_alert is not None and onset is not None and first_alert >= onset else None
+    if attack != 'clean' and detection_latency is None:
+        if not defense:
+            detection_note = 'Anomaly detector disabled'
+        elif detection_note is None:
+            detection_note = 'No confirmed alert' if first_alert is None else 'Unaligned alert and delivery timestamps'
     return dict(valid=True, final_state=final['state'], end_reason=s['cases'][0]['end_reason'],
+        observed_command_publisher_counts=sorted(counts),
         min_clearance_lower_m=lower, min_clearance_upper_m=upper, clearance=clearance,
         attack_success=None if attack=='clean' or clearance=='indeterminate' else clearance=='violation',
         normal_task_success=clean_success, path_ok=path_ok,
         false_alarm=(bool(alerts) if defense else None) if attack=='clean' else None,
         premature_stop=(brake is not None and final['state']!='GOAL_REACHED') if empty else None,
         attack_delivery_sim_s=onset, first_alert_sim_s=first_alert, detection_latency_s=detection_latency,
+        detection_note=detection_note,
         detector_enabled=defense, motion_start_sim_s=motion, stop_command_sim_s=brake,
         motion_to_stop_command_s=None if brake is None else brake-motion,
         pose_samples=len(movement), **braking)

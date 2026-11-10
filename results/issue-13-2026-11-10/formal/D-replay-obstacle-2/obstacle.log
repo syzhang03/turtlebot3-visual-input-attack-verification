@@ -1,0 +1,4 @@
+[INFO] [1794302165.958776591] [camera_lidar_monitor]: Logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-13-2026-11-10/formal/D-replay-obstacle-2/obstacle/20261110T091605.856916Z; enabled=True
+[INFO] [1794302166.267132610] [camera_lidar_monitor]: WAITING: distance=0.000; clearance=inf; reason=NO_SCAN
+[INFO] [1794302166.475328042] [camera_lidar_monitor]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1794302169.126339287] [camera_lidar_monitor]: ANOMALY_STOP: distance=1.437; clearance=2.320; reason=

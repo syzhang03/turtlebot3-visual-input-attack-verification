@@ -37,8 +37,9 @@ def main():
     args = parser.parse_args()
     folder = Path(args.folder)
     protocol = json.loads((folder/'protocol.json').read_text())
-    rows = json.loads((folder/'runs.json').read_text())
-    status = json.loads((folder/'status.json').read_text())
+    audited = (folder/'analysis-status.json').exists()
+    rows = json.loads((folder/('analysis-runs.json' if audited else 'runs.json')).read_text())
+    status = json.loads((folder/('analysis-status.json' if audited else 'status.json')).read_text())
     if protocol['pilot'] or status['completed'] != status['planned']:
         raise ValueError('Use a completed formal batch')
     statistics = []
@@ -52,6 +53,8 @@ def main():
             false_alarm=outcome_rate(sample,'false_alarm') if attack=='clean' and controller=='fusion' else None,
             premature_stop=outcome_rate(sample,'premature_stop') if empty else None,
             alerts=sum(r.get('first_alert_sim_s') is not None for r in sample),
+            missing_detection_reasons=[r.get('detection_note',r.get('error')) for r in sample
+                                       if attack!='clean' and r.get('detection_latency_s') is None],
             missing_braking_reasons=[r.get('braking_note',r.get('error')) for r in sample if r.get('braking_latency_s') is None],
             **{key:describe([r.get(key) for r in sample]) for key in
                ['min_clearance_lower_m','min_clearance_upper_m','detection_latency_s',
@@ -78,9 +81,10 @@ def main():
               'confirmed only when the upper bound is below 0.35 m. The lower bound establishes a safe margin '
               'when it reaches 0.35 m. The contact event rate is unavailable because these runs have no contact sensor.', '',
               'Detection uses the first accepted manipulated frame and the confirmed alert on simulation time. '
+              'One occlusion trial accepted its first manipulated frame before its controller clock synchronized; its detection latency is unavailable. '
               'Braking onset uses sustained independently measured speed decrease after the stop command. '
               'Trials where motion slowed before the command or no stop command occurred have unavailable braking latency. '
-              'See `runs.json` for those reasons and any indeterminate outcomes.', '']
+              'See `analysis-runs.json` (or `runs.json` before audit) for those reasons and any indeterminate outcomes.', '']
     (folder/'REPORT.md').write_text('\n'.join(lines))
     print(json.dumps(status))
 

@@ -1,0 +1,6 @@
+[INFO] [1794301785.784212624] [visual_baseline]: Logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-13-2026-11-10/pilot/B-replay-obstacle-1/obstacle/20261110T090945.683425Z; enabled=True
+[INFO] [1794301785.795449672] [visual_baseline]: Image input: /validation/image; reliability=best_effort
+[INFO] [1794301785.807801844] [visual_baseline]: Control: speed=1.0; red_threshold=0.4; goal_stop=True; sensor_timeout=2.0
+[INFO] [1794301785.829641973] [visual_baseline]: WAITING: distance=0.000, red_area=0.0339
+[INFO] [1794301787.530223747] [visual_baseline]: RUNNING: distance=0.000, red_area=0.0344
+[INFO] [1794301793.830020621] [visual_baseline]: OBSTACLE_STOP: distance=3.967, red_area=0.4374
