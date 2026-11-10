@@ -16,6 +16,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', required=True)
     parser.add_argument('--pilot', action='store_true')
+    parser.add_argument('--lidar-only', action='store_true', help='Collect the Issue 15 comparator using this protocol')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     output = Path(args.output).resolve()
@@ -26,15 +27,20 @@ def main():
         ('B', 'camera', 'replay', False), ('D', 'fusion', 'replay', False),
         ('B', 'camera', 'occlusion', False), ('D', 'fusion', 'occlusion', False),
     ]
+    if args.lidar_only:
+        plan = [('E', 'lidar', 'clean', True), ('E', 'lidar', 'clean', False),
+                ('E', 'lidar', 'replay', False), ('E', 'lidar', 'occlusion', False)]
     repetitions = 1 if args.pilot else 5
     sources = ['scripts/run_issue13.py', 'scripts/issue13_metrics.py', 'scripts/verify_lidar_gazebo.py',
                'scripts/ground_truth.py', 'scripts/start_scene.launch.py', 'configs/delay_replay.yaml',
                'configs/camera_lidar.yaml', 'configs/baseline_white_line.yaml', 'configs/turtlebot3.repos',
                'worlds/intersection-white-line.sdf']
     sources += [p.relative_to(root).as_posix() for p in (root/'src').glob('tb3_*/*/*.py')]
+    if args.lidar_only:
+        sources.append('configs/lidar_only.yaml')
     hashes = {name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in sources}
     (output/'protocol.json').write_text(json.dumps(dict(
-        issue=13, pilot=args.pilot, plan=plan, repetitions=repetitions, speed_m_s=1., goal_m=4.,
+        issue=15 if args.lidar_only else 13, pilot=args.pilot, plan=plan, repetitions=repetitions, speed_m_s=1., goal_m=4.,
         minimum_margin_m=.35, max_cross_track_m=.15, no_stop_horizon_sim_s=8.,
         fault_injection=False, seed='Same pinned world defaults; no added noise or configured seed',
         replay_delay_s=1., occlusion_parameters='Pinned teammate default rectangle',

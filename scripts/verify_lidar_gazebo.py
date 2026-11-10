@@ -56,9 +56,8 @@ def main():
     if args.fault_clearance is not None and (not args.fault or not math.isfinite(args.fault_clearance)
                                            or args.fault_clearance <= 0):
         parser.error('--fault-clearance requires a fault and a positive finite distance')
-    if args.evaluate and (not args.ground_truth or args.case == 'suite' or args.fault or args.calibration_mode
-                          or args.controller == 'lidar'):
-        parser.error('--evaluate requires camera or fusion, --ground-truth, and a single case without faults or calibration')
+    if args.evaluate and (not args.ground_truth or args.case == 'suite' or args.fault or args.calibration_mode):
+        parser.error('--evaluate requires --ground-truth and a single case without faults or calibration')
     project = Path(__file__).resolve().parents[1]
     os.environ.setdefault('TURTLEBOT3_MODEL', 'waffle_pi')
     os.environ.setdefault('LIBGL_ALWAYS_SOFTWARE', '1')
@@ -281,8 +280,9 @@ def main():
                 command[6] = str(project/'configs/baseline_white_line.yaml')
                 command[9:11] = ['-p', 'image_topic:=/validation/image']
             if args.evaluate:
-                command += ['-p', 'record_image_acceptance:=true', '-p',
-                            f'enable_goal_stop:={str(args.empty_world).lower()}']
+                command += ['-p', f'enable_goal_stop:={str(args.empty_world).lower()}']
+                if args.controller != 'lidar':
+                    command += ['-p', 'record_image_acceptance:=true']
             if case == 'clear_segment':
                 command += ['-p', f'goal_distance:={args.goal_distance or 0.5}']
             process = start(command, case)
