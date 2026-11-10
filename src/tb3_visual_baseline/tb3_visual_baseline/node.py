@@ -24,6 +24,7 @@ class Baseline(Node):
         super().__init__('visual_baseline')
         defaults = {
             'enabled': False, 'image_topic': '/camera/image_raw',
+            'record_image_acceptance': False,
             'image_reliability': 'best_effort',
             'odom_topic': '/odom', 'cmd_topic': '/cmd_vel',
             'speed': 0.05, 'goal_distance': 1.0, 'sensor_timeout': 2.0,
@@ -64,6 +65,10 @@ class Baseline(Node):
                         run_id=run_id, status='LOCAL_BASELINE_NOT_FORMAL_EVALUATION')
         (self.run_dir / 'config.json').write_text(json.dumps(metadata, indent=2), encoding='utf-8')
         self.log = (self.run_dir / 'events.csv').open('w', newline='', encoding='utf-8')
+        self.image_trace = ((self.run_dir/'image-acceptance.csv').open('w', newline='')
+                            if self.cfg['record_image_acceptance'] else None)
+        if self.image_trace is not None:
+            csv.writer(self.image_trace).writerow(['accepted_sim_s', 'header_stamp_ns'])
         self.writer = csv.writer(self.log)
         self.writer.writerow(['wall_elapsed_s', 'sim_time_s', 'state', 'distance_m',
                               'red_area_ratio', 'visual_blocked', 'cmd_v', 'cmd_w',
@@ -88,6 +93,7 @@ class Baseline(Node):
 
     def on_image(self, msg):
         stamp = self.stamp(msg)
+        accepted_sim_s = self.get_clock().now().nanoseconds / 1e9 if self.image_trace is not None else None
         if self.last_image_stamp is not None and stamp <= self.last_image_stamp:
             if stamp < self.last_image_stamp:
                 self.trial.stop('FAULT')
@@ -98,6 +104,10 @@ class Baseline(Node):
                 frame, self.cfg['red_area_threshold'], self.cfg['roi_top'])
             self.image_at = time.monotonic()
             self.image_stamp = self.last_image_stamp = stamp
+            if self.image_trace is not None:
+                source_stamp = msg.header.stamp
+                csv.writer(self.image_trace).writerow([accepted_sim_s, source_stamp.sec*10**9+source_stamp.nanosec])
+                self.image_trace.flush()
             # Preserve a detected obstacle between control ticks.
             if self.cfg['enabled'] and self.blocked:
                 self.trial.stop('OBSTACLE_STOP')
@@ -185,6 +195,8 @@ def main(args=None):
                     node.publish()
                     time.sleep(0.05)
             node.log.close()
+            if node.image_trace is not None:
+                node.image_trace.close()
             node.destroy_node()
         if rclpy.ok():
             rclpy.shutdown()

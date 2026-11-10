@@ -27,7 +27,7 @@ class CameraLidarMonitor(LidarBaseline):
         defaults = dict(image_topic='/attack/image_raw', visual_stop_threshold=.4,
                         visual_verify_threshold=.06, roi_top=.25, verify_near=2.57,
                         verify_far=2.91, pair_tolerance=.12, pair_timeout=.6,
-                        confirmations=3, calibration_mode=False)
+                        confirmations=3, calibration_mode=False, record_image_acceptance=False)
         self.visual_cfg = {k: self.declare_parameter(k, v, ParameterDescriptor(read_only=True)).value
                            for k, v in defaults.items()}
         for key in ('visual_stop_threshold', 'visual_verify_threshold', 'roi_top'):
@@ -49,10 +49,15 @@ class CameraLidarMonitor(LidarBaseline):
             'image_stamp', 'scan_stamp', 'visual_present', 'clearance', 'lidar_present',
             'direction', 'count', 'alert', 'red_ratio'])
         self.pair_writer.writeheader()
+        self.image_trace = ((self.run_dir/'image-acceptance.csv').open('w', newline='')
+                            if self.visual_cfg['record_image_acceptance'] else None)
+        if self.image_trace is not None:
+            csv.writer(self.image_trace).writerow(['accepted_sim_s', 'header_stamp_ns'])
         self.ratios = {}
 
     def on_image(self, msg):
         stamp = self.accept_stamp(msg, self.image_stamp)
+        accepted_sim_s = self.get_clock().now().nanoseconds / 1e9 if self.image_trace is not None else None
         if stamp is None:
             return
         try:
@@ -64,6 +69,10 @@ class CameraLidarMonitor(LidarBaseline):
             self.get_logger().error(f'Image conversion/detection failed: {exc}')
             return
         self.image_stamp, self.image_at = stamp, time.monotonic()
+        if self.image_trace is not None:
+            source_stamp = msg.header.stamp
+            csv.writer(self.image_trace).writerow([accepted_sim_s, source_stamp.sec*10**9+source_stamp.nanosec])
+            self.image_trace.flush()
         self.ratios[stamp] = ratio
         if len(self.ratios) > 100:
             del self.ratios[min(self.ratios)]
@@ -88,6 +97,8 @@ class CameraLidarMonitor(LidarBaseline):
             message = String()
             # JSON uses null for a no-return distance, not nonstandard Infinity.
             wire = dict(pair)
+            if self.image_trace is not None:
+                wire['published_sim_s'] = self.get_clock().now().nanoseconds / 1e9
             if not math.isfinite(wire['clearance']):
                 wire['clearance'] = None
             message.data = json.dumps(wire)
@@ -120,6 +131,8 @@ def main(args=None):
                     node.publish()
                     time.sleep(.05)
             node.pair_log.close()
+            if node.image_trace is not None:
+                node.image_trace.close()
             node.log.close()
             node.destroy_node()
         if rclpy.ok():

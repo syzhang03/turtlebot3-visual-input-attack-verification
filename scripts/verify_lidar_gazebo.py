@@ -18,8 +18,11 @@ import subprocess
 import time
 
 import rclpy
+from rclpy.parameter import Parameter
 from rclpy.qos import qos_profile_sensor_data
+from geometry_msgs.msg import TwistStamped
 from sensor_msgs.msg import Image, LaserScan
+from std_msgs.msg import String
 from ament_index_python.packages import get_package_share_directory
 from ground_truth import collision_radius, box_clearance_lower_bound
 
@@ -33,7 +36,8 @@ def main():
     parser.add_argument('--case', choices=['suite', 'obstacle', 'clear'], default='suite')
     parser.add_argument('--goal-distance', type=float)
     parser.add_argument('--ground-truth', action='store_true', help='Record evaluation-only simulator poses')
-    parser.add_argument('--controller', choices=['lidar', 'fusion'], default='lidar')
+    parser.add_argument('--controller', choices=['lidar', 'fusion', 'camera'], default='lidar')
+    parser.add_argument('--evaluate', action='store_true', help='Record outcomes including unsafe or missing stops')
     parser.add_argument('--calibration-mode', action='store_true')
     parser.add_argument('--expected-stop')
     parser.add_argument('--fault', choices=['camera-loss', 'scan-loss', 'camera-freeze'])
@@ -50,6 +54,9 @@ def main():
     if args.fault_clearance is not None and (not args.fault or not math.isfinite(args.fault_clearance)
                                            or args.fault_clearance <= 0):
         parser.error('--fault-clearance requires a fault and a positive finite distance')
+    if args.evaluate and (not args.ground_truth or args.case == 'suite' or args.fault or args.calibration_mode
+                          or args.controller == 'lidar'):
+        parser.error('--evaluate requires camera or fusion, --ground-truth, and a single case without faults or calibration')
     project = Path(__file__).resolve().parents[1]
     os.environ.setdefault('TURTLEBOT3_MODEL', 'waffle_pi')
     os.environ.setdefault('LIBGL_ALWAYS_SOFTWARE', '1')
@@ -77,7 +84,11 @@ def main():
                 process.wait(timeout=10)
 
     rclpy.init()
-    peer = rclpy.create_node('lidar_gazebo_verification')
+    peer = rclpy.create_node('lidar_gazebo_verification',
+                             parameter_overrides=[Parameter('use_sim_time', value=True)])
+    evaluation_end = None
+    delivery, commands, alerts = [], [], []
+    publishers_seen = set()
     relay = peer.create_publisher(LaserScan, '/validation/scan', qos_profile_sensor_data)
     forwarding = [True]
     scans = [0]
@@ -98,7 +109,12 @@ def main():
             raise ValueError(f'Robot collision bound {required_radius} exceeds evaluation sphere')
         gt_log = (output/'ground-truth.csv').open('w', newline='')
         gt_writer = csv.writer(gt_log)
-        gt_writer.writerow(['sim_time_s', 'model_x', 'model_y', 'clearance_lower_bound_m'])
+        header = ['sim_time_s', 'model_x', 'model_y', 'clearance_lower_bound_m']
+        if args.evaluate:
+            from issue13_metrics import robot_witness_center
+            witness = robot_witness_center(model)
+            header.append('clearance_upper_bound_m')
+        gt_writer.writerow(header)
 
     def receive_pose(message):
         for pose in message.pose:
@@ -106,10 +122,16 @@ def main():
                 p = pose.position
                 stamp = message.header.stamp.sec + message.header.stamp.nsec*1e-9
                 gap = None if args.empty_world else box_clearance_lower_bound(p.x, p.y, .30)
-                gt_queue.put((stamp, p.x, p.y, gap))
+                sample = (stamp, p.x, p.y, gap)
+                if args.evaluate:
+                    from issue13_metrics import witness_upper_bound
+                    upper = None if args.empty_world else witness_upper_bound(p, pose.orientation, witness)
+                    sample += (upper,)
+                gt_queue.put(sample)
 
     def receive_image(message):
         attacked_images[0] += 1
+        black_mask = False
         if args.occlusion:
             # Validate the actual default mask in received BGR8 messages.
             import numpy as np
@@ -119,6 +141,7 @@ def main():
                 roi = pixels[int(message.height*.25):, int(message.width*.2):int(message.width*.8)]
                 if roi.size and not np.any(roi):
                     black_roi_images[0] += 1
+                    black_mask = True
         if fault_active[0] and args.fault == 'camera-loss':
             return
         if fault_active[0] and args.fault == 'camera-freeze':
@@ -127,6 +150,22 @@ def main():
             return
         frozen_image[0] = copy.deepcopy(message)
         image_forward.publish(message)
+        if args.evaluate and evaluation_end is None:
+            stamp = message.header.stamp
+            delivery.append((peer.get_clock().now().nanoseconds / 1e9,
+                             stamp.sec * 10**9 + stamp.nanosec, black_mask))
+
+    def receive_command(message):
+        if evaluation_end is None:
+            stamp = message.header.stamp
+            commands.append((stamp.sec + stamp.nanosec / 1e9, message.twist.linear.x,
+                             message.twist.angular.z))
+
+    def receive_alert(message):
+        if evaluation_end is None:
+            row = json.loads(message.data)
+            if row['alert']:
+                alerts.append(dict(observed_sim_s=peer.get_clock().now().nanoseconds / 1e9, **row))
 
     def receive_scan(message):
         scans[0] += 1
@@ -135,6 +174,9 @@ def main():
 
     subscription = peer.create_subscription(LaserScan, '/scan', receive_scan, qos_profile_sensor_data)
     image_subscription = peer.create_subscription(Image, '/attack/image_raw', receive_image, qos_profile_sensor_data)
+    if args.evaluate:
+        peer.create_subscription(TwistStamped, '/cmd_vel', receive_command, 100)
+        peer.create_subscription(String, '/defense/consistency', receive_alert, 100)
     if args.ground_truth:
         from gz.transport13 import Node as GazeboNode
         from gz.msgs10.pose_v_pb2 import Pose_V
@@ -232,10 +274,18 @@ def main():
                 command += ['-p', 'image_topic:=/validation/image']
                 if args.calibration_mode:
                     command += ['-p', 'calibration_mode:=true', '-p', 'speed:=0.3']
+            elif args.controller == 'camera':
+                command[2:4] = ['tb3_visual_baseline', 'baseline']
+                command[6] = str(project/'configs/baseline_white_line.yaml')
+                command[9:11] = ['-p', 'image_topic:=/validation/image']
+            if args.evaluate:
+                command += ['-p', 'record_image_acceptance:=true', '-p',
+                            f'enable_goal_stop:={str(args.empty_world).lower()}']
             if case == 'clear_segment':
                 command += ['-p', f'goal_distance:={args.goal_distance or 0.5}']
             process = start(command, case)
             interrupted = False
+            started_at = None
             deadline = time.monotonic() + 100
             while time.monotonic() < deadline:
                 spin_for(0.1)
@@ -244,6 +294,15 @@ def main():
                     raise RuntimeError(f'{case} controller exited unexpectedly')
                 if not event:
                     continue
+                if args.evaluate:
+                    publishers_seen.add(peer.count_publishers('/cmd_vel'))
+                    if event['state'] == 'RUNNING' and started_at is None:
+                        started_at = float(event['sim_time_s'])
+                    if (started_at is not None and float(event['sim_time_s']) - started_at >= 8
+                            and event['state'] == 'RUNNING'):
+                        evaluation_end = float(event['sim_time_s'])
+                        outcomes.append(dict(case=case, final_event=event, end_reason='MOTION_HORIZON'))
+                        break
                 if (args.fault and event['state'] == 'RUNNING' and not fault_active[0]
                         and (args.fault_clearance is None or
                              float(event['corridor_clearance_m']) <= args.fault_clearance)):
@@ -258,6 +317,10 @@ def main():
                                       'ANOMALY_STOP', 'VISUAL_STOP'):
                     spin_for(2)
                     final = last_event(case)
+                    if args.evaluate:
+                        evaluation_end = float(final['sim_time_s'])
+                        outcomes.append(dict(case=case, final_event=final, end_reason='TERMINAL_STATE'))
+                        break
                     passed = (final['state'] in expected.split('|') and float(final['cmd_v']) == 0
                               and abs(float(final['odom_v'])) < 0.02)
                     outcome = dict(case=case, expected=expected, passed=passed, final_event=final)
@@ -285,7 +348,7 @@ def main():
             if black_roi_images[0] < 1:
                 raise RuntimeError('No received image has the expected black detector ROI')
             attack_verified = True
-        if args.ground_truth and not args.empty_world:
+        if args.ground_truth and not args.empty_world and not args.evaluate:
             if min(s[3] for s in gt_samples) < .35:
                 raise RuntimeError('Simulator-pose conservative clearance below 0.35 m')
         if args.fault and fault_sim_time is None:
@@ -300,10 +363,22 @@ def main():
             handle.close()
         if gt_log is not None:
             gt_log.close()
+        if args.evaluate:
+            with (output/'image-delivery.csv').open('w', newline='') as stream:
+                writer = csv.writer(stream)
+                writer.writerow(['delivery_sim_s', 'header_stamp_ns', 'black_roi'])
+                writer.writerows(delivery)
+            with (output/'commands.csv').open('w', newline='') as stream:
+                writer = csv.writer(stream)
+                writer.writerow(['sim_time_s', 'linear_x', 'angular_z'])
+                writer.writerows(commands)
+            (output/'alerts.json').write_text(json.dumps(alerts, indent=2))
         (output / 'summary.json').write_text(json.dumps(dict(
             checked_at_utc=datetime.now(timezone.utc).isoformat(),
             status='DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION',
             controller=args.controller, calibration_mode=args.calibration_mode,
+            evaluation=args.evaluate, evaluation_end_sim_s=evaluation_end,
+            command_publisher_counts=sorted(publishers_seen),
             injected_fault=args.fault, fault_activated_sim_s=fault_sim_time,
             fault_clearance_trigger_m=args.fault_clearance,
             cases=outcomes, empty_world=args.empty_world, camera_delay_s=args.delay,
@@ -317,7 +392,7 @@ def main():
             ground_truth_min_clearance_lower_bound_m=(min(s[3] for s in gt_samples)
                                                       if gt_samples and not args.empty_world else None),
             all_passed=(len(outcomes) == expected_cases
-                        and all(o['passed'] for o in outcomes) and attack_verified is not False
+                        and all(o.get('passed', False) for o in outcomes) and attack_verified is not False
                         and (not args.fault or fault_sim_time is not None)
                         and (not args.ground_truth or (bool(gt_samples) and (args.empty_world
                              or min(s[3] for s in gt_samples) >= .35)))),
