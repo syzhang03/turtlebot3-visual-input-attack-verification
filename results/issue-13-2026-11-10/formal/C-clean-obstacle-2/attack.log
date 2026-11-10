@@ -1,0 +1,9 @@
+[INFO] [1794302126.607715526] [delay_replay]: Replay logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-13-2026-11-10/formal/C-clean-obstacle-2/attack/20261110T091526.554850Z
+[INFO] [1794302126.616629650] [delay_replay]: Output reliability=reliable; reliable queue depth=1
+[INFO] [1794302130.357784847] [delay_replay]: ZERO_DELAY; reset=False; elapsed=0.000s
+Exception ignored in: <function Future.__del__ at 0x7c20a5cc5580>
+Traceback (most recent call last):
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/task.py", line 56, in __del__
+    if self._exception is not None and not self._exception_fetched:
+       ^^^^^^^^^^^^^^^
+AttributeError: 'Task' object has no attribute '_exception'
