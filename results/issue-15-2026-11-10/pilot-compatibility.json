@@ -1,0 +1,46 @@
+{
+  "reused_records": 40,
+  "added_records": 4,
+  "historical_commit": "0aec88b",
+  "verified_historical_sources": 32,
+  "reviewed_harness_only_differences": [
+    "scripts/issue13_metrics.py",
+    "scripts/run_issue13.py",
+    "scripts/verify_lidar_gazebo.py"
+  ],
+  "shared_guard": {
+    "scan_topic": "/validation/scan",
+    "odom_topic": "/odom",
+    "cmd_topic": "/cmd_vel",
+    "base_frame": "base_footprint",
+    "front_extent": 0.15,
+    "corridor_half_width": 0.2,
+    "min_clearance": 0.35,
+    "reaction_time": 0.3,
+    "braking_deceleration": 1.0,
+    "sensor_timeout_wall": 2.0,
+    "max_stamp_age_sim": 0.5,
+    "control_period": 0.05,
+    "allow_positive_infinity": true,
+    "heading_gain": 1.0,
+    "max_angular_speed": 0.3,
+    "max_trial_seconds": 120.0
+  },
+  "matched_protocol": {
+    "speed_m_s": 1.0,
+    "goal_m": 4.0,
+    "minimum_margin_m": 0.35,
+    "max_cross_track_m": 0.15,
+    "no_stop_horizon_sim_s": 8.0,
+    "fault_injection": false,
+    "seed": "Same pinned world defaults; no added noise or configured seed",
+    "replay_delay_s": 1.0,
+    "occlusion_parameters": "Pinned teammate default rectangle",
+    "confirmation_pairs": 3
+  },
+  "lidar_manipulated_frames_before_stop": {
+    "E-replay-obstacle-1": 80,
+    "E-occlusion-obstacle-1": 84
+  },
+  "timing_note": "Separate collection batches. Controller code, shared geometry and scoring are matched; DDS startup and scheduling can vary."
+}

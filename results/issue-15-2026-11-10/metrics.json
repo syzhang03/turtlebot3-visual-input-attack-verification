@@ -1,0 +1,692 @@
+{
+  "conditions": [
+    {
+      "controller": "camera",
+      "input": "clean",
+      "scene": "empty",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": null,
+      "normal_task_success": {
+        "positive": 5,
+        "total": 5,
+        "unknown": 0
+      },
+      "premature_stop": {
+        "positive": 0,
+        "total": 5,
+        "unknown": 0
+      },
+      "empty_task_completion_s": {
+        "n": 5,
+        "mean": 4.6610000000000005,
+        "sd": 0.030683871985132383,
+        "minimum": 4.6290000000000004,
+        "maximum": 4.708
+      },
+      "false_alarm": null,
+      "alerts": 0,
+      "missing_braking": [],
+      "missing_detection": [],
+      "min_clearance_lower_m": null,
+      "min_clearance_upper_m": null,
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 4.5382,
+        "sd": 0.027914154115788813,
+        "minimum": 4.515,
+        "maximum": 4.583
+      },
+      "detection_latency_s": null,
+      "braking_latency_s": {
+        "n": 5,
+        "mean": 0.024400000000000154,
+        "sd": 0.0058566201857384375,
+        "minimum": 0.015000000000000568,
+        "maximum": 0.031000000000000583
+      },
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.12280000000000033,
+        "sd": 0.004969909455915418,
+        "minimum": 0.11400000000000077,
+        "maximum": 0.12600000000000033
+      }
+    },
+    {
+      "controller": "lidar",
+      "input": "clean",
+      "scene": "empty",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": null,
+      "normal_task_success": {
+        "positive": 5,
+        "total": 5,
+        "unknown": 0
+      },
+      "premature_stop": {
+        "positive": 0,
+        "total": 5,
+        "unknown": 0
+      },
+      "empty_task_completion_s": {
+        "n": 5,
+        "mean": 4.6652,
+        "sd": 0.01446374778541171,
+        "minimum": 4.651,
+        "maximum": 4.683
+      },
+      "false_alarm": null,
+      "alerts": 0,
+      "missing_braking": [],
+      "missing_detection": [],
+      "min_clearance_lower_m": null,
+      "min_clearance_upper_m": null,
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 4.54,
+        "sd": 0.014560219778561232,
+        "minimum": 4.5169999999999995,
+        "maximum": 4.555
+      },
+      "detection_latency_s": null,
+      "braking_latency_s": {
+        "n": 5,
+        "mean": 0.020800000000000197,
+        "sd": 0.006300793600809243,
+        "minimum": 0.017000000000000348,
+        "maximum": 0.03200000000000003
+      },
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.12520000000000006,
+        "sd": 0.012132600710482434,
+        "minimum": 0.11000000000000032,
+        "maximum": 0.13400000000000034
+      }
+    },
+    {
+      "controller": "fusion",
+      "input": "clean",
+      "scene": "empty",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": null,
+      "normal_task_success": {
+        "positive": 5,
+        "total": 5,
+        "unknown": 0
+      },
+      "premature_stop": {
+        "positive": 0,
+        "total": 5,
+        "unknown": 0
+      },
+      "empty_task_completion_s": {
+        "n": 5,
+        "mean": 4.6444,
+        "sd": 0.010737783756437125,
+        "minimum": 4.6339999999999995,
+        "maximum": 4.657
+      },
+      "false_alarm": {
+        "positive": 0,
+        "total": 5,
+        "unknown": 0
+      },
+      "alerts": 0,
+      "missing_braking": [],
+      "missing_detection": [],
+      "min_clearance_lower_m": null,
+      "min_clearance_upper_m": null,
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 4.5241999999999996,
+        "sd": 0.01406058320269819,
+        "minimum": 4.506,
+        "maximum": 4.545
+      },
+      "detection_latency_s": null,
+      "braking_latency_s": {
+        "n": 5,
+        "mean": 0.022000000000000065,
+        "sd": 0.006964194138592026,
+        "minimum": 0.016000000000000014,
+        "maximum": 0.030999999999999694
+      },
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.1202,
+        "sd": 0.010059821071967222,
+        "minimum": 0.11000000000000032,
+        "maximum": 0.13199999999999967
+      }
+    },
+    {
+      "controller": "camera",
+      "input": "clean",
+      "scene": "obstacle",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": null,
+      "normal_task_success": {
+        "positive": 5,
+        "total": 5,
+        "unknown": 0
+      },
+      "premature_stop": null,
+      "empty_task_completion_s": null,
+      "false_alarm": null,
+      "alerts": 0,
+      "missing_braking": [],
+      "missing_detection": [],
+      "min_clearance_lower_m": {
+        "n": 5,
+        "mean": 0.5587012162727814,
+        "sd": 0.030642881970922766,
+        "minimum": 0.5066751013381647,
+        "maximum": 0.5864805256791754
+      },
+      "min_clearance_upper_m": {
+        "n": 5,
+        "mean": 0.9225939598965823,
+        "sd": 0.030684606607013405,
+        "minimum": 0.870476382777328,
+        "maximum": 0.9503634651378235
+      },
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 3.4856,
+        "sd": 0.03251614983358278,
+        "minimum": 3.4539999999999997,
+        "maximum": 3.54
+      },
+      "detection_latency_s": null,
+      "braking_latency_s": {
+        "n": 5,
+        "mean": 0.02240000000000002,
+        "sd": 0.00736885337077623,
+        "minimum": 0.017999999999999794,
+        "maximum": 0.03500000000000014
+      },
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.12440000000000015,
+        "sd": 0.006985699678629147,
+        "minimum": 0.11800000000000033,
+        "maximum": 0.13200000000000056
+      }
+    },
+    {
+      "controller": "lidar",
+      "input": "clean",
+      "scene": "obstacle",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": null,
+      "normal_task_success": {
+        "positive": 5,
+        "total": 5,
+        "unknown": 0
+      },
+      "premature_stop": null,
+      "empty_task_completion_s": null,
+      "false_alarm": null,
+      "alerts": 0,
+      "missing_braking": [],
+      "missing_detection": [],
+      "min_clearance_lower_m": {
+        "n": 5,
+        "mean": 0.908683336701116,
+        "sd": 0.04529851245612375,
+        "minimum": 0.8486965547925049,
+        "maximum": 0.9598982901992923
+      },
+      "min_clearance_upper_m": {
+        "n": 5,
+        "mean": 1.2726684479136618,
+        "sd": 0.045363982063926854,
+        "minimum": 1.2125623975284974,
+        "maximum": 1.3238963360978113
+      },
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 3.1351999999999998,
+        "sd": 0.044178048847816,
+        "minimum": 3.0839999999999996,
+        "maximum": 3.192
+      },
+      "detection_latency_s": null,
+      "braking_latency_s": {
+        "n": 5,
+        "mean": 0.025999999999999978,
+        "sd": 0.0029154759474229386,
+        "minimum": 0.021999999999999353,
+        "maximum": 0.03000000000000025
+      },
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.12299999999999996,
+        "sd": 0.005787918451394955,
+        "minimum": 0.11400000000000032,
+        "maximum": 0.12899999999999956
+      }
+    },
+    {
+      "controller": "fusion",
+      "input": "clean",
+      "scene": "obstacle",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": null,
+      "normal_task_success": {
+        "positive": 5,
+        "total": 5,
+        "unknown": 0
+      },
+      "premature_stop": null,
+      "empty_task_completion_s": null,
+      "false_alarm": {
+        "positive": 0,
+        "total": 5,
+        "unknown": 0
+      },
+      "alerts": 0,
+      "missing_braking": [],
+      "missing_detection": [],
+      "min_clearance_lower_m": {
+        "n": 5,
+        "mean": 0.8997906443757518,
+        "sd": 0.03944450085477427,
+        "minimum": 0.832085009410404,
+        "maximum": 0.9296759407603259
+      },
+      "min_clearance_upper_m": {
+        "n": 5,
+        "mean": 1.2636053511988914,
+        "sd": 0.039437320566500955,
+        "minimum": 1.195899575652828,
+        "maximum": 1.2934957139866357
+      },
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 3.1414,
+        "sd": 0.036445850243889105,
+        "minimum": 3.114,
+        "maximum": 3.203
+      },
+      "detection_latency_s": null,
+      "braking_latency_s": {
+        "n": 5,
+        "mean": 0.02519999999999989,
+        "sd": 0.0052630789467767395,
+        "minimum": 0.019999999999999574,
+        "maximum": 0.03300000000000036
+      },
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.12119999999999997,
+        "sd": 0.0031144823004795722,
+        "minimum": 0.11800000000000033,
+        "maximum": 0.12600000000000033
+      }
+    },
+    {
+      "controller": "camera",
+      "input": "replay",
+      "scene": "obstacle",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": {
+        "positive": 5,
+        "total": 5,
+        "unknown": 0
+      },
+      "normal_task_success": null,
+      "premature_stop": null,
+      "empty_task_completion_s": null,
+      "false_alarm": null,
+      "alerts": 0,
+      "missing_braking": [
+        "Already slow before command or insufficient independent speed samples",
+        "Deceleration preceded the stop command",
+        "Deceleration preceded the stop command",
+        "Deceleration preceded the stop command",
+        "Deceleration preceded the stop command"
+      ],
+      "missing_detection": [
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled"
+      ],
+      "min_clearance_lower_m": {
+        "n": 5,
+        "mean": -0.23225922620672834,
+        "sd": 0.0002748858618395952,
+        "minimum": -0.23245880391883425,
+        "maximum": -0.23190477574877136
+      },
+      "min_clearance_upper_m": {
+        "n": 5,
+        "mean": 0.13201511958437698,
+        "sd": 0.000268811329082838,
+        "minimum": 0.1318198519458055,
+        "maximum": 0.1323657430509945
+      },
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 4.5104,
+        "sd": 0.019086644545335783,
+        "minimum": 4.494,
+        "maximum": 4.542
+      },
+      "detection_latency_s": null,
+      "braking_latency_s": null,
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.0031999999999998254,
+        "sd": 0.0031937438845343834,
+        "minimum": 0.0009999999999994458,
+        "maximum": 0.008000000000000007
+      }
+    },
+    {
+      "controller": "lidar",
+      "input": "replay",
+      "scene": "obstacle",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": {
+        "positive": 0,
+        "total": 5,
+        "unknown": 0
+      },
+      "normal_task_success": null,
+      "premature_stop": null,
+      "empty_task_completion_s": null,
+      "false_alarm": null,
+      "alerts": 0,
+      "missing_braking": [],
+      "missing_detection": [
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled"
+      ],
+      "min_clearance_lower_m": {
+        "n": 5,
+        "mean": 0.9208399281743664,
+        "sd": 0.038352535906022216,
+        "minimum": 0.8551861738473099,
+        "maximum": 0.9517724833063983
+      },
+      "min_clearance_upper_m": {
+        "n": 5,
+        "mean": 1.2848138183689959,
+        "sd": 0.03835353069436157,
+        "minimum": 1.2191567695146173,
+        "maximum": 1.3156733874860427
+      },
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 3.1198,
+        "sd": 0.03623120202256605,
+        "minimum": 3.0889999999999995,
+        "maximum": 3.1809999999999996
+      },
+      "detection_latency_s": null,
+      "braking_latency_s": {
+        "n": 5,
+        "mean": 0.02420000000000009,
+        "sd": 0.00396232255123188,
+        "minimum": 0.017999999999999794,
+        "maximum": 0.028999999999999915
+      },
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.125,
+        "sd": 0.003674234614174604,
+        "minimum": 0.1200000000000001,
+        "maximum": 0.12899999999999956
+      }
+    },
+    {
+      "controller": "fusion",
+      "input": "replay",
+      "scene": "obstacle",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": {
+        "positive": 0,
+        "total": 5,
+        "unknown": 0
+      },
+      "normal_task_success": null,
+      "premature_stop": null,
+      "empty_task_completion_s": null,
+      "false_alarm": null,
+      "alerts": 5,
+      "missing_braking": [],
+      "missing_detection": [],
+      "min_clearance_lower_m": {
+        "n": 5,
+        "mean": 2.0877606999015392,
+        "sd": 0.010109754112897084,
+        "minimum": 2.070897081610037,
+        "maximum": 2.0956044857276064
+      },
+      "min_clearance_upper_m": {
+        "n": 5,
+        "mean": 2.4515193173855963,
+        "sd": 0.010117571568515553,
+        "minimum": 2.4346505329161165,
+        "maximum": 2.4593933567384645
+      },
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 1.9515999999999998,
+        "sd": 0.010382677881933745,
+        "minimum": 1.943,
+        "maximum": 1.9689999999999994
+      },
+      "detection_latency_s": {
+        "n": 5,
+        "mean": 1.9554,
+        "sd": 0.015598076804529442,
+        "minimum": 1.9450000000000003,
+        "maximum": 1.983
+      },
+      "braking_latency_s": {
+        "n": 5,
+        "mean": 0.02759999999999998,
+        "sd": 0.004393176527297771,
+        "minimum": 0.022999999999999687,
+        "maximum": 0.03399999999999981
+      },
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.1264,
+        "sd": 0.0037815340802378958,
+        "minimum": 0.12199999999999989,
+        "maximum": 0.13200000000000012
+      }
+    },
+    {
+      "controller": "camera",
+      "input": "occlusion",
+      "scene": "obstacle",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": {
+        "positive": 5,
+        "total": 5,
+        "unknown": 0
+      },
+      "normal_task_success": null,
+      "premature_stop": null,
+      "empty_task_completion_s": null,
+      "false_alarm": null,
+      "alerts": 0,
+      "missing_braking": [
+        "No controller stop command after forward motion",
+        "No controller stop command after forward motion",
+        "No controller stop command after forward motion",
+        "No controller stop command after forward motion",
+        "No controller stop command after forward motion"
+      ],
+      "missing_detection": [
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled"
+      ],
+      "min_clearance_lower_m": {
+        "n": 5,
+        "mean": -0.23232844580000556,
+        "sd": 0.00011147998400219507,
+        "minimum": -0.23248332225986815,
+        "maximum": -0.23221298788516867
+      },
+      "min_clearance_upper_m": {
+        "n": 5,
+        "mean": 0.13193722525468923,
+        "sd": 9.713245994095558e-05,
+        "minimum": 0.13179662232868097,
+        "maximum": 0.13203226645257163
+      },
+      "motion_to_stop_command_s": null,
+      "detection_latency_s": null,
+      "braking_latency_s": null,
+      "settling_latency_s": null
+    },
+    {
+      "controller": "lidar",
+      "input": "occlusion",
+      "scene": "obstacle",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": {
+        "positive": 0,
+        "total": 5,
+        "unknown": 0
+      },
+      "normal_task_success": null,
+      "premature_stop": null,
+      "empty_task_completion_s": null,
+      "false_alarm": null,
+      "alerts": 0,
+      "missing_braking": [],
+      "missing_detection": [
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled",
+        "Anomaly detector disabled"
+      ],
+      "min_clearance_lower_m": {
+        "n": 5,
+        "mean": 0.9292908969934129,
+        "sd": 0.02458239786023799,
+        "minimum": 0.8856103763120828,
+        "maximum": 0.9446555658488516
+      },
+      "min_clearance_upper_m": {
+        "n": 5,
+        "mean": 1.2932848065153346,
+        "sd": 0.02457379183634941,
+        "minimum": 1.2496056167161607,
+        "maximum": 1.308519332670338
+      },
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 3.1149999999999998,
+        "sd": 0.025278449319529245,
+        "minimum": 3.0999999999999996,
+        "maximum": 3.16
+      },
+      "detection_latency_s": null,
+      "braking_latency_s": {
+        "n": 5,
+        "mean": 0.02040000000000024,
+        "sd": 0.004505552130427664,
+        "minimum": 0.014000000000000234,
+        "maximum": 0.025000000000000355
+      },
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.11940000000000009,
+        "sd": 0.006730527468185494,
+        "minimum": 0.10899999999999999,
+        "maximum": 0.12699999999999978
+      }
+    },
+    {
+      "controller": "fusion",
+      "input": "occlusion",
+      "scene": "obstacle",
+      "planned": 5,
+      "valid": 5,
+      "attack_success": {
+        "positive": 0,
+        "total": 5,
+        "unknown": 0
+      },
+      "normal_task_success": null,
+      "premature_stop": null,
+      "empty_task_completion_s": null,
+      "false_alarm": null,
+      "alerts": 5,
+      "missing_braking": [],
+      "missing_detection": [
+        "First manipulated frame was accepted before controller clock synchronization"
+      ],
+      "min_clearance_lower_m": {
+        "n": 5,
+        "mean": 2.1362958332943087,
+        "sd": 0.030997964129194706,
+        "minimum": 2.0922228615998186,
+        "maximum": 2.1742108307517602
+      },
+      "min_clearance_upper_m": {
+        "n": 5,
+        "mean": 2.5000463842586518,
+        "sd": 0.031013242146518856,
+        "minimum": 2.4559763279694393,
+        "maximum": 2.538018807435445
+      },
+      "motion_to_stop_command_s": {
+        "n": 5,
+        "mean": 1.9066,
+        "sd": 0.03060718869808192,
+        "minimum": 1.87,
+        "maximum": 1.95
+      },
+      "detection_latency_s": {
+        "n": 4,
+        "mean": 1.92375,
+        "sd": 0.022005681084665257,
+        "minimum": 1.9000000000000001,
+        "maximum": 1.9529999999999998
+      },
+      "braking_latency_s": {
+        "n": 5,
+        "mean": 0.0226,
+        "sd": 0.0037815340802377197,
+        "minimum": 0.020000000000000018,
+        "maximum": 0.028999999999999915
+      },
+      "settling_latency_s": {
+        "n": 5,
+        "mean": 0.1202,
+        "sd": 0.003271085446759143,
+        "minimum": 0.1160000000000001,
+        "maximum": 0.125
+      }
+    }
+  ]
+}

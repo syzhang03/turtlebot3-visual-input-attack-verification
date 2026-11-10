@@ -116,22 +116,29 @@ def analyze(folder, attack, empty, defense):
             clean_success = None
     onset = None
     detection_note = None
+    manipulated_motion_frames = None
     if attack != 'clean':
         delivered = read_csv(folder/'image-delivery.csv')
-        accepted = [r for r in read_csv(next(folder.glob('*/*/image-acceptance.csv')))
-                    if float(r['accepted_sim_s']) <= end]
         if attack == 'replay':
             altered = {r['input_stamp_ns'] for r in read_csv(next((folder/'attack').glob('*/frames.csv')))
                        if r['state']=='REPLAY'}
         else:
             altered = {r['header_stamp_ns'] for r in delivered if r['black_roi']=='True'}
-        candidates = [float(r['accepted_sim_s']) for r in accepted if r['header_stamp_ns'] in altered]
-        if not candidates:
-            raise ValueError('No manipulated frame linked to the delivered stream')
-        if candidates[0] > 0:
-            onset = candidates[0]
+        if s['controller'] == 'lidar':
+            manipulated_motion_frames = sum(r['header_stamp_ns'] in altered
+                and motion <= float(r['delivery_sim_s']) <= end for r in delivered)
+            if not manipulated_motion_frames:
+                raise ValueError('No manipulated frame verified on the common stream during LiDAR-only motion')
         else:
-            detection_note = 'First manipulated frame was accepted before controller clock synchronization'
+            accepted = [r for r in read_csv(next(folder.glob('*/*/image-acceptance.csv')))
+                        if float(r['accepted_sim_s']) <= end]
+            candidates = [float(r['accepted_sim_s']) for r in accepted if r['header_stamp_ns'] in altered]
+            if not candidates:
+                raise ValueError('No manipulated frame linked to the delivered stream')
+            if candidates[0] > 0:
+                onset = candidates[0]
+            else:
+                detection_note = 'First manipulated frame was accepted before controller clock synchronization'
     alerts = json.loads((folder/'alerts.json').read_text())
     first_alert = float(alerts[0]['published_sim_s']) if alerts else None
     detection_latency = first_alert-onset if first_alert is not None and onset is not None and first_alert >= onset else None
@@ -148,7 +155,7 @@ def analyze(folder, attack, empty, defense):
         false_alarm=(bool(alerts) if defense else None) if attack=='clean' else None,
         premature_stop=(brake is not None and final['state']!='GOAL_REACHED') if empty else None,
         attack_delivery_sim_s=onset, first_alert_sim_s=first_alert, detection_latency_s=detection_latency,
-        detection_note=detection_note,
+        detection_note=detection_note, manipulated_stream_frames_during_motion=manipulated_motion_frames,
         detector_enabled=defense, motion_start_sim_s=motion, stop_command_sim_s=brake,
         motion_to_stop_command_s=None if brake is None else brake-motion,
         pose_samples=len(movement), **braking)
