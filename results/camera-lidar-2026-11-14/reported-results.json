@@ -167,14 +167,42 @@
         "duration_wall_s": 5,
         "scope": "Post-stop check only, not whole-run minimum or exact gap",
         "historical_contact": "UNKNOWN"
+      },
+      "delayed_braking_result": {
+        "objective_met_in_reported_trial": true,
+        "comparison_reference_run_id": "20261114T114534.386523Z",
+        "extra_travel_before_first_zero_command_m": 0.73,
+        "extra_stopping_displacement_m": 0.743,
+        "stop_command_delay_from_motion_start_relative_to_clean_sim_s": 0.722
       }
     }
   ],
   "interpretation_limits": [
     "Displacement is forward odometry, not physical obstacle clearance.",
-    "Successful injection is not demonstrated collision.",
+    "Successful injection alone does not establish delayed braking; compare stop commands and positions against matched clean.",
     "Ordinary visual/LiDAR stopping does not establish anomaly detection.",
-    "No full-run contact recorder was used.",
-    "The proposed faster-speed trial was not completed."
-  ]
+    "The reported clearance lower bound describes the post-stop observation window only.",
+    "Higher-speed, longer-delay and larger-bias trials are follow-up work."
+  ],
+  "success_criterion": {
+    "objective": "Delay the stop command or shift the stopping position forward relative to a matched clean trial.",
+    "collision_required": false,
+    "primary_metrics": [
+      "time from motion start to first zero-speed command",
+      "forward displacement at first zero-speed command",
+      "forward displacement at first logged zero odometry speed"
+    ],
+    "scope": "Observed single-trial comparison; repeat trials to establish reproducibility and distinguish small differences from normal variation."
+  },
+  "follow_up_testing": {
+    "owner": "testing team",
+    "status": "planned; not included in completed results",
+    "vary": [
+      "robot speed (m/s)",
+      "camera replay delay (simulation s)",
+      "positive LiDAR radial range bias (m)"
+    ],
+    "controls": "Matched clean baseline at each speed, fixed recorded defense profile within each comparison, repeated trials.",
+    "implementation_note": "Current joint controller wrapper and summary audit fix speed at 1.0 m/s; parameterize and record speed before speed sweeps."
+  }
 }

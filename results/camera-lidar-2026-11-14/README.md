@@ -2,7 +2,9 @@
 
 This update provides a working two-sensor attack testbed, four matched development trials, and a starting point for teammates implementing defenses. The robot uses the existing houses, road, white stop line and fixed red obstacle. All four retained trials used the same camera–LiDAR controller at **1.0 m/s** with a **0.4 visual stop threshold** and a **0.788 m fixed LiDAR trigger clearance**.
 
-The single-sensor attacks were followed by stops using the other sensor. The joint attack delayed the stop: final logged forward displacement increased from **2.9653 m to 3.7083 m**, a difference of **0.7430 m**. A later independent Gazebo geometry check found a **current clearance lower bound of 0.064162 m (6.42 cm)** while the robot was stationary. **A collision was not established.** The check cannot reconstruct contact earlier in the approach.
+The single-sensor attacks were followed by stops using the other sensor. The joint attack achieved the **delayed-braking objective in this reported trial**: the robot travelled **0.7300 m farther before the first zero-speed command**, and final logged forward displacement increased from **2.9653 m to 3.7083 m**, a difference of **0.7430 m**. A later independent Gazebo geometry check found a **current clearance lower bound of 0.064162 m (6.42 cm)** while the robot was stationary.
+
+**Success criterion:** an attack succeeds at this task when it delays the braking command or shifts the stopping position forward relative to a matched clean trial. Collision is an optional additional severity outcome, not a requirement for success. Compare the first zero-speed command's time since motion started, its forward displacement, and the final stopping displacement. These command-based measurements describe when the controller requested a stop; they are not a direct measurement of mechanical braking onset. Repeated trials are needed to separate an attack effect from normal run-to-run variation.
 
 This is an extension of the original camera-only threat model. Here LiDAR may also be compromised; it must not be treated as trusted in the `lidar` and `joint` conditions. The repository's original root README is retained. These four conditions are not the historical four conditions in Issue #13, and the results must not be pooled with that evaluation or the October camera-only trials.
 
@@ -82,14 +84,14 @@ The [frozen reference profile](../../configs/aligned_stop_20261114.yaml) is tran
 
 ## 5. Four retained trials and results
 
-Each row is **one development trial**, not a repeated statistical evaluation. All four summaries reported `issues: []`; this is a configuration/data audit, not a collision-success criterion. Results below are transcribed from the operator's terminal summaries and observations. The original complete VM CSV/JSON directories have **not yet been copied into this evidence folder**; [reported-results.json](reported-results.json) records provenance and the original run identifiers. No raw sensor records have been reconstructed or invented.
+Each row is **one development trial**, not a repeated statistical evaluation. All four summaries reported `issues: []`; this is a configuration/data audit, not an attack-success determination by itself. Success is assessed from the braking/stop-position comparison with clean. Results below are transcribed from the operator's terminal summaries and observations. The original complete VM CSV/JSON directories have **not yet been copied into this evidence folder**; [reported-results.json](reported-results.json) records provenance and the original run identifiers. No raw sensor records have been reconstructed or invented.
 
 | Condition | Requested camera delay | Requested LiDAR bias | First stop state | Forward displacement at first zero command | Forward displacement at first logged zero odometry speed | Contact evidence |
 |---|---:|---:|---|---:|---:|---|
 | `clean` | 0 s | 0 m | `VISUAL_STOP` | 2.9515 m | 2.9653 m | Operator reported no contact and supplied a screenshot in the working session |
 | `camera` | 1 s | 0 m | `OBSTACLE_STOP` | 3.0025 m | 3.0263 m | Operator confirmed no contact and a complete stop |
 | `lidar` | 0 s | +1 m | `VISUAL_STOP` | 2.9525 m | 2.9733 m | Operator confirmed no contact and a complete stop |
-| `joint` | 1 s | +1 m | `OBSTACLE_STOP` | 3.6815 m | 3.7083 m | Later native geometry check: currently separated by at least 0.064162 m; earlier contact remains unknown |
+| `joint` | 1 s | +1 m | `OBSTACLE_STOP` | 3.6815 m | 3.7083 m | Later native geometry check: current clearance lower bound 0.064162 m |
 
 | Condition | Actual accepted camera content delay (min / mean / max) | Matched accepted camera frames | LiDAR relay states during motion | Cumulative changed ray samples |
 |---|---|---:|---|---:|
@@ -102,7 +104,9 @@ Changed ray samples are summed across scans, not counts of distinct laser beams.
 
 The joint trial's reported corridor clearance dropped from 1.1049 to 0.0210 m at stopping. Those are **attacked sensor measurements**, not independent clearance measurements. Unmodified sector-edge rays are one possible explanation, but the current summaries do not establish which ray triggered the stop.
 
-The subsequent geometry check observed 177 native-pose samples over five wall seconds and reported stationary, separated collision geometry. Its 6.42 cm value is a conservative **lower bound during that check**, conditional on the installed collision model matching the live scene. It is not an exact gap or the minimum clearance over the whole approach. With collision as the success criterion, the joint trial is **not a demonstrated collision success**. No 1.2 m/s trial was completed for this update.
+Relative to clean, the joint trial's first zero-speed command occurred **0.722 simulation seconds later after motion start** (4.201 s versus 3.479 s), after **0.7300 m more forward travel**. Its final stopping displacement increased by **0.7430 m**. These observations meet this trial's delayed-braking/forward-stop-shift objective even though the robot ultimately stopped. The small differences in the single-sensor trials should be checked with repetitions before drawing conclusions about their effect sizes.
+
+The subsequent geometry check observed 177 native-pose samples over five wall seconds and reported stationary, separated collision geometry. Its 6.42 cm value is a conservative **lower bound during that check**, conditional on the installed collision model matching the live scene. It is not an exact gap or the minimum clearance over the whole approach.
 
 Original VM run identifiers (UTC):
 
@@ -190,7 +194,7 @@ python3 "$HOME/camera-lidar-attack/scripts/summarize_joint_trial.py" "$run_dir"
 bash "$HOME/camera-lidar-attack/scripts/check_stopped_clearance.sh" "$run_dir"
 ```
 
-The geometry helper needs Gazebo Harmonic's `gz.transport13` and `gz.msgs10` Python bindings. It reads native model/link poses and collision primitives, publishes no commands, and stores its report under `~/clearance-checks`. `CURRENTLY_SEPARATED` applies only to the check window; overlapping bounds do not prove contact. A reset destroys the original stopped pose. For whole-trial collision scoring, teammates must add an independent contact recorder before motion; this update does **not** include a completed full-run contact-recording system.
+The geometry helper needs Gazebo Harmonic's `gz.transport13` and `gz.msgs10` Python bindings. It reads native model/link poses and collision primitives, publishes no commands, and stores its report under `~/clearance-checks`. `CURRENTLY_SEPARATED` applies only to the check window; overlapping bounds do not prove contact. A reset destroys the original stopped pose. Use this optional measurement alongside the primary braking-command and stopping-position metrics. If collision is additionally evaluated, record contact independently from before motion.
 
 Preserve `manifest.json`, `controller-profile.yaml`, both relays' configuration and CSV files, and controller `config.json`, `visual-config.json`, `events.csv`, `pairs.csv` and `image-acceptance.csv`, together with screenshots and independent geometry/contact evidence. Directory timestamps are UTC; they can differ from local display time.
 
@@ -201,7 +205,7 @@ ROS_DOMAIN_ID=33 bash "$HOME/camera-lidar-attack/scripts/check_camera_streams.sh
   --seconds 60 --gazebo --raw-reliability reliable
 ```
 
-Investigate `SENSOR_TIMEOUT` using [diagnose_joint_timeout.py](../../scripts/diagnose_joint_timeout.py). Do not report infrastructure failures as demonstrated collision attacks.
+Investigate `SENSOR_TIMEOUT` using [diagnose_joint_timeout.py](../../scripts/diagnose_joint_timeout.py). Classify infrastructure failures separately from valid braking-delay comparisons.
 
 ## 7. How teammates can build and evaluate defenses
 
@@ -223,10 +227,18 @@ Practical integration steps:
 2. Subscribe to **both attacked topics**, even for `clean`. Reading `/scan` in the `lidar` or `joint` group would bypass the attack. Raw topics, relay provenance and Gazebo ground truth are reserved for evaluation unless explicitly added to the defense's trust model.
 3. Set the same 1.0 m/s speed, geometry, simulation clock and frozen thresholds for the first comparison. Use the two input streams to implement the new check and connect its decision to the sole final command publisher. Do not run the supplied drive controller concurrently with another drive controller.
 4. Save the defense version, effective parameters, input acceptance times, alarm reason/time, outgoing commands and actual motion. The supplied summary expects the supplied controller's log schema; a different controller needs a compatible exporter or its own evaluator.
-5. Run `clean`, `camera`, `lidar` and `joint` from fresh scenes with the same attack settings. Measure false stops, detection latency, stopping behavior, full-run independent contact and minimum clearance. Report ordinary sensor stops separately from anomaly alarms.
+5. Run `clean`, `camera`, `lidar` and `joint` from fresh scenes with the same attack settings. Compare time and travel before the first zero-speed command, final stopping displacement, false stops and detection latency. Independent clearance and contact measurements can provide additional severity evidence. Report ordinary sensor stops separately from anomaly alarms.
 
-Historical pixels with a current header can defeat header-only freshness checks. In the joint condition, mutually plausible observations may still both be wrong: cross-sensor agreement alone does not establish truth. These are properties to test, not reasons to assume every joint attack will collide.
+Historical pixels with a current header can defeat header-only freshness checks. In the joint condition, mutually plausible observations may still both be wrong: cross-sensor agreement alone does not establish truth. A defense should therefore be evaluated on whether it prevents delayed braking and excessive forward travel, as well as whether it eventually stops the robot.
+
+### Follow-up testing by the testing team
+
+The testing team will extend these four conditions to **higher robot speeds, longer camera replay delays, and larger positive LiDAR range biases**. LiDAR bias is a distance manipulation measured in metres, not a temporal LiDAR delay. These parameter sweeps are planned work; the results above remain the completed 1.0 m/s, 1.0-second replay and +1.0 m bias trials.
+
+Use a matched clean baseline at each speed, vary one factor at a time initially, and preserve every run. Keep controller/defense parameters fixed within each comparison and record any recalibration as a new profile. Measure additional travel before the stop command, change in stopping displacement and delay in the stop command relative to motion start. Repeat conditions to distinguish small differences from sampling and scheduling variation. Check `actual_delay_s`, `changed_rays` and range clipping rather than relying only on requested attack strengths.
+
+`run_joint_attack.sh` already accepts the camera delay and LiDAR bias arguments. The current `run_joint_controller.sh` fixes speed at **1.0 m/s**; the testing team must make that override configurable and record its effective value before a speed sweep. Changing only the YAML speed will not override this script's command-line setting. The current summary also audits against 1.0 m/s, so a speed sweep needs a corresponding audit of the recorded per-run speed.
 
 ## 8. Evidence and validation limits
 
-The four VM runs and the post-stop check are operator-provided evidence. This publication includes their explicitly labeled summary, the scripts used, the recorded parameter profile, and tests. Full raw VM records and a full-run contact trace are pending. Local test results and skipped ROS checks are recorded in [validation.json](validation.json). Windows unit tests do not substitute for a ROS build or live Gazebo trial on a teammate's machine.
+The four VM runs and the post-stop check are operator-provided evidence. This publication includes their explicitly labeled summary, the scripts used, the recorded parameter profile, and tests. Full raw VM records remain to be imported. Local test results and skipped ROS checks are recorded in [validation.json](validation.json). Windows unit tests do not substitute for a ROS build or live Gazebo trial on a teammate's machine.

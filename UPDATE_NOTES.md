@@ -14,9 +14,11 @@ The **[experiment README](results/camera-lidar-2026-11-14/README.md)** explains 
 | No attack | `VISUAL_STOP` | 2.9653 m | Operator reported no contact |
 | Camera only: 1 s replay | `OBSTACLE_STOP` | 3.0263 m | Operator reported no contact |
 | LiDAR only: +1 m | `VISUAL_STOP` | 2.9733 m | Operator reported no contact |
-| Joint attack | `OBSTACLE_STOP` | 3.7083 m | Later geometry check: current gap at least 6.42 cm; earlier contact unknown |
+| Joint attack | `OBSTACLE_STOP` | 3.7083 m | Later geometry check: current gap lower bound 6.42 cm |
 
-The joint attack moved the stopping position forward by approximately **0.743 m** relative to the clean run. Both injections were verified in the reported logs, but **collision success was not established**. These are individual development trials, not a statistical success-rate study. A faster-speed experiment was discussed but was not completed or included.
+**The attack objective is delayed braking or a forward shift of the stopping position; collision is not required.** The joint trial met this objective: relative to clean, its first zero-speed command occurred 0.722 simulation seconds later after motion start and after 0.730 m more travel; its final stopping position moved forward by approximately **0.743 m**. Both injections were verified in the reported logs. These are individual development trials, not a statistical success-rate study.
+
+The testing team will evaluate higher speeds, longer camera replay delays and larger LiDAR distance biases, using matched clean baselines and repeated trials. These sweeps are planned follow-up work; the reported results remain the completed 1.0 m/s experiments. See the [testing handoff](results/camera-lidar-2026-11-14/README.md#follow-up-testing-by-the-testing-team) for the current script's fixed-speed override and audit requirements.
 
 Start with the [English reproduction and defense handoff](results/camera-lidar-2026-11-14/README.md#6-reproduce-on-another-ubuntu-machine), [recorded profile](configs/aligned_stop_20261114.yaml) and [reported results/provenance](results/camera-lidar-2026-11-14/reported-results.json). Full original VM logs are still to be imported; the published summaries explicitly identify their operator-provided source.
 
