@@ -9,12 +9,15 @@ import xml.etree.ElementTree as ET
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
-    EmitEvent, IncludeLaunchDescription, LogInfo, OpaqueFunction,
+    AppendEnvironmentVariable, DeclareLaunchArgument, EmitEvent, GroupAction,
+    IncludeLaunchDescription, LogInfo, OpaqueFunction,
     RegisterEventHandler, TimerAction,
 )
+from launch.conditions import IfCondition, UnlessCondition
 from launch.event_handlers import OnProcessExit
 from launch.events import Shutdown
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 
@@ -22,6 +25,8 @@ def generate_launch_description():
     project = Path(__file__).resolve().parents[1]
     scene_file = project / 'worlds' / 'intersection-white-line.sdf'
     tb3 = Path(get_package_share_directory('turtlebot3_gazebo'))
+    ros_gz_sim = Path(get_package_share_directory('ros_gz_sim'))
+    scene_gui = LaunchConfiguration('scene_gui')
     base_world = tb3 / 'worlds' / 'empty_world.world'
     world = ET.parse(base_world).getroot().find('world')
     if world is None or not world.get('name'):
@@ -37,7 +42,25 @@ def generate_launch_description():
     simulator = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(str(tb3 / 'launch' / 'empty_world.launch.py')),
         launch_arguments={'x_pose': '0.0', 'y_pose': '0.0', 'use_sim_time': 'true'}.items(),
+        condition=IfCondition(scene_gui),
     )
+    # Same server, world, robot spawner, bridges and robot description as the
+    # upstream Jazzy empty_world launch; omit only its separate `gz sim -g` client.
+    # Keep DISPLAY/render engine unchanged: server mode is not an EGL switch.
+    # Reference: ROBOTIS-GIT/turtlebot3_simulations, jazzy, empty_world.launch.py.
+    server_simulator = GroupAction([
+        AppendEnvironmentVariable('GZ_SIM_RESOURCE_PATH', str(tb3 / 'models')),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(str(ros_gz_sim / 'launch' / 'gz_sim.launch.py')),
+            launch_arguments={'gz_args': ['-r -s -v2 ', str(base_world)],
+                              'on_exit_shutdown': 'true'}.items()),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(str(tb3 / 'launch' / 'robot_state_publisher.launch.py')),
+            launch_arguments={'use_sim_time': 'true'}.items()),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(str(tb3 / 'launch' / 'spawn_turtlebot3.launch.py')),
+            launch_arguments={'x_pose': '0.0', 'y_pose': '0.0'}.items()),
+    ], condition=UnlessCondition(scene_gui))
     spawn_scene = Node(
         package='ros_gz_sim', executable='create', name='spawn_experiment_scene',
         output='screen', arguments=[
@@ -55,7 +78,7 @@ def generate_launch_description():
             return [LogInfo(msg='SCENE_FAILED: see spawn_experiment_scene output above.'),
                     EmitEvent(event=Shutdown(reason='Experiment scenery creation failed'))]
         status['loaded'] = True
-        return [LogInfo(msg='SCENE_READY: scenery loaded. Confirm robot and scene in Gazebo '
+        return [LogInfo(msg='SCENE_READY: scenery loaded. Wait for camera and scan data '
                             'before starting a controller. Ctrl+C closes this simulation.')]
 
     def check_deadline(context):
@@ -65,8 +88,10 @@ def generate_launch_description():
                 EmitEvent(event=Shutdown(reason='Experiment scenery startup timeout'))]
 
     return LaunchDescription([
+        DeclareLaunchArgument('scene_gui', default_value='true', choices=['true', 'false']),
         RegisterEventHandler(OnProcessExit(target_action=spawn_scene, on_exit=on_spawn_exit)),
         simulator,
+        server_simulator,
         spawn_scene,
         TimerAction(period=120.0, actions=[OpaqueFunction(function=check_deadline)]),
     ])

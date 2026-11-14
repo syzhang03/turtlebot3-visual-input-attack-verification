@@ -19,13 +19,16 @@ except ImportError:
 
 @unittest.skipUnless(HAS_ROS, 'Requires real ROS Jazzy packages')
 class RosTests(unittest.TestCase):
+    extra_parameters = []
+
     def setUp(self):
         self.logs = tempfile.TemporaryDirectory(prefix='lidar-ros-test-')
         rclpy.init(args=['--ros-args', '-p', 'enabled:=true', '-p', 'use_sim_time:=false',
                         '-p', 'scan_topic:=/lidar_test/scan', '-p', 'odom_topic:=/lidar_test/odom',
                         '-p', 'cmd_topic:=/lidar_test/cmd', '-p', 'speed:=0.1',
                         '-p', 'goal_distance:=0.2', '-p', 'sensor_timeout_wall:=0.6',
-                        '-p', 'max_stamp_age_sim:=0.5', '-p', f'log_dir:={self.logs.name}'])
+                        '-p', 'max_stamp_age_sim:=0.5', '-p', f'log_dir:={self.logs.name}']
+                        + self.extra_parameters)
         self.baseline = LidarBaseline()
         self.peer = rclpy.create_node('lidar_test_peer')
         self.scans = self.peer.create_publisher(LaserScan, '/lidar_test/scan', qos_profile_sensor_data)
@@ -46,7 +49,8 @@ class RosTests(unittest.TestCase):
         rclpy.shutdown()
         self.logs.cleanup()
 
-    def pump(self, duration, scan=True, obstacle=False, invalid=False, frozen=False, x=0.0):
+    def pump(self, duration, scan=True, obstacle=False, invalid=False, frozen=False, x=0.0,
+             distance=None, velocity=0.0):
         deadline = time.monotonic() + duration
         while time.monotonic() < deadline:
             stamp = self.peer.get_clock().now().to_msg()
@@ -54,6 +58,7 @@ class RosTests(unittest.TestCase):
             odom.header.stamp = stamp
             odom.pose.pose.orientation.w = 1.0
             odom.pose.pose.position.x = x
+            odom.twist.twist.linear.x = velocity
             self.odoms.publish(odom)
             if scan:
                 msg = LaserScan()
@@ -62,6 +67,8 @@ class RosTests(unittest.TestCase):
                 msg.angle_max = 359*math.pi/180
                 msg.range_min, msg.range_max = 0.12, 3.5
                 msg.ranges = [math.inf]*360
+                if distance is not None:
+                    msg.ranges[0] = distance
                 if obstacle:
                     msg.ranges[0] = 0.3
                 if invalid:
@@ -109,6 +116,17 @@ class RosTests(unittest.TestCase):
         self.pump(0.5)
         self.pump(0.2, invalid=True)
         self.assert_stopped('SENSOR_INVALID')
+
+
+class FixedStopRosTests(RosTests):
+    extra_parameters = ['-p', 'stop_distance_mode:=fixed', '-p', 'fixed_stop_distance:=0.77']
+
+    def test_scan_boundary_stays_fixed_with_higher_odometry_speed(self):
+        self.pump(.6, distance=1.0, velocity=1.0)  # clearance=.85 > .77; old dynamic threshold=1.15.
+        self.assertEqual(self.baseline.controller.state, 'RUNNING')
+        self.assertEqual(self.baseline.threshold, .77)
+        self.pump(.2, distance=.9, velocity=1.0)  # clearance=.75 < .77.
+        self.assert_stopped('OBSTACLE_STOP')
 
 
 if __name__ == '__main__':

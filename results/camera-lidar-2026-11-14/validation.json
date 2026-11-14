@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-14",
+  "host": "Windows, Python 3.12",
+  "suites": [
+    {
+      "path": "src/tb3_lidar_attack/test",
+      "passed": 22,
+      "skipped": 3
+    },
+    {
+      "path": "src/tb3_lidar_baseline/test",
+      "passed": 16,
+      "skipped": 11
+    },
+    {
+      "path": "src/tb3_camera_lidar_monitor/test",
+      "passed": 6,
+      "skipped": 12
+    },
+    {
+      "path": "tests",
+      "passed": 11,
+      "skipped": 0
+    },
+    {
+      "path": "src/tb3_visual_baseline/test",
+      "pattern": "test_re*.py",
+      "passed": 11,
+      "skipped": 5
+    }
+  ],
+  "total_passed": 66,
+  "total_skipped": 31,
+  "skip_reason": "ROS 2 / DDS / cv_bridge unavailable on this host",
+  "bash_syntax": "Passed for build_joint_attack.sh, run_joint_attack.sh, run_joint_controller.sh, start_scene.sh, run_stop_calibration.sh and check_stopped_clearance.sh",
+  "scope": "Host verification only. VM runs and geometry observations are operator-reported, as described in reported-results.json.",
+  "not_run_here": [
+    "ROS build",
+    "ROS/DDS runtime tests",
+    "Gazebo trials",
+    "full-run contact recording",
+    "full visual-baseline test suite requiring NumPy/OpenCV"
+  ]
+}

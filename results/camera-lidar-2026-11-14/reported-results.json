@@ -1,0 +1,208 @@
+{
+  "experiment_date_local": "2026-11-14",
+  "timezone": "Asia/Shanghai",
+  "status": "DEVELOPMENT_NOT_FORMAL_EVALUATION",
+  "provenance": "Transcribed from operator-supplied terminal summaries and observations; not independently regenerated from original VM CSV files.",
+  "raw_vm_records_in_this_folder": false,
+  "replicates_per_condition_in_this_report": 1,
+  "run_id_time_basis": "UTC",
+  "shared_configuration": {
+    "speed_m_s": 1,
+    "visual_stop_threshold": 0.4,
+    "visual_verify_threshold": 0.4,
+    "stop_distance_mode": "fixed",
+    "fixed_stop_distance_m": 0.788,
+    "verify_near_m": 0.71,
+    "verify_far_m": 0.87,
+    "pair_tolerance_sim_s": 0.06,
+    "pair_timeout_sim_s": 0.6,
+    "confirmations": 3,
+    "sensor_timeout_wall_s": 2,
+    "max_stamp_age_sim_s": 0.5,
+    "enable_goal_stop": false,
+    "camera_transport_revision": "configurable-reliable-input-v2",
+    "camera_input_reliability": "reliable",
+    "camera_output_reliability": "reliable",
+    "image_topic": "/attack/image_raw",
+    "scan_topic": "/attack/scan",
+    "sector_center_deg": 0,
+    "sector_half_width_deg": 30,
+    "attack_start_sim_s": 0,
+    "attack_duration_sim_s": 600
+  },
+  "trials": [
+    {
+      "mode": "clean",
+      "run_id": "20261114T114534.386523Z",
+      "controller_run_id": "20261114T114609.164320Z",
+      "camera_delay_requested_s": 0,
+      "lidar_bias_requested_m": 0,
+      "summary_issues": [],
+      "motion_start_sim_s": 12.031,
+      "first_zero_command_sim_s": 15.51,
+      "first_zero_command_displacement_m": 2.9514999999990197,
+      "first_zero_odom_sim_s": 15.544,
+      "first_zero_odom_displacement_m": 2.965276503281903,
+      "final_state": "VISUAL_STOP",
+      "actual_camera_delay_s": {
+        "count": 107,
+        "minimum": 0,
+        "mean": 0,
+        "maximum": 0
+      },
+      "accepted_camera_states": {
+        "ZERO_DELAY": 107
+      },
+      "lidar_relay_states_during_motion": {
+        "PASSTHROUGH": 35
+      },
+      "lidar_changed_ray_samples": 0,
+      "contact_observation": "Operator reported no contact and a complete stop; no full-run contact trace included.",
+      "independent_clearance_lower_bound_m": null
+    },
+    {
+      "mode": "camera",
+      "run_id": "20261114T115158.435562Z",
+      "controller_run_id": "20261114T115219.316460Z",
+      "camera_delay_requested_s": 1,
+      "lidar_bias_requested_m": 0,
+      "summary_issues": [],
+      "motion_start_sim_s": 7.13,
+      "first_zero_command_sim_s": 10.659,
+      "first_zero_command_displacement_m": 3.0024999999990216,
+      "first_zero_odom_sim_s": 10.693,
+      "first_zero_odom_displacement_m": 3.0262765034056556,
+      "final_state": "OBSTACLE_STOP",
+      "actual_camera_delay_s": {
+        "count": 106,
+        "minimum": 1.022,
+        "mean": 1.023,
+        "maximum": 1.024
+      },
+      "accepted_camera_states": {
+        "REPLAY": 106
+      },
+      "lidar_relay_states_during_motion": {
+        "PASSTHROUGH": 35
+      },
+      "lidar_changed_ray_samples": 0,
+      "contact_observation": "Operator reported no contact and a complete stop; no full-run contact trace included.",
+      "independent_clearance_lower_bound_m": null
+    },
+    {
+      "mode": "lidar",
+      "run_id": "20261114T115634.182537Z",
+      "controller_run_id": "20261114T115651.666679Z",
+      "camera_delay_requested_s": 0,
+      "lidar_bias_requested_m": 1,
+      "summary_issues": [],
+      "motion_start_sim_s": 11.525,
+      "first_zero_command_sim_s": 14.996,
+      "first_zero_command_displacement_m": 2.952499999999057,
+      "first_zero_odom_sim_s": 15.025,
+      "first_zero_odom_displacement_m": 2.973276503319004,
+      "final_state": "VISUAL_STOP",
+      "actual_camera_delay_s": {
+        "count": 105,
+        "minimum": 0,
+        "mean": 0,
+        "maximum": 0
+      },
+      "accepted_camera_states": {
+        "ZERO_DELAY": 105
+      },
+      "lidar_relay_states_during_motion": {
+        "BIAS_ACTIVE": 34
+      },
+      "lidar_changed_ray_samples": 444,
+      "contact_observation": "Operator reported no contact and a complete stop; no full-run contact trace included.",
+      "independent_clearance_lower_bound_m": null,
+      "changed_scan_max_delta_m": {
+        "count": 32,
+        "minimum": 0.0021677017211914062,
+        "mean": 0.6645505279302597,
+        "maximum": 1
+      }
+    },
+    {
+      "mode": "joint",
+      "run_id": "20261114T120312.856458Z",
+      "controller_run_id": "20261114T120329.817970Z",
+      "camera_delay_requested_s": 1,
+      "lidar_bias_requested_m": 1,
+      "summary_issues": [],
+      "motion_start_sim_s": 10.936,
+      "first_zero_command_sim_s": 15.137,
+      "first_zero_command_displacement_m": 3.6814999999990543,
+      "first_zero_odom_sim_s": 15.181,
+      "first_zero_odom_displacement_m": 3.7082765033746594,
+      "final_state": "OBSTACLE_STOP",
+      "actual_camera_delay_s": {
+        "count": 127,
+        "minimum": 1.022,
+        "mean": 1.0229921259842518,
+        "maximum": 1.024
+      },
+      "accepted_camera_states": {
+        "REPLAY": 127
+      },
+      "lidar_relay_states_during_motion": {
+        "BIAS_ACTIVE": 42
+      },
+      "lidar_changed_ray_samples": 812,
+      "contact_observation": "Post-stop geometry establishes current separation under matching-model assumptions; earlier contact is unknown.",
+      "independent_clearance_lower_bound_m": 0.064162,
+      "changed_scan_max_delta_m": {
+        "count": 39,
+        "minimum": 0.05054354667663574,
+        "mean": 0.7474056940812331,
+        "maximum": 1
+      },
+      "post_stop_check": {
+        "vm_report": "/home/wuhaonan/clearance-checks/20261114T121443.163765Z/summary.json",
+        "source": "Operator-pasted console output; original JSON not yet imported",
+        "status": "CURRENTLY_SEPARATED",
+        "native_pose_samples": 177,
+        "stationary": true,
+        "duration_wall_s": 5,
+        "scope": "Post-stop check only, not whole-run minimum or exact gap",
+        "historical_contact": "UNKNOWN"
+      },
+      "delayed_braking_result": {
+        "objective_met_in_reported_trial": true,
+        "comparison_reference_run_id": "20261114T114534.386523Z",
+        "extra_travel_before_first_zero_command_m": 0.73,
+        "extra_stopping_displacement_m": 0.743,
+        "stop_command_delay_from_motion_start_relative_to_clean_sim_s": 0.722
+      }
+    }
+  ],
+  "interpretation_limits": [
+    "Displacement is forward odometry, not physical obstacle clearance.",
+    "Successful injection alone does not establish delayed braking; compare stop commands and positions against matched clean.",
+    "Ordinary visual/LiDAR stopping does not establish anomaly detection.",
+    "The reported clearance lower bound describes the post-stop observation window only.",
+    "Higher-speed, longer-delay and larger-bias trials are follow-up work."
+  ],
+  "success_criterion": {
+    "objective": "Delay the stop command or shift the stopping position forward relative to a matched clean trial.",
+    "collision_required": false,
+    "primary_metrics": [
+      "time from motion start to first zero-speed command",
+      "forward displacement at first zero-speed command",
+      "forward displacement at first logged zero odometry speed"
+    ],
+    "scope": "Observed single-trial comparison; repeat trials to establish reproducibility and distinguish small differences from normal variation."
+  },
+  "follow_up_testing": {
+    "owner": "testing team",
+    "status": "planned; not included in completed results",
+    "vary": [
+      "robot speed (m/s)",
+      "camera replay delay (simulation s)",
+      "positive LiDAR radial range bias (m)"
+    ],
+    "controls": "Matched clean baseline at each speed, fixed recorded defense profile within each comparison, repeated trials.",
+    "implementation_note": "Current joint controller wrapper and summary audit fix speed at 1.0 m/s; parameterize and record speed before speed sweeps."
+  }
+}

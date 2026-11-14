@@ -18,13 +18,16 @@ class DelayReplay(Node):
     def __init__(self):
         super().__init__('delay_replay')
         defaults = dict(input_topic='/camera/image_raw', output_topic='/attack/image_raw',
-                        output_reliability='reliable',
+                        input_reliability='best_effort', output_reliability='reliable',
                         delay_s=1.0, start_s=0.0, duration_s=60.0,
                         max_frames=300, max_buffer_bytes=268435456,
                         log_dir='~/replay-results')
         self.cfg = {k: self.declare_parameter(k, v).value for k, v in defaults.items()}
-        if self.cfg['output_reliability'] not in ('best_effort', 'reliable'):
-            raise ValueError('output_reliability must be best_effort or reliable')
+        for key in ('input_reliability', 'output_reliability'):
+            if self.cfg[key] not in ('best_effort', 'reliable'):
+                raise ValueError(f'{key} must be best_effort or reliable')
+        input_qos = (QoSProfile(depth=1, reliability=ReliabilityPolicy.RELIABLE)
+                     if self.cfg['input_reliability'] == 'reliable' else qos_profile_sensor_data)
         output_qos = (QoSProfile(depth=1, reliability=ReliabilityPolicy.RELIABLE)
                       if self.cfg['output_reliability'] == 'reliable' else qos_profile_sensor_data)
         self.buffer = DelayBuffer(self.cfg['delay_s'], self.cfg['start_s'],
@@ -38,7 +41,7 @@ class DelayReplay(Node):
         run_dir.mkdir(parents=True, exist_ok=False)
         (run_dir / 'config.json').write_text(json.dumps(dict(
             self.cfg, run_id=run_id, use_sim_time=self.get_parameter('use_sim_time').value,
-            transport_revision='reliable-output-v1',
+            transport_revision='configurable-reliable-input-v2',
             time_basis='input image header stamps; schedule starts at first frame'), indent=2), encoding='utf-8')
         self.log = (run_dir / 'frames.csv').open('w', newline='', encoding='utf-8')
         self.writer = csv.writer(self.log)
@@ -50,8 +53,9 @@ class DelayReplay(Node):
         self.previous_state = None
         self.previous_callback_ns = None
         self.previous_log_write_s = 0.0
-        self.create_subscription(Image, self.cfg['input_topic'], self.on_image, qos_profile_sensor_data)
+        self.create_subscription(Image, self.cfg['input_topic'], self.on_image, input_qos)
         self.get_logger().info(f'Replay logs: {run_dir}')
+        self.get_logger().info(f'Input reliability={self.cfg["input_reliability"]}; queue depth={input_qos.depth}')
         self.get_logger().info(f'Output reliability={self.cfg["output_reliability"]}; reliable queue depth=1')
 
     def on_image(self, msg):

@@ -3,6 +3,13 @@
 set -eo pipefail
 
 PROJECT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+MODE="${1:-gui}"
+[[ $# -le 1 ]] || { echo 'Usage: start_scene.sh [gui|server]' >&2; exit 2; }
+case "$MODE" in
+  gui) SCENE_GUI=true ;;
+  server) SCENE_GUI=false ;;
+  *) echo 'Usage: start_scene.sh [gui|server]' >&2; exit 2 ;;
+esac
 ROS_SETUP=/opt/ros/jazzy/setup.bash
 TB3_SETUP="${TB3_WS:-$HOME/turtlebot3_ws}/install/setup.bash"
 
@@ -30,6 +37,9 @@ fi
 
 echo 'Starting houses, road, white line and red box at X=4.0 m.'
 echo "ROS_DOMAIN_ID=$ROS_DOMAIN_ID. Stop any previously launched Gazebo first."
+if [[ "$MODE" == server ]]; then
+  echo 'SERVER MODE: no Gazebo viewer window. Physics and sensor rendering remain enabled.'
+fi
 echo 'Wait for SCENE_READY. Keep this terminal open; Ctrl+C stops the scene.'
 cd "$PROJECT_DIR"
-exec ros2 launch "$PROJECT_DIR/scripts/start_scene.launch.py"
+exec ros2 launch "$PROJECT_DIR/scripts/start_scene.launch.py" "scene_gui:=$SCENE_GUI"
