@@ -1,0 +1,16 @@
+{
+  "base_commit": "9cf784f",
+  "issue": 9,
+  "sha256": {
+    "src/tb3_camera_lidar_monitor/setup.py": "e0c745b632c4389e358ee57532bc282d5590232f999e3a045029d5ddf379a305",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/core.py": "818218dca48bc463a1138e18cb6a37306f56730cd7b771c7b7a112e3a14b50ee",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/node.py": "bdd66ebdfd51ded8569114a3402dd2ba7d7b7c3df6169e41021a6e2abe6baa03",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/tb3_camera_lidar_monitor/test/test_core.py": "a53f1861dc30cf5bb150f301ef2d7906892328fb5e50b3100cb9b3c5698f5c13",
+    "src/tb3_camera_lidar_monitor/test/test_ros.py": "869ce55a0757ec9a8c68ca2b6394a6de76b404a4f63daa6e3560b0488e5f85c2",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/node.py": "d38f63491678e2a44ef1c920796e5873f0942ec006c2e23491fda00d7632c38c",
+    "scripts/verify_lidar_gazebo.py": "6103b939f29f0d389504ad1cb4dd3076c0c33d74cd68b005abf48d4d1fc31321",
+    "scripts/calibrate_camera_lidar.py": "11e5e5a4d5950456046bc3c883283ddeb2be4d742fc9bd599463428fc442e588",
+    "configs/camera_lidar.yaml": "963f966a728be5a81d39a27fcb4b70efb7b8441fb4e86d09a915f97350a937fa"
+  }
+}

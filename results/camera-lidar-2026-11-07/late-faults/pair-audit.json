@@ -1,0 +1,118 @@
+{
+  "trials": 9,
+  "all_checks_passed": true,
+  "confirmed_trials": 0,
+  "confirmation_interval_mean_sim_s": null,
+  "confirmation_interval_range_sim_s": null,
+  "note": "Interval from the first pair in the confirming sequence to the confirming pair, not attack-onset detection latency.",
+  "per_trial": [
+    {
+      "trial": "camera-freeze-1",
+      "pairs": 30,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "camera-freeze-2",
+      "pairs": 31,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "camera-freeze-3",
+      "pairs": 29,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "camera-loss-1",
+      "pairs": 30,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "camera-loss-2",
+      "pairs": 30,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "camera-loss-3",
+      "pairs": 31,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "scan-loss-1",
+      "pairs": 29,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "scan-loss-2",
+      "pairs": 29,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    },
+    {
+      "trial": "scan-loss-3",
+      "pairs": 29,
+      "checks": {
+        "unique_image_stamps": true,
+        "unique_scan_stamps": true,
+        "tolerance_respected": true,
+        "ambiguity_does_not_accumulate": true,
+        "first_alert_has_three_pairs": true
+      },
+      "confirmation_interval_sim_s": null
+    }
+  ]
+}

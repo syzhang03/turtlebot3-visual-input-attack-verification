@@ -1,0 +1,17 @@
+visual_baseline:
+  ros__parameters:
+    use_sim_time: true
+    enabled: false
+    image_topic: /attack/image_raw
+    odom_topic: /odom
+    cmd_topic: /cmd_vel
+    speed: 1.0
+    goal_distance: 4.0
+    enable_goal_stop: false
+    sensor_timeout: 2.0
+    red_area_threshold: 0.4
+    roi_top: 0.25
+    heading_gain: 1.0
+    max_angular_speed: 0.3
+    max_trial_seconds: 120.0
+    log_dir: ~/baseline-results

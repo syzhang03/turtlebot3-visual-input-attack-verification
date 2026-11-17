@@ -1,0 +1,4 @@
+[INFO] [1793947621.704673865] [delay_replay]: Replay logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/lidar-only-2026-11-06/reset-trials/obstacle-delay-1/attack/20261106T064701.652468Z
+[INFO] [1793947621.713541313] [delay_replay]: Output reliability=reliable; reliable queue depth=1
+[INFO] [1793947625.503309447] [delay_replay]: BUFFER_NOT_READY; reset=False; elapsed=0.000s
+[INFO] [1793947626.904256778] [delay_replay]: REPLAY; reset=False; elapsed=1.057s

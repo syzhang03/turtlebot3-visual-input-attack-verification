@@ -1,0 +1,76 @@
+{
+  "issue": 15,
+  "pilot": true,
+  "plan": [
+    [
+      "E",
+      "lidar",
+      "clean",
+      true
+    ],
+    [
+      "E",
+      "lidar",
+      "clean",
+      false
+    ],
+    [
+      "E",
+      "lidar",
+      "replay",
+      false
+    ],
+    [
+      "E",
+      "lidar",
+      "occlusion",
+      false
+    ]
+  ],
+  "repetitions": 1,
+  "speed_m_s": 1.0,
+  "goal_m": 4.0,
+  "minimum_margin_m": 0.35,
+  "max_cross_track_m": 0.15,
+  "no_stop_horizon_sim_s": 8.0,
+  "fault_injection": false,
+  "seed": "Same pinned world defaults; no added noise or configured seed",
+  "replay_delay_s": 1.0,
+  "occlusion_parameters": "Pinned teammate default rectangle",
+  "confirmation_pairs": 3,
+  "sources_sha256": {
+    "scripts/run_issue13.py": "02e4528d0d8bcc896e35db761e9f3e2230e859f830b9b4f7114435d747737e04",
+    "scripts/issue13_metrics.py": "02cb2b6aec2b6ee396276430e5acfc714e9146f3ad34814494b1ea5d5ffe2c86",
+    "scripts/verify_lidar_gazebo.py": "fe6ed983cb73901044798fefdeed80a7666568e957caaa685d39350fe3030f49",
+    "scripts/ground_truth.py": "f3e69a30d60b521b1bc49582e140bb9a816a22ac037e79707385526a4a0d7968",
+    "scripts/start_scene.launch.py": "a734ff525f477c4ddf8eb1b16c5ab6be84c4e1416aee57e43561495ef3d82e2d",
+    "configs/delay_replay.yaml": "d394a0c2345548cc003960c04b12b062da373f8b91ed9a8aa97dd8062f0e088a",
+    "configs/camera_lidar.yaml": "963f966a728be5a81d39a27fcb4b70efb7b8441fb4e86d09a915f97350a937fa",
+    "configs/baseline_white_line.yaml": "39600eedd724ae97cd7bc982b0aebc1e571430ccf8c167597ea0acbe32fe76f2",
+    "configs/turtlebot3.repos": "0e77880a9f811adfe6972eb696b684ac444b1c79f00e484b0b4da0dd7db6b3c3",
+    "worlds/intersection-white-line.sdf": "3a17682115ef1a864b6417b2a02fb39240c4ec65ddfbd845d8ce7c43043950df",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/core.py": "818218dca48bc463a1138e18cb6a37306f56730cd7b771c7b7a112e3a14b50ee",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/node.py": "f0d10d6ce0e64f47394a555d8045fb046ba9fcce8e54ac3dbd0b40d102098500",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/run_batch_test.py": "1fb65a0ea482afca17f6e7d60f9db0b09b3f8eb360e5ee95fbe51a039c2ad4d1",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/tb3_camera_lidar_monitor/test/test_core.py": "a53f1861dc30cf5bb150f301ef2d7906892328fb5e50b3100cb9b3c5698f5c13",
+    "src/tb3_camera_lidar_monitor/test/test_ros.py": "869ce55a0757ec9a8c68ca2b6394a6de76b404a4f63daa6e3560b0488e5f85c2",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/core.py": "41cb9241b0fccbdf4f3823214a7b49f0eca01d1a1c713a85c85a875929fe361d",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/node.py": "d38f63491678e2a44ef1c920796e5873f0942ec006c2e23491fda00d7632c38c",
+    "src/tb3_lidar_baseline/tb3_lidar_baseline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/tb3_lidar_baseline/test/test_core.py": "cf463904948d6ddf79db0f35db896ee68bff60c9baaf78cc547919381f5f2b68",
+    "src/tb3_lidar_baseline/test/test_ground_truth.py": "7259f94764d69fe5d1a0d2843f65c3d16aa89009615fc9fa49dbb4add854eb41",
+    "src/tb3_lidar_baseline/test/test_ros.py": "32d2b6d2bf9ab359415270e6ad93ba631db362ff102b7a6b45a08e8892972295",
+    "src/tb3_visual_baseline/tb3_visual_baseline/core.py": "ad1dbfb073556ceec7bc3c7bad035f96c925a3c8b38a63401c552c5ca8158e61",
+    "src/tb3_visual_baseline/tb3_visual_baseline/node.py": "f230992adc7fd14c38d163574a44f3cad5273a3425049957e5549f7a36b1e9c0",
+    "src/tb3_visual_baseline/tb3_visual_baseline/replay_core.py": "7b9e4c36fedd34a609a75b2ac15e079f0ebe1b2115c1046ea7417b3bcf5e81a1",
+    "src/tb3_visual_baseline/tb3_visual_baseline/replay_node.py": "737047721ffc1070b8e9154f65de3f60d2677c604fee20ee0ed68335c8901651",
+    "src/tb3_visual_baseline/tb3_visual_baseline/vision.py": "f79e9aae79470e79fa2541fcfc51d4a17ac0df02683ec7e69a7ef788781db05f",
+    "src/tb3_visual_baseline/tb3_visual_baseline/__init__.py": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "src/tb3_visual_baseline/test/test_core.py": "d606c27e52549a196687ea2b381d9d53cc05a975e9896fb6a562e221d38c8ffb",
+    "src/tb3_visual_baseline/test/test_relay_transport.py": "5c81c4e5566a20f23a2df82ed33b4889b004232c499f20e3b507d85387dc7f50",
+    "src/tb3_visual_baseline/test/test_replay.py": "30ad24dfca245ecace1b8f727d9c7a3dbcf03d7481de5df642a3bd58da0c02af",
+    "src/tb3_visual_baseline/test/test_vision.py": "b616099c406367b4ff2be67407bcd52d80d4a3febdf779865a982879a7f573ef",
+    "configs/lidar_only.yaml": "cb30e6c4323a882537cdd891c4433fa2f072abc46beddaf08c733527f8e14b88"
+  }
+}

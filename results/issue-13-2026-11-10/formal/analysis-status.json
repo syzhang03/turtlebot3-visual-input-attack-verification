@@ -1,0 +1,15 @@
+{
+  "planned": 40,
+  "completed": 40,
+  "valid": 40,
+  "source_unchanged": true,
+  "collection_valid": 35,
+  "recovered": [
+    "C-clean-obstacle-1",
+    "D-occlusion-obstacle-1",
+    "A-clean-empty-2",
+    "B-occlusion-obstacle-3",
+    "C-clean-obstacle-3"
+  ],
+  "pending": []
+}

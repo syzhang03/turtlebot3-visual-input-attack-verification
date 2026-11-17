@@ -1,0 +1,31 @@
+test_bad_parameters_and_nan (test_core.TrialTests.test_bad_parameters_and_nan) ... ok
+test_disabled_goal_does_not_stop_at_or_beyond_endpoint (test_core.TrialTests.test_disabled_goal_does_not_stop_at_or_beyond_endpoint) ... ok
+test_goal_latches (test_core.TrialTests.test_goal_latches) ... ok
+test_goal_stop_requires_boolean (test_core.TrialTests.test_goal_stop_requires_boolean) ... ok
+test_later_visual_callback_does_not_replace_first_stop_reason (test_core.TrialTests.test_later_visual_callback_does_not_replace_first_stop_reason) ... ok
+test_obstacle_latches_after_disappearing (test_core.TrialTests.test_obstacle_latches_after_disappearing) ... ok
+test_requires_explicit_enable (test_core.TrialTests.test_requires_explicit_enable) ... ok
+test_stale_stream_stops_running_robot (test_core.TrialTests.test_stale_stream_stops_running_robot) ... ok
+test_timeout_and_fault_still_stop_with_goal_disabled (test_core.TrialTests.test_timeout_and_fault_still_stop_with_goal_disabled) ... ok
+test_visual_callback_between_ticks_is_latched (test_core.TrialTests.test_visual_callback_between_ticks_is_latched) ... ok
+test_visual_stop_still_latches_when_goal_disabled (test_core.TrialTests.test_visual_stop_still_latches_when_goal_disabled) ... ok
+test_wait_for_both_sensors (test_core.TrialTests.test_wait_for_both_sensors) ... ok
+test_wrap_heading_at_pi_boundary (test_core.TrialTests.test_wrap_heading_at_pi_boundary) ... ok
+test_byte_limit_and_oversized_frame (test_replay.ReplayTests.test_byte_limit_and_oversized_frame) ... ok
+test_duplicate_does_not_publish_or_accumulate (test_replay.ReplayTests.test_duplicate_does_not_publish_or_accumulate) ... ok
+test_format_change_clears_incompatible_frames (test_replay.ReplayTests.test_format_change_clears_incompatible_frames) ... ok
+test_frame_limit_falls_back_honestly (test_replay.ReplayTests.test_frame_limit_falls_back_honestly) ... ok
+test_history_is_bounded_over_long_run (test_replay.ReplayTests.test_history_is_bounded_over_long_run) ... ok
+test_invalid_parameters (test_replay.ReplayTests.test_invalid_parameters) ... ok
+test_irregular_sampling_uses_latest_not_after_target (test_replay.ReplayTests.test_irregular_sampling_uses_latest_not_after_target) ... ok
+test_schedule_start_inclusive_end_exclusive (test_replay.ReplayTests.test_schedule_start_inclusive_end_exclusive) ... ok
+test_time_reset_clears_history_and_schedule (test_replay.ReplayTests.test_time_reset_clears_history_and_schedule) ... ok
+test_warmup_and_exact_delay (test_replay.ReplayTests.test_warmup_and_exact_delay) ... ok
+test_zero_delay_is_identity (test_replay.ReplayTests.test_zero_delay_is_identity) ... ok
+test_delayed_output_uses_current_header_without_mutating_history (test_relay_transport.RelayTransportTests.test_delayed_output_uses_current_header_without_mutating_history) ... skipped 'ROS 2 message libraries are not available'
+test_zero_delay_preserves_full_image_and_header (test_relay_transport.RelayTransportTests.test_zero_delay_preserves_full_image_and_header) ... skipped 'ROS 2 message libraries are not available'
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.014s
+
+OK (skipped=2)

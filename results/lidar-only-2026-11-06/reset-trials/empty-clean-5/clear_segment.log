@@ -1,0 +1,4 @@
+[INFO] [1793947895.812071586] [lidar_baseline]: Logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/lidar-only-2026-11-06/reset-trials/empty-clean-5/clear_segment/20261106T065135.747097Z; enabled=True
+[INFO] [1793947895.825211340] [lidar_baseline]: WAITING: distance=0.000; clearance=inf; reason=NO_SCAN
+[INFO] [1793947895.965335340] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793947904.057225213] [lidar_baseline]: GOAL_REACHED: distance=4.037; clearance=inf; reason=

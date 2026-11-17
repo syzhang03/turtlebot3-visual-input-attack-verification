@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "baseline_run_id": "20261030T153945.096132Z",
+  "relay_run_id": "20261030T153932.320958Z",
+  "baseline_config": {
+    "enabled": true,
+    "image_topic": "/attack/image_raw",
+    "image_reliability": "reliable",
+    "odom_topic": "/odom",
+    "cmd_topic": "/cmd_vel",
+    "speed": 1.0,
+    "goal_distance": 4.0,
+    "sensor_timeout": 2.0,
+    "enable_goal_stop": false,
+    "red_area_threshold": 0.4,
+    "roi_top": 0.25,
+    "heading_gain": 1.0,
+    "max_angular_speed": 0.3,
+    "max_trial_seconds": 120.0,
+    "log_dir": "~/baseline-results",
+    "use_sim_time": true,
+    "control_revision": "configurable-goal-first-stop-latched-v1",
+    "run_id": "20261030T153945.096132Z",
+    "status": "LOCAL_BASELINE_NOT_FORMAL_EVALUATION"
+  },
+  "relay_config": {
+    "input_topic": "/camera/image_raw",
+    "output_topic": "/attack/image_raw",
+    "output_reliability": "reliable",
+    "delay_s": 1.0,
+    "start_s": 0.0,
+    "duration_s": 600.0,
+    "max_frames": 300,
+    "max_buffer_bytes": 268435456,
+    "log_dir": "~/replay-results",
+    "run_id": "20261030T153932.320958Z",
+    "use_sim_time": true,
+    "transport_revision": "reliable-output-v1",
+    "time_basis": "input image header stamps; schedule starts at first frame"
+  },
+  "source_files": [
+    {
+      "path": "runs/20261030T153945.096132Z/config.json",
+      "bytes": 584,
+      "sha256": "5d59e8ec70c2b732517d79757bc95e974374236c22e2d453bbf2fddaa16ecdf4"
+    },
+    {
+      "path": "runs/20261030T153945.096132Z/events.csv",
+      "bytes": 2441800,
+      "sha256": "dcabc53be9f9e7d4f0165d488261bc925e920bf066a7fce66ba16a8f8805e016"
+    },
+    {
+      "path": "runs/20261030T153932.320958Z/config.json",
+      "bytes": 447,
+      "sha256": "854890d5def87ae1bc5655abcf70566c2dd2c92cd6c0bddc81b2bf3028eda43b"
+    },
+    {
+      "path": "runs/20261030T153932.320958Z/frames.csv",
+      "bytes": 428803,
+      "sha256": "2415d88524de84a5c828a22ca7da0694b7d0086aa7fcda99984eef815764b1e0"
+    }
+  ],
+  "method": {
+    "window": "First RUNNING through first stop, inclusive",
+    "join": "round(image_stamp_s * 1e9) equals relay input_stamp_ns; unique input stamps",
+    "delay": "(input_stamp_ns - selected_source_stamp_ns) / 1e9; simulation seconds",
+    "weighting": "One sample per distinct image header observed in controller CSV ticks",
+    "coverage_limit": "Control ticks may omit intermediate callbacks; this is not every received image",
+    "speed": "cmd_v/cmd_w are controller publish-call values; odom_v is reported odometry",
+    "contact": "No contact detector or independent cmd_vel recording is present",
+    "low_speed_filter": "RUNNING, distance_m > 1, cmd_v > 0.1, abs(odom_v) < 0.02"
+  },
+  "row_counts": {
+    "events": 17379,
+    "frames": 3089
+  },
+  "image_join": {
+    "unique_stamps": 47,
+    "matched": 47,
+    "unmatched": 0
+  },
+  "actual_replay_delay_sim_s": {
+    "count": 47,
+    "min": 1.022,
+    "mean": 1.0994468085106384,
+    "max": 1.353
+  },
+  "matched_relay_states": [
+    "REPLAY"
+  ],
+  "matched_buffer_resets": 0,
+  "delay_arithmetic_mismatch_rows": 0,
+  "first_stop": {
+    "csv_line": 196,
+    "state": "OBSTACLE_STOP",
+    "wall_elapsed_s": 19.6500666489992,
+    "sim_time_s": 9.183,
+    "distance_m": 3.9997730355632815,
+    "red_area_ratio": 0.4847222222222222,
+    "cmd_v": 0.0,
+    "cmd_w": 0.0,
+    "odom_v": 0.20903012990580727,
+    "image_stamp_s": 9.142,
+    "odom_stamp_s": 9.18,
+    "relative_to_stop_wall_s": 0.0
+  },
+  "stop_frame": {
+    "input_stamp_ns": 9142000000,
+    "selected_source_stamp_ns": 8118000000,
+    "actual_delay_s": 1.024,
+    "content_age_at_control_tick_sim_s": 1.0649999999999995
+  },
+  "state_transitions": [
+    {
+      "csv_line": 2,
+      "state": "RUNNING",
+      "wall_elapsed_s": 0.2513950009997643,
+      "sim_time_s": 4.6000000000000005,
+      "distance_m": 0.0,
+      "red_area_ratio": 0.03394097222222222,
+      "cmd_v": 1.0,
+      "cmd_w": 0.0,
+      "odom_v": 1.4349929266569924e-18,
+      "image_stamp_s": 4.555,
+      "odom_stamp_s": 4.6,
+      "relative_to_stop_wall_s": -19.398671647999436
+    },
+    {
+      "csv_line": 196,
+      "state": "OBSTACLE_STOP",
+      "wall_elapsed_s": 19.6500666489992,
+      "sim_time_s": 9.183,
+      "distance_m": 3.9997730355632815,
+      "red_area_ratio": 0.4847222222222222,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.20903012990580727,
+      "image_stamp_s": 9.142,
+      "odom_stamp_s": 9.18,
+      "relative_to_stop_wall_s": 0.0
+    }
+  ],
+  "stop_window": [
+    {
+      "csv_line": 193,
+      "state": "RUNNING",
+      "wall_elapsed_s": 19.349944917001267,
+      "sim_time_s": 9.108,
+      "distance_m": 3.9477075163275885,
+      "red_area_ratio": 0.35442708333333334,
+      "cmd_v": 1.0,
+      "cmd_w": -0.0002841341741388519,
+      "odom_v": 0.4086626683929673,
+      "image_stamp_s": 8.977,
+      "odom_stamp_s": 9.1,
+      "relative_to_stop_wall_s": -0.30012173199793324
+    },
+    {
+      "csv_line": 194,
+      "state": "RUNNING",
+      "wall_elapsed_s": 19.449557291001838,
+      "sim_time_s": 9.133000000000001,
+      "distance_m": 3.9677075155361514,
+      "red_area_ratio": 0.35442708333333334,
+      "cmd_v": 1.0,
+      "cmd_w": -0.0002784872854709982,
+      "odom_v": 0.999999999999801,
+      "image_stamp_s": 8.977,
+      "odom_stamp_s": 9.12,
+      "relative_to_stop_wall_s": -0.2005093579973618
+    },
+    {
+      "csv_line": 195,
+      "state": "RUNNING",
+      "wall_elapsed_s": 19.54948018900177,
+      "sim_time_s": 9.17,
+      "distance_m": 3.9976911138281044,
+      "red_area_ratio": 0.391015625,
+      "cmd_v": 1.0,
+      "cmd_w": -0.00027005161406839893,
+      "odom_v": -0.0016400580408637566,
+      "image_stamp_s": 9.108,
+      "odom_stamp_s": 9.16,
+      "relative_to_stop_wall_s": -0.10058645999743021
+    },
+    {
+      "csv_line": 196,
+      "state": "OBSTACLE_STOP",
+      "wall_elapsed_s": 19.6500666489992,
+      "sim_time_s": 9.183,
+      "distance_m": 3.9997730355632815,
+      "red_area_ratio": 0.4847222222222222,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.20903012990580727,
+      "image_stamp_s": 9.142,
+      "odom_stamp_s": 9.18,
+      "relative_to_stop_wall_s": 0.0
+    },
+    {
+      "csv_line": 197,
+      "state": "OBSTACLE_STOP",
+      "wall_elapsed_s": 19.749949504999677,
+      "sim_time_s": 9.201,
+      "distance_m": 4.009681147223434,
+      "red_area_ratio": 0.4847222222222222,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.02720746782394201,
+      "image_stamp_s": 9.142,
+      "odom_stamp_s": 9.2,
+      "relative_to_stop_wall_s": 0.09988285600047675
+    },
+    {
+      "csv_line": 198,
+      "state": "OBSTACLE_STOP",
+      "wall_elapsed_s": 19.849388833001285,
+      "sim_time_s": 9.213000000000001,
+      "distance_m": 4.009681147223434,
+      "red_area_ratio": 0.4847222222222222,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.02720746782394201,
+      "image_stamp_s": 9.142,
+      "odom_stamp_s": 9.2,
+      "relative_to_stop_wall_s": 0.19932218400208512
+    },
+    {
+      "csv_line": 199,
+      "state": "OBSTACLE_STOP",
+      "wall_elapsed_s": 19.951408843000536,
+      "sim_time_s": 9.251000000000001,
+      "distance_m": 4.009681147223434,
+      "red_area_ratio": 0.4847222222222222,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.0,
+      "image_stamp_s": 9.142,
+      "odom_stamp_s": 9.24,
+      "relative_to_stop_wall_s": 0.3013421940013359
+    },
+    {
+      "csv_line": 200,
+      "state": "OBSTACLE_STOP",
+      "wall_elapsed_s": 20.049534523001057,
+      "sim_time_s": 9.279,
+      "distance_m": 4.009662437472382,
+      "red_area_ratio": 0.4847222222222222,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": -0.0016605965036831094,
+      "image_stamp_s": 9.142,
+      "odom_stamp_s": 9.26,
+      "relative_to_stop_wall_s": 0.3994678740018571
+    }
+  ],
+  "after_stop": {
+    "rows": 17185,
+    "nonzero_command_rows": 0,
+    "first_odom_abs_below_0_02": {
+      "csv_line": 199,
+      "state": "OBSTACLE_STOP",
+      "wall_elapsed_s": 19.951408843000536,
+      "sim_time_s": 9.251000000000001,
+      "distance_m": 4.009681147223434,
+      "red_area_ratio": 0.4847222222222222,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.0,
+      "image_stamp_s": 9.142,
+      "odom_stamp_s": 9.24,
+      "relative_to_stop_wall_s": 0.3013421940013359
+    },
+    "odom_after_first_low": {
+      "count": 17182,
+      "min": -0.0016605965036831094,
+      "mean": -1.3116575168054443e-07,
+      "max": 0.0
+    },
+    "final_sample": {
+      "csv_line": 17380,
+      "state": "OBSTACLE_STOP",
+      "wall_elapsed_s": 1755.150618898002,
+      "sim_time_s": 400.69800000000004,
+      "distance_m": 4.0096347037289535,
+      "red_area_ratio": 0.0,
+      "cmd_v": 0.0,
+      "cmd_w": 0.0,
+      "odom_v": 0.0,
+      "image_stamp_s": 400.39,
+      "odom_stamp_s": 400.68,
+      "relative_to_stop_wall_s": 1735.5005522490028
+    }
+  },
+  "prestop_nonzero_command_low_odom_samples": [
+    {
+      "csv_line": 195,
+      "state": "RUNNING",
+      "wall_elapsed_s": 19.54948018900177,
+      "sim_time_s": 9.17,
+      "distance_m": 3.9976911138281044,
+      "red_area_ratio": 0.391015625,
+      "cmd_v": 1.0,
+      "cmd_w": -0.00027005161406839893,
+      "odom_v": -0.0016400580408637566,
+      "image_stamp_s": 9.108,
+      "odom_stamp_s": 9.16,
+      "relative_to_stop_wall_s": -0.10058645999743021
+    }
+  ]
+}

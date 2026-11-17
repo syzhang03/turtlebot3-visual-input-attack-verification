@@ -1,0 +1,371 @@
+{
+  "groups": {
+    "obstacle-clean": {
+      "total": 5,
+      "passed": 5,
+      "alerts": 0,
+      "states": {
+        "OBSTACLE_STOP": 5
+      },
+      "ground_truth_gap_m": {
+        "n": 5,
+        "mean": 0.9322295131592311,
+        "sd": 0.01640955668324468,
+        "minimum": 0.9169552739265632,
+        "maximum": 0.951707348386831
+      },
+      "stop_time_sim_s": {
+        "n": 5,
+        "mean": 3.1114,
+        "sd": 0.01605615146914117,
+        "minimum": 3.0919999999999996,
+        "maximum": 3.1250000000000004
+      },
+      "fault_to_stop_sim_s": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "endpoint_overshoot_m": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      }
+    },
+    "obstacle-delay-1": {
+      "total": 5,
+      "passed": 5,
+      "alerts": 5,
+      "states": {
+        "ANOMALY_STOP": 5
+      },
+      "ground_truth_gap_m": {
+        "n": 5,
+        "mean": 2.103860193295725,
+        "sd": 0.029814736839609862,
+        "minimum": 2.083710534926992,
+        "maximum": 2.1551248611037885
+      },
+      "stop_time_sim_s": {
+        "n": 5,
+        "mean": 1.9396000000000002,
+        "sd": 0.03234656086819731,
+        "minimum": 1.8840000000000003,
+        "maximum": 1.9590000000000003
+      },
+      "fault_to_stop_sim_s": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "endpoint_overshoot_m": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      }
+    },
+    "obstacle-occlusion": {
+      "total": 5,
+      "passed": 5,
+      "alerts": 5,
+      "states": {
+        "ANOMALY_STOP": 5
+      },
+      "ground_truth_gap_m": {
+        "n": 5,
+        "mean": 2.1548353032750063,
+        "sd": 0.03680997016450418,
+        "minimum": 2.1154380061136107,
+        "maximum": 2.1969636507826493
+      },
+      "stop_time_sim_s": {
+        "n": 5,
+        "mean": 1.8876000000000002,
+        "sd": 0.03378313188560256,
+        "minimum": 1.8489999999999998,
+        "maximum": 1.9270000000000003
+      },
+      "fault_to_stop_sim_s": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "endpoint_overshoot_m": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      }
+    },
+    "empty-clean": {
+      "total": 5,
+      "passed": 5,
+      "alerts": 0,
+      "states": {
+        "GOAL_REACHED": 5
+      },
+      "ground_truth_gap_m": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "stop_time_sim_s": {
+        "n": 5,
+        "mean": 4.541,
+        "sd": 0.013322912594474394,
+        "minimum": 4.523,
+        "maximum": 4.559
+      },
+      "fault_to_stop_sim_s": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "endpoint_overshoot_m": {
+        "n": 5,
+        "mean": 0.04247650417030986,
+        "sd": 0.00962808390633393,
+        "minimum": 0.02727650423148198,
+        "maximum": 0.05027650437248443
+      }
+    },
+    "empty-delay-1": {
+      "total": 5,
+      "passed": 5,
+      "alerts": 0,
+      "states": {
+        "GOAL_REACHED": 5
+      },
+      "ground_truth_gap_m": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "stop_time_sim_s": {
+        "n": 5,
+        "mean": 4.526,
+        "sd": 0.016507574019219002,
+        "minimum": 4.51,
+        "maximum": 4.5489999999999995
+      },
+      "fault_to_stop_sim_s": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "endpoint_overshoot_m": {
+        "n": 5,
+        "mean": 0.02947650391901515,
+        "sd": 0.016664333264031817,
+        "minimum": 0.013276503770974557,
+        "maximum": 0.05227650408496043
+      }
+    },
+    "empty-occlusion": {
+      "total": 5,
+      "passed": 5,
+      "alerts": 0,
+      "states": {
+        "GOAL_REACHED": 5
+      },
+      "ground_truth_gap_m": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "stop_time_sim_s": {
+        "n": 5,
+        "mean": 4.5402000000000005,
+        "sd": 0.01754137964927508,
+        "minimum": 4.521000000000001,
+        "maximum": 4.566000000000001
+      },
+      "fault_to_stop_sim_s": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "endpoint_overshoot_m": {
+        "n": 5,
+        "mean": 0.04267650385305348,
+        "sd": 0.01663730741963739,
+        "minimum": 0.0252765038745002,
+        "maximum": 0.0672765039001515
+      }
+    },
+    "obstacle-delay-0.5": {
+      "total": 5,
+      "passed": 5,
+      "alerts": 5,
+      "states": {
+        "ANOMALY_STOP": 5
+      },
+      "ground_truth_gap_m": {
+        "n": 5,
+        "mean": 2.115677339938153,
+        "sd": 0.01664535728253157,
+        "minimum": 2.0942078901346703,
+        "maximum": 2.13979308227561
+      },
+      "stop_time_sim_s": {
+        "n": 5,
+        "mean": 1.9260000000000002,
+        "sd": 0.014730919862656195,
+        "minimum": 1.905,
+        "maximum": 1.9449999999999998
+      },
+      "fault_to_stop_sim_s": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "endpoint_overshoot_m": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      }
+    },
+    "camera-loss": {
+      "total": 3,
+      "passed": 3,
+      "alerts": 0,
+      "states": {
+        "SENSOR_TIMEOUT": 3
+      },
+      "ground_truth_gap_m": {
+        "n": 3,
+        "mean": 3.425821432043163,
+        "sd": 0.010555948392006333,
+        "minimum": 3.4145303592420637,
+        "maximum": 3.435443374195759
+      },
+      "stop_time_sim_s": {
+        "n": 3,
+        "mean": 0.5016666666666666,
+        "sd": 0.021385353243127247,
+        "minimum": 0.4829999999999999,
+        "maximum": 0.5249999999999999
+      },
+      "fault_to_stop_sim_s": {
+        "n": 3,
+        "mean": 0.462,
+        "sd": 0.026057628441590854,
+        "minimum": 0.43199999999999994,
+        "maximum": 0.4790000000000001
+      },
+      "endpoint_overshoot_m": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      }
+    },
+    "scan-loss": {
+      "total": 3,
+      "passed": 3,
+      "alerts": 0,
+      "states": {
+        "SENSOR_TIMEOUT": 3
+      },
+      "ground_truth_gap_m": {
+        "n": 3,
+        "mean": 3.4428665562950838,
+        "sd": 0.0289044813643634,
+        "minimum": 3.4250914173242655,
+        "maximum": 3.4762184338407858
+      },
+      "stop_time_sim_s": {
+        "n": 3,
+        "mean": 0.4523333333333334,
+        "sd": 0.05598511706992607,
+        "minimum": 0.3880000000000001,
+        "maximum": 0.49
+      },
+      "fault_to_stop_sim_s": {
+        "n": 3,
+        "mean": 0.4523333333333334,
+        "sd": 0.05598511706992607,
+        "minimum": 0.3880000000000001,
+        "maximum": 0.49
+      },
+      "endpoint_overshoot_m": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      }
+    },
+    "camera-freeze": {
+      "total": 3,
+      "passed": 3,
+      "alerts": 0,
+      "states": {
+        "SENSOR_TIMEOUT": 3
+      },
+      "ground_truth_gap_m": {
+        "n": 3,
+        "mean": 3.42997687136468,
+        "sd": 0.01875151210926556,
+        "minimum": 3.4103146080073348,
+        "maximum": 3.447660757727776
+      },
+      "stop_time_sim_s": {
+        "n": 3,
+        "mean": 0.48966666666666675,
+        "sd": 0.03507610772781586,
+        "minimum": 0.45599999999999996,
+        "maximum": 0.5260000000000002
+      },
+      "fault_to_stop_sim_s": {
+        "n": 3,
+        "mean": 0.48966666666666675,
+        "sd": 0.03507610772781586,
+        "minimum": 0.45599999999999996,
+        "maximum": 0.5260000000000002
+      },
+      "endpoint_overshoot_m": {
+        "n": 0,
+        "mean": null,
+        "sd": null,
+        "minimum": null,
+        "maximum": null
+      }
+    }
+  },
+  "source_unchanged": true,
+  "all_passed": true,
+  "limits": [
+    "Only this calibrated scene, robot, parameters and tested attacks.",
+    "Pose-derived enclosure separation, not a contact sensor collision rate.",
+    "No statistical comparison with other controllers in this batch."
+  ]
+}

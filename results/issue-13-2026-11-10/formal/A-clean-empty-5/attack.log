@@ -1,0 +1,26 @@
+[INFO] [1794302504.788365534] [delay_replay]: Replay logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-13-2026-11-10/formal/A-clean-empty-5/attack/20261110T092144.743669Z
+[INFO] [1794302504.795298834] [delay_replay]: Output reliability=reliable; reliable queue depth=1
+[INFO] [1794302507.763482873] [delay_replay]: ZERO_DELAY; reset=False; elapsed=0.000s
+Traceback (most recent call last):
+  File "/home/michael/tb3_project_ws/install/tb3_visual_baseline/lib/tb3_visual_baseline/delay_replay", line 33, in <module>
+    sys.exit(load_entry_point('tb3-visual-baseline', 'console_scripts', 'delay_replay')())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/michael/tb3_project_ws/build/tb3_visual_baseline/tb3_visual_baseline/replay_node.py", line 103, in main
+    rclpy.spin(node)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+    executor.spin_once()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 926, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 918, in _spin_once_impl
+    raise handler.exception()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/task.py", line 286, in _execute_coroutine_step
+    result = coro.send(None)
+             ^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 584, in handler
+    call_coroutine = take_from_wait_list(entity)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 470, in _take_subscription
+    msg_info = sub.handle.take_message(sub.msg_type, sub.raw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Unable to convert call argument '0' to Python object (#define PYBIND11_DETAILED_ERROR_MESSAGES or compile in debug mode for details)
+[ros2run]: Process exited with failure 1

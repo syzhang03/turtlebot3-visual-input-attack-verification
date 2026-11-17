@@ -1,0 +1,37 @@
+test_goal_and_first_stop_reason_latch (test_core.ControlTests.test_goal_and_first_stop_reason_latch) ... ok
+test_no_motion_until_ready_fresh_and_usable (test_core.ControlTests.test_no_motion_until_ready_fresh_and_usable) ... ok
+test_obstacle_stop_latches_even_if_obstacle_disappears (test_core.ControlTests.test_obstacle_stop_latches_even_if_obstacle_disappears) ... ok
+test_timeout_and_invalid_data_stop_a_running_robot (test_core.ControlTests.test_timeout_and_invalid_data_stop_a_running_robot) ... ok
+test_bad_front_readings_cannot_mean_clear (test_core.GeometryTests.test_bad_front_readings_cannot_mean_clear) ... ok
+test_front_distance_accounts_for_sensor_offset_and_robot_front (test_core.GeometryTests.test_front_distance_accounts_for_sensor_offset_and_robot_front) ... ok
+test_larger_speed_requires_more_stopping_distance (test_core.GeometryTests.test_larger_speed_requires_more_stopping_distance) ... ok
+test_no_return_convention_is_explicit (test_core.GeometryTests.test_no_return_convention_is_explicit) ... ok
+test_rotated_sensor_and_reversed_angle_origin (test_core.GeometryTests.test_rotated_sensor_and_reversed_angle_origin) ... ok
+test_side_walls_and_rear_obstacles_are_not_forward_hazards (test_core.GeometryTests.test_side_walls_and_rear_obstacles_are_not_forward_hazards) ... ok
+test_unobserved_front_or_insufficient_range_rejected (test_core.GeometryTests.test_unobserved_front_or_insufficient_range_rejected) ... ok
+test_clear_route_then_goal (test_ros.RosTests.test_clear_route_then_goal) ... [INFO] [1793873106.720497661] [lidar_baseline]: Logs: /tmp/lidar-ros-test-a5kp2i8h/20261105T100506.649322Z; enabled=True
+[INFO] [1793873106.735273236] [lidar_baseline]: WAITING: distance=0.000; clearance=inf; reason=NO_SCAN
+[INFO] [1793873106.761428402] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793873107.260471005] [lidar_baseline]: GOAL_REACHED: distance=0.250; clearance=inf; reason=
+ok
+test_invalid_scan_is_not_clear (test_ros.RosTests.test_invalid_scan_is_not_clear) ... [INFO] [1793873107.515873749] [lidar_baseline]: Logs: /tmp/lidar-ros-test-7jp_yu1e/20261105T100507.504150Z; enabled=True
+[INFO] [1793873107.566094071] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793873108.066229742] [lidar_baseline]: SENSOR_INVALID: distance=0.000; clearance=inf; reason=INVALID_FORWARD_RAYS
+ok
+test_missing_scan_stops_while_odom_continues (test_ros.RosTests.test_missing_scan_stops_while_odom_continues) ... [INFO] [1793873108.254535191] [lidar_baseline]: Logs: /tmp/lidar-ros-test-kzk2a2ik/20261105T100508.242812Z; enabled=True
+[INFO] [1793873108.304884090] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793873109.304731923] [lidar_baseline]: SENSOR_TIMEOUT: distance=0.000; clearance=inf; reason=
+ok
+test_obstacle_stop_is_latched (test_ros.RosTests.test_obstacle_stop_is_latched) ... [INFO] [1793873109.658504031] [lidar_baseline]: Logs: /tmp/lidar-ros-test-tymfo0za/20261105T100509.647017Z; enabled=True
+[INFO] [1793873109.708818465] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793873110.208451759] [lidar_baseline]: OBSTACLE_STOP: distance=0.000; clearance=0.150; reason=
+ok
+test_repeated_old_scan_does_not_refresh_watchdog (test_ros.RosTests.test_repeated_old_scan_does_not_refresh_watchdog) ... [INFO] [1793873110.597243185] [lidar_baseline]: Logs: /tmp/lidar-ros-test-_8rjru7f/20261105T100510.585575Z; enabled=True
+[INFO] [1793873110.647422347] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793873111.647611339] [lidar_baseline]: SENSOR_TIMEOUT: distance=0.000; clearance=inf; reason=
+ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 5.464s
+
+OK

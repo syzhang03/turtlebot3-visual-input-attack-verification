@@ -1,0 +1,16 @@
+{
+  "checks": {
+    "all_attempts_retained": true,
+    "all_predeclared_trial_outcomes": true,
+    "frozen_source_and_parameters": true,
+    "final_speed_below_0.02_m_s": true,
+    "minimum_pose_bound_0.35_m": true,
+    "normal_inputs_no_anomaly_alerts": true,
+    "one_second_and_mask_detected": true,
+    "all_empty_tasks_reached_goal": true,
+    "all_faults_stopped_on_timeout": true,
+    "fault_injection_recorded": true
+  },
+  "stable_within_tested_scope": true,
+  "note": "Repeatability in these fixed conditions, not proof of general reliability or fusion superiority."
+}

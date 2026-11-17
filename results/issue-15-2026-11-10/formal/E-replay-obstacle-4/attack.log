@@ -1,0 +1,4 @@
+[INFO] [1794315955.170420608] [delay_replay]: Replay logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-15-2026-11-10/formal/E-replay-obstacle-4/attack/20261110T130555.100422Z
+[INFO] [1794315955.180341896] [delay_replay]: Output reliability=reliable; reliable queue depth=1
+[INFO] [1794315959.102151395] [delay_replay]: BUFFER_NOT_READY; reset=False; elapsed=0.000s
+[INFO] [1794315960.569473044] [delay_replay]: REPLAY; reset=False; elapsed=1.024s

@@ -1,0 +1,133 @@
+{
+  "groups": {
+    "obstacle-clean": {
+      "total": 5,
+      "expected_outcome_count": 5,
+      "final_states": {
+        "OBSTACLE_STOP": 5
+      },
+      "lidar_gap_m": {
+        "n": 5,
+        "mean": 1.0419560510578325,
+        "sample_sd": 0.04006392118906964,
+        "minimum": 0.978488957605495,
+        "maximum": 1.0860985666634781
+      },
+      "time_to_stop_sim_s": {
+        "n": 5,
+        "mean": 3.1276,
+        "sample_sd": 0.03531005522510542,
+        "minimum": 3.0890000000000004,
+        "maximum": 3.184
+      },
+      "time_to_stop_wall_s": {
+        "n": 5,
+        "mean": 4.349529800599993,
+        "sample_sd": 0.1275751287253332,
+        "minimum": 4.249940676999984,
+        "maximum": 4.5497126039999785
+      },
+      "endpoint_overshoot_m": null
+    },
+    "obstacle-delay": {
+      "total": 5,
+      "expected_outcome_count": 5,
+      "final_states": {
+        "OBSTACLE_STOP": 5
+      },
+      "lidar_gap_m": {
+        "n": 5,
+        "mean": 1.0388587710031536,
+        "sample_sd": 0.04917391850848612,
+        "minimum": 0.9761332096832128,
+        "maximum": 1.0905146398456604
+      },
+      "time_to_stop_sim_s": {
+        "n": 5,
+        "mean": 3.1282000000000005,
+        "sample_sd": 0.048864097249412035,
+        "minimum": 3.0810000000000004,
+        "maximum": 3.1900000000000004
+      },
+      "time_to_stop_wall_s": {
+        "n": 5,
+        "mean": 4.339891494800009,
+        "sample_sd": 0.07414491776074797,
+        "minimum": 4.2499369189999925,
+        "maximum": 4.449786196000048
+      },
+      "endpoint_overshoot_m": null
+    },
+    "obstacle-occlusion": {
+      "total": 5,
+      "expected_outcome_count": 5,
+      "final_states": {
+        "OBSTACLE_STOP": 5
+      },
+      "lidar_gap_m": {
+        "n": 5,
+        "mean": 1.040014562011366,
+        "sample_sd": 0.04654080073005415,
+        "minimum": 0.9855311975479125,
+        "maximum": 1.0830834970474243
+      },
+      "time_to_stop_sim_s": {
+        "n": 5,
+        "mean": 3.1314,
+        "sample_sd": 0.04633896848226113,
+        "minimum": 3.092,
+        "maximum": 3.186
+      },
+      "time_to_stop_wall_s": {
+        "n": 5,
+        "mean": 4.33974427899999,
+        "sample_sd": 0.1030417353852945,
+        "minimum": 4.248396657000001,
+        "maximum": 4.500579233999986
+      },
+      "endpoint_overshoot_m": null
+    },
+    "empty-clean": {
+      "total": 5,
+      "expected_outcome_count": 5,
+      "final_states": {
+        "GOAL_REACHED": 5
+      },
+      "lidar_gap_m": {
+        "n": 0,
+        "mean": null,
+        "sample_sd": null,
+        "minimum": null,
+        "maximum": null
+      },
+      "time_to_stop_sim_s": {
+        "n": 5,
+        "mean": 4.529000000000001,
+        "sample_sd": 0.015874507866387503,
+        "minimum": 4.510000000000001,
+        "maximum": 4.550000000000001
+      },
+      "time_to_stop_wall_s": {
+        "n": 5,
+        "mean": 6.070036770399986,
+        "sample_sd": 0.07577460144663602,
+        "minimum": 5.950117811999974,
+        "maximum": 6.14998055999996
+      },
+      "endpoint_overshoot_m": {
+        "n": 5,
+        "mean": 0.03227650407790126,
+        "sample_sd": 0.016077935266006118,
+        "minimum": 0.012276503756512902,
+        "maximum": 0.05327650398455308
+      }
+    }
+  },
+  "collision_rate": null,
+  "notes": [
+    "All retained runs included, including failures.",
+    "Gap statistics are LiDAR-derived, not ground truth.",
+    "Simulation and wall durations are reported separately.",
+    "Expected outcome counts are not collision-free success counts."
+  ]
+}

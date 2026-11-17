@@ -1,0 +1,5 @@
+[INFO] [1794301924.158238812] [visual_baseline]: Logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-13-2026-11-10/pilot-instrumentation/camera-occlusion/obstacle/20261110T091204.044856Z; enabled=True
+[INFO] [1794301924.169110211] [visual_baseline]: Image input: /validation/image; reliability=best_effort
+[INFO] [1794301924.178650410] [visual_baseline]: Control: speed=1.0; red_threshold=0.4; goal_stop=False; sensor_timeout=2.0
+[INFO] [1794301924.207554909] [visual_baseline]: WAITING: distance=0.000, red_area=0.0000
+[INFO] [1794301924.303661803] [visual_baseline]: RUNNING: distance=0.000, red_area=0.0000

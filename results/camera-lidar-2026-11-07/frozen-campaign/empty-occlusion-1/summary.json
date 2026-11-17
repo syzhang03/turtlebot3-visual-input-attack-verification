@@ -1,0 +1,51 @@
+{
+  "checked_at_utc": "2026-11-06T16:08:33.375751+00:00",
+  "status": "DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION",
+  "controller": "fusion",
+  "calibration_mode": false,
+  "injected_fault": null,
+  "fault_activated_sim_s": null,
+  "cases": [
+    {
+      "case": "clear_segment",
+      "expected": "GOAL_REACHED",
+      "passed": true,
+      "final_event": {
+        "wall_elapsed_s": "9.068682814999192",
+        "sim_time_s": "7.234000000000001",
+        "state": "GOAL_REACHED",
+        "distance_m": "4.0672765039001515",
+        "corridor_clearance_m": "inf",
+        "stop_threshold_m": "1.15",
+        "scan_usable": "True",
+        "scan_reason": "",
+        "invalid_rays": "0",
+        "cmd_v": "0.0",
+        "cmd_w": "0.0",
+        "odom_v": "0.0",
+        "scan_age_wall_s": "0.006218298000021605",
+        "odom_age_wall_s": "0.03175608799938345",
+        "scan_stamp_s": "7.2",
+        "odom_stamp_s": "7.22"
+      }
+    }
+  ],
+  "empty_world": true,
+  "camera_delay_s": null,
+  "received_attacked_images": 204,
+  "camera_occlusion": true,
+  "black_roi_images": 204,
+  "attack_verified": true,
+  "case_selection": "clear",
+  "goal_distance_override": 4.0,
+  "ground_truth_samples": 532,
+  "ground_truth_robot_enclosure_radius_m": 0.3,
+  "model_collision_radius_bound_m": 0.2725947818607763,
+  "ground_truth_min_clearance_lower_bound_m": null,
+  "all_passed": true,
+  "limitations": [
+    "Single empty-world endpoint check; no repeated trials.",
+    "Simulator-pose conservative clearance bound; no contact sensor.",
+    "No formal attack success rate or repeated noise study."
+  ]
+}

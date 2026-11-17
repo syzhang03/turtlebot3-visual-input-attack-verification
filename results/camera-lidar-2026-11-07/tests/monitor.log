@@ -1,0 +1,33 @@
+test_ambiguity_and_agreement_reset_evidence (test_core.PairTests.test_ambiguity_and_agreement_reset_evidence) ... ok
+test_direction_flip_and_long_gap_restart (test_core.PairTests.test_direction_flip_and_long_gap_restart) ... ok
+test_invalid_configuration_and_scan (test_core.PairTests.test_invalid_configuration_and_scan) ... ok
+test_pair_is_consumed_once_and_alert_latches (test_core.PairTests.test_pair_is_consumed_once_and_alert_latches) ... ok
+test_three_distinct_pairs_required (test_core.PairTests.test_three_distinct_pairs_required) ... ok
+test_unmatched_and_out_of_order_data (test_core.PairTests.test_unmatched_and_out_of_order_data) ... ok
+test_camera_loss_is_not_agreement (test_ros.FusionRosTests.test_camera_loss_is_not_agreement) ... [INFO] [1793982205.515624489] [camera_lidar_monitor]: Logs: /tmp/tmp63on0z2g/20261106T162325.417847Z; enabled=True
+[INFO] [1793982205.530217919] [camera_lidar_monitor]: WAITING: distance=0.000; clearance=inf; reason=NO_SCAN
+[INFO] [1793982205.577320304] [camera_lidar_monitor]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793982206.478166542] [camera_lidar_monitor]: SENSOR_TIMEOUT: distance=0.000; clearance=inf; reason=
+ok
+test_camera_timestamp_rollback_latches_fault (test_ros.FusionRosTests.test_camera_timestamp_rollback_latches_fault) ... [INFO] [1793982206.866410806] [camera_lidar_monitor]: Logs: /tmp/tmptfzwyr9b/20261106T162326.856669Z; enabled=True
+[INFO] [1793982206.915688698] [camera_lidar_monitor]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793982207.416357703] [camera_lidar_monitor]: FAULT: distance=0.000; clearance=inf; reason=
+ok
+test_lidar_danger_has_immediate_priority (test_ros.FusionRosTests.test_lidar_danger_has_immediate_priority) ... [INFO] [1793982207.587721376] [camera_lidar_monitor]: Logs: /tmp/tmpud1qzuyy/20261106T162327.578607Z; enabled=True
+[INFO] [1793982207.637906118] [camera_lidar_monitor]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793982208.138489830] [camera_lidar_monitor]: OBSTACLE_STOP: distance=0.000; clearance=0.150; reason=
+ok
+test_normal_pairing_and_single_command_owner (test_ros.FusionRosTests.test_normal_pairing_and_single_command_owner) ... [INFO] [1793982208.327068522] [camera_lidar_monitor]: Logs: /tmp/tmpn81kqd8b/20261106T162328.317450Z; enabled=True
+[INFO] [1793982208.376092696] [camera_lidar_monitor]: RUNNING: distance=0.000; clearance=inf; reason=
+ok
+test_persistent_visual_miss_and_reverse_direction (test_ros.FusionRosTests.test_persistent_visual_miss_and_reverse_direction) ... [INFO] [1793982208.964214637] [camera_lidar_monitor]: Logs: /tmp/tmp42a9gv5x/20261106T162328.955450Z; enabled=True
+[INFO] [1793982209.014657325] [camera_lidar_monitor]: ANOMALY_STOP: distance=0.000; clearance=1.850; reason=
+ok
+test_visual_extra_also_alerts_without_nominal_visual_stop (test_ros.FusionRosTests.test_visual_extra_also_alerts_without_nominal_visual_stop) ... [INFO] [1793982209.597998907] [camera_lidar_monitor]: Logs: /tmp/tmpiamyw_1_/20261106T162329.589001Z; enabled=True
+[INFO] [1793982209.648665537] [camera_lidar_monitor]: ANOMALY_STOP: distance=0.000; clearance=inf; reason=
+ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 4.877s
+
+OK

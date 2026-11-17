@@ -1,0 +1,5 @@
+[INFO] [1794302178.166073605] [visual_baseline]: Logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-13-2026-11-10/formal/B-occlusion-obstacle-2/obstacle/20261110T091618.061489Z; enabled=True
+[INFO] [1794302178.178286446] [visual_baseline]: Image input: /validation/image; reliability=best_effort
+[INFO] [1794302178.187626087] [visual_baseline]: Control: speed=1.0; red_threshold=0.4; goal_stop=False; sensor_timeout=2.0
+[INFO] [1794302178.218197377] [visual_baseline]: WAITING: distance=0.000, red_area=0.0000
+[INFO] [1794302178.616135742] [visual_baseline]: RUNNING: distance=0.000, red_area=0.0000

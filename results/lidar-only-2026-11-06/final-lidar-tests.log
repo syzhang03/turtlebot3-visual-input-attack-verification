@@ -1,0 +1,40 @@
+test_goal_and_first_stop_reason_latch (test_core.ControlTests.test_goal_and_first_stop_reason_latch) ... ok
+test_no_motion_until_ready_fresh_and_usable (test_core.ControlTests.test_no_motion_until_ready_fresh_and_usable) ... ok
+test_obstacle_stop_latches_even_if_obstacle_disappears (test_core.ControlTests.test_obstacle_stop_latches_even_if_obstacle_disappears) ... ok
+test_timeout_and_invalid_data_stop_a_running_robot (test_core.ControlTests.test_timeout_and_invalid_data_stop_a_running_robot) ... ok
+test_bad_front_readings_cannot_mean_clear (test_core.GeometryTests.test_bad_front_readings_cannot_mean_clear) ... ok
+test_front_distance_accounts_for_sensor_offset_and_robot_front (test_core.GeometryTests.test_front_distance_accounts_for_sensor_offset_and_robot_front) ... ok
+test_larger_speed_requires_more_stopping_distance (test_core.GeometryTests.test_larger_speed_requires_more_stopping_distance) ... ok
+test_no_return_convention_is_explicit (test_core.GeometryTests.test_no_return_convention_is_explicit) ... ok
+test_rotated_sensor_and_reversed_angle_origin (test_core.GeometryTests.test_rotated_sensor_and_reversed_angle_origin) ... ok
+test_side_walls_and_rear_obstacles_are_not_forward_hazards (test_core.GeometryTests.test_side_walls_and_rear_obstacles_are_not_forward_hazards) ... ok
+test_unobserved_front_or_insufficient_range_rejected (test_core.GeometryTests.test_unobserved_front_or_insufficient_range_rejected) ... ok
+test_front_and_side_clearance_are_euclidean_lower_bounds (test_ground_truth.GroundTruthTests.test_front_and_side_clearance_are_euclidean_lower_bounds) ... ok
+test_robot_collision_offsets_are_included (test_ground_truth.GroundTruthTests.test_robot_collision_offsets_are_included) ... ok
+test_unknown_collision_shapes_are_not_ignored (test_ground_truth.GroundTruthTests.test_unknown_collision_shapes_are_not_ignored) ... ok
+test_clear_route_then_goal (test_ros.RosTests.test_clear_route_then_goal) ... [INFO] [1793949210.976648846] [lidar_baseline]: Logs: /tmp/lidar-ros-test-sgo8v7yu/20261106T071330.879515Z; enabled=True
+[INFO] [1793949210.992799189] [lidar_baseline]: WAITING: distance=0.000; clearance=inf; reason=NO_SCAN
+[INFO] [1793949211.041886434] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793949211.540617921] [lidar_baseline]: GOAL_REACHED: distance=0.250; clearance=inf; reason=
+ok
+test_invalid_scan_is_not_clear (test_ros.RosTests.test_invalid_scan_is_not_clear) ... [INFO] [1793949211.795518612] [lidar_baseline]: Logs: /tmp/lidar-ros-test-95k700ud/20261106T071331.785759Z; enabled=True
+[INFO] [1793949211.845615090] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793949212.345923078] [lidar_baseline]: SENSOR_INVALID: distance=0.000; clearance=inf; reason=INVALID_FORWARD_RAYS
+ok
+test_missing_scan_stops_while_odom_continues (test_ros.RosTests.test_missing_scan_stops_while_odom_continues) ... [INFO] [1793949212.555843688] [lidar_baseline]: Logs: /tmp/lidar-ros-test-i2f2q18v/20261106T071332.544609Z; enabled=True
+[INFO] [1793949212.610405441] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793949213.606892054] [lidar_baseline]: SENSOR_TIMEOUT: distance=0.000; clearance=inf; reason=
+ok
+test_obstacle_stop_is_latched (test_ros.RosTests.test_obstacle_stop_is_latched) ... [INFO] [1793949213.959084620] [lidar_baseline]: Logs: /tmp/lidar-ros-test-3pa14ksu/20261106T071333.948363Z; enabled=True
+[INFO] [1793949214.015075573] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793949214.510288707] [lidar_baseline]: OBSTACLE_STOP: distance=0.000; clearance=0.150; reason=
+ok
+test_repeated_old_scan_does_not_refresh_watchdog (test_ros.RosTests.test_repeated_old_scan_does_not_refresh_watchdog) ... [INFO] [1793949216.574900946] [lidar_baseline]: Logs: /tmp/lidar-ros-test-qxn94vhh/20261106T071336.564327Z; enabled=True
+[INFO] [1793949216.633130676] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793949217.625438206] [lidar_baseline]: SENSOR_TIMEOUT: distance=0.000; clearance=inf; reason=
+ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 5.539s
+
+OK

@@ -1,0 +1,18 @@
+{
+  "repeats": 3,
+  "trigger_lidar_clearance_m": 1.5,
+  "min_pose_margin_m": 0.35,
+  "accepted_states": [
+    "SENSOR_TIMEOUT",
+    "OBSTACLE_STOP"
+  ],
+  "explanation": "A fresh LiDAR emergency stop can precede camera watchdog expiry.",
+  "sha256": {
+    "scripts/verify_lidar_gazebo.py": "dea406281796b380527a187137208f654db6c5166592b9236b94dac16717a1b7",
+    "configs/camera_lidar.yaml": "963f966a728be5a81d39a27fcb4b70efb7b8441fb4e86d09a915f97350a937fa",
+    "scripts/run_fusion_late_faults.py": "41434235095b91b080b82860c3dd978cb71785933655af2f40f8f1e736c94235",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/core.py": "818218dca48bc463a1138e18cb6a37306f56730cd7b771c7b7a112e3a14b50ee",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/node.py": "bdd66ebdfd51ded8569114a3402dd2ba7d7b7c3df6169e41021a6e2abe6baa03",
+    "src/tb3_camera_lidar_monitor/tb3_camera_lidar_monitor/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

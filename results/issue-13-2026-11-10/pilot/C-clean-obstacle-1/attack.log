@@ -1,0 +1,6 @@
+[INFO] [1794301765.060743813] [delay_replay]: Replay logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-13-2026-11-10/pilot/C-clean-obstacle-1/attack/20261110T090925.004610Z
+[INFO] [1794301765.069877211] [delay_replay]: Output reliability=reliable; reliable queue depth=1
+[INFO] [1794301769.053977916] [delay_replay]: ZERO_DELAY; reset=False; elapsed=0.000s
+/home/michael/tb3_project_ws/build/tb3_visual_baseline/tb3_visual_baseline/replay_node.py:105: RuntimeWarning: coroutine 'Executor._make_handler.<locals>.handler' was never awaited
+  pass
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback

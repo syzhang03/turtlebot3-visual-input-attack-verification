@@ -1,0 +1,3 @@
+[INFO] [1794315653.886967432] [delay_replay]: Replay logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-15-2026-11-10/pilot/E-clean-obstacle-1/attack/20261110T130053.831640Z
+[INFO] [1794315653.897339636] [delay_replay]: Output reliability=reliable; reliable queue depth=1
+[INFO] [1794315657.899021618] [delay_replay]: ZERO_DELAY; reset=False; elapsed=0.000s

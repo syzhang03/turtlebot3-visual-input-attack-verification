@@ -1,0 +1,6 @@
+[INFO] [1794301754.966890394] [visual_baseline]: Logs: /mnt/e/7508/Group project/turtlebot3-visual-input-attack-verification/results/issue-13-2026-11-10/pilot/A-clean-obstacle-1/obstacle/20261110T090914.855339Z; enabled=True
+[INFO] [1794301754.977189592] [visual_baseline]: Image input: /validation/image; reliability=best_effort
+[INFO] [1794301754.988398490] [visual_baseline]: Control: speed=1.0; red_threshold=0.4; goal_stop=True; sensor_timeout=2.0
+[INFO] [1794301755.009572085] [visual_baseline]: WAITING: distance=0.000, red_area=0.0000
+[INFO] [1794301755.617550460] [visual_baseline]: RUNNING: distance=0.000, red_area=0.0339
+[INFO] [1794301760.710560310] [visual_baseline]: OBSTACLE_STOP: distance=2.988, red_area=0.4204

@@ -1,0 +1,25 @@
+lidar_baseline:
+  ros__parameters:
+    use_sim_time: true
+    enabled: false
+    scan_topic: /scan
+    odom_topic: /odom
+    cmd_topic: /cmd_vel
+    base_frame: base_footprint
+    speed: 1.0
+    goal_distance: 4.0
+    enable_goal_stop: true
+    # Conservative envelope around Waffle Pi; distances are in base_frame.
+    front_extent: 0.15
+    corridor_half_width: 0.20
+    min_clearance: 0.35
+    reaction_time: 0.30
+    braking_deceleration: 1.0
+    sensor_timeout_wall: 2.0
+    max_stamp_age_sim: 0.5
+    control_period: 0.05
+    allow_positive_infinity: true
+    heading_gain: 1.0
+    max_angular_speed: 0.3
+    max_trial_seconds: 120.0
+    log_dir: ~/lidar-results

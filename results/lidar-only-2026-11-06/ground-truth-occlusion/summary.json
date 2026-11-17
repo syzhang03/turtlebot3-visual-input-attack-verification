@@ -1,0 +1,22 @@
+{
+  "checked_at_utc": "2026-11-06T07:11:02.368953+00:00",
+  "status": "DEVELOPMENT_CHECK_NOT_FORMAL_EVALUATION",
+  "cases": [],
+  "empty_world": false,
+  "camera_delay_s": null,
+  "received_attacked_images": 160,
+  "camera_occlusion": true,
+  "black_roi_images": 160,
+  "attack_verified": false,
+  "case_selection": "obstacle",
+  "goal_distance_override": null,
+  "ground_truth_samples": 0,
+  "ground_truth_min_clearance_lower_bound_m": null,
+  "all_passed": false,
+  "limitations": [
+    "Sequential runs in one scene, not reset matched trials.",
+    "Clear segment ends before the distant red obstacle.",
+    "No contact sensor or independent ground-truth clearance measurement.",
+    "No formal attack success rate or repeated noise study."
+  ]
+}

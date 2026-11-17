@@ -1,0 +1,20 @@
+{
+  "review_date": "2026-11-02",
+  "platform": "win32",
+  "python": "3.12.14",
+  "dependencies": {
+    "numpy": true,
+    "cv2": false,
+    "rclpy": false
+  },
+  "modules": [
+    "test_core",
+    "test_replay",
+    "test_relay_transport"
+  ],
+  "exit_code": 0,
+  "not_run": [
+    "test_vision: OpenCV (cv2) unavailable; 3 test methods"
+  ],
+  "ros_gazebo_reexecuted": false
+}

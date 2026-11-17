@@ -1,0 +1,12 @@
+{
+  "source": "E:\\7508\\Group project\\turtlebot3-visual-input-attack-verification\\results\\camera-lidar-2026-11-06\\calibration\\obstacle\\20261106T074225.229214Z\\pairs.csv",
+  "pairs": 115,
+  "margin": 0.15,
+  "transition_distances_m": [
+    2.729203263523967,
+    2.7508810303558953
+  ],
+  "verify_near": 2.57,
+  "verify_far": 2.91,
+  "limits": "Only the fixed red obstacle, ROI, geometry and verify threshold used in this clean run."
+}

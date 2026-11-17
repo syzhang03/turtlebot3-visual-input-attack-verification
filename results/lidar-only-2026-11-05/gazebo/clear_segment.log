@@ -1,0 +1,4 @@
+[INFO] [1793873171.345273734] [lidar_baseline]: Logs: /mnt/e/7508/Group project/local-deployment/lidar-gazebo-check-1/clear_segment/20261105T100611.275230Z; enabled=True
+[INFO] [1793873171.357533110] [lidar_baseline]: WAITING: distance=0.000; clearance=inf; reason=NO_SCAN
+[INFO] [1793873171.796346613] [lidar_baseline]: RUNNING: distance=0.000; clearance=inf; reason=
+[INFO] [1793873173.244123249] [lidar_baseline]: GOAL_REACHED: distance=0.542; clearance=3.235; reason=
