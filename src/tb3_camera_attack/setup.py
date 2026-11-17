@@ -1,4 +1,5 @@
 from setuptools import setup
+from glob import glob
 
 
 setup(
@@ -8,7 +9,7 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/tb3_camera_attack']),
         ('share/tb3_camera_attack', ['package.xml']),
-        ('share/tb3_camera_attack/config', ['config/camera_occlusion.yaml']),
+        ('share/tb3_camera_attack/config', glob('config/*.yaml')),
         ('share/tb3_camera_attack/launch', ['launch/camera_occlusion.launch.py']),
     ],
     install_requires=['setuptools'],

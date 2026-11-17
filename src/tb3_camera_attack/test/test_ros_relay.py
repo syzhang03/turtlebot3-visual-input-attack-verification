@@ -105,6 +105,19 @@ class RosRelayTests(unittest.TestCase):
                 self.assertEqual(self.relay.rectangle(), original)
         self.assertEqual(self.exchange().header, self.message.header)
 
+    def test_rgb_encoding_preservation_opt_in(self):
+        self.message = self.bridge.cv2_to_imgmsg(self.frame.copy(), encoding='rgb8')
+        self.message.header.stamp.sec = 42
+        self.message.header.frame_id = 'rgb_camera'
+        result = self.relay.set_parameters_atomically([
+            Parameter('attack_enabled', value=True), Parameter('preserve_encoding', value=True)])
+        self.assertTrue(result.successful, result.reason)
+        output = self.exchange()
+        self.assertEqual(output.encoding, 'rgb8')
+        self.assertEqual(output.header, self.message.header)
+        expected = self.frame.copy(); expected[60:, 64:256] = 0
+        np.testing.assert_array_equal(self.bridge.imgmsg_to_cv2(output, 'passthrough'), expected)
+
     def test_valid_atomic_rectangle_and_clean_toggle(self):
         result = self.relay.set_parameters_atomically([
             Parameter('attack_enabled', value=True), Parameter('mask_x', value=0.0),
@@ -115,6 +128,19 @@ class RosRelayTests(unittest.TestCase):
         self.assertFalse(self.bridge.imgmsg_to_cv2(output, 'bgr8').any())
         self.relay.set_parameters_atomically([Parameter('attack_enabled', value=False)])
         self.assertEqual(self.exchange(), self.message)
+
+    def test_runtime_modes_and_invalid_atomic_update(self):
+        result = self.relay.set_parameters_atomically([
+            Parameter('attack_enabled', value=True), Parameter('attack_mode', value='brightness'),
+            Parameter('brightness_delta', value=-255.0)])
+        self.assertTrue(result.successful, result.reason)
+        self.assertFalse(self.bridge.imgmsg_to_cv2(self.exchange(), 'bgr8').any())
+        old = self.relay.settings()
+        for name, value in [('attack_mode', 'fgsm'), ('noise_sigma', -1.0),
+                            ('period_s', 0.0), ('random_seed', -1)]:
+            result = self.relay.set_parameters_atomically([Parameter(name, value=value)])
+            self.assertFalse(result.successful)
+            self.assertEqual(self.relay.settings(), old)
 
     def test_invalid_startup_coordinates_use_valid_defaults(self):
         node = CameraOcclusion(namespace='/invalid_startup_test', parameter_overrides=[

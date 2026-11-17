@@ -1,0 +1,18 @@
+camera_occlusion:
+  ros__parameters:
+    use_sim_time: true
+    input_topic: /camera/image_raw
+    output_topic: /attack/image_raw
+    attack_enabled: true
+    attack_mode: occlusion
+    input_reliability: best_effort
+    output_reliability: reliable
+    input_history: keep_last
+    output_history: keep_last
+    input_depth: 5
+    output_depth: 1
+    mask_x: 0.2
+    mask_y: 0.25
+    mask_width: 0.6
+    mask_height: 0.75
+    log_dir: ~/meiqi-camera-results/relay

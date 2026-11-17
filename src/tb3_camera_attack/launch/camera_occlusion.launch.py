@@ -14,10 +14,14 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('params_file', default_value=config),
         DeclareLaunchArgument('attack_enabled', default_value='false'),
+        DeclareLaunchArgument('input_topic', default_value='/camera/image_raw'),
+        DeclareLaunchArgument('output_topic', default_value='/camera/attacked_image'),
         Node(
             package='tb3_camera_attack', executable='camera_occlusion',
             name='camera_occlusion', output='screen',
             parameters=[LaunchConfiguration('params_file'), {
+                'input_topic': LaunchConfiguration('input_topic'),
+                'output_topic': LaunchConfiguration('output_topic'),
                 'attack_enabled': ParameterValue(
                     LaunchConfiguration('attack_enabled'), value_type=bool),
             }],
