@@ -24,7 +24,29 @@ red visual and collision at `[4, 0, 0.25, 0, 0, 0]`; `empty` rejects any
 `red_box_visual` or `red_box_collision`. Both require `road_x_visual` and
 `stop_line_visual`. The white stop line remains at `X=3.15 m`; the empty-road
 profiles use the odometry endpoint at 4.0 m because there is no red obstacle to
-trigger a visual or LiDAR stop.
+trigger a visual or LiDAR stop. Both scenes spawn the same Waffle Pi model at
+the same pose, so the camera, LiDAR, IMU and wheel joint-state topics are
+identical; only the world model (red box present or absent) changes.
+
+## Run longer than 4 m
+
+The 4.0 m endpoint is only the default test endpoint. The road itself runs to
+about `X=11 m`, so you can extend the straight run without adding an obstacle:
+
+```bash
+# Visual: endpoint at 8.0 m
+ROS_DOMAIN_ID=33 bash scripts/run_empty_road_visual.sh drive -p goal_distance:=8.0
+
+# LiDAR: endpoint at 8.0 m
+ROS_DOMAIN_ID=33 bash scripts/run_empty_road_lidar.sh drive -p goal_distance:=8.0
+
+# Or keep driving until Ctrl+C (supervise the robot; the road ends near X=11 m)
+ROS_DOMAIN_ID=33 bash scripts/run_empty_road_visual.sh drive -p enable_goal_stop:=false
+```
+
+`run_empty_road_visual.sh` forwards extra ROS arguments, so these overrides
+reach the baseline node. Keep the endpoint inside the road for repeatable
+trials; disabling the endpoint is only for a supervised straight-run check.
 
 ## Run
 

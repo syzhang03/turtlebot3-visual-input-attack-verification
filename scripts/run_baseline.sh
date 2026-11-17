@@ -5,8 +5,9 @@ MODE="${1:-observe}"
 case "$MODE" in
   observe) ENABLED=false ;;
   drive) ENABLED=true ;;
-  *) echo 'Usage: bash scripts/run_baseline.sh [observe|drive]' >&2; exit 2 ;;
+  *) echo 'Usage: bash scripts/run_baseline.sh [observe|drive] [ROS arguments...]' >&2; exit 2 ;;
 esac
+[[ $# -eq 0 ]] || shift
 CONFIG="${BASELINE_CONFIG:-$PROJECT_DIR/configs/baseline_white_line.yaml}"
 source /opt/ros/jazzy/setup.bash
 source "${TB3_WS:-$HOME/turtlebot3_ws}/install/setup.bash"
@@ -16,4 +17,4 @@ cd "$PROJECT_DIR"
 exec ros2 run tb3_visual_baseline baseline --ros-args \
   --params-file "$CONFIG" \
   -p image_topic:=/camera/image_raw -p image_reliability:=best_effort \
-  -p enabled:="$ENABLED"
+  -p enabled:="$ENABLED" "$@"

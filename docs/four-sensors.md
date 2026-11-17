@@ -27,6 +27,11 @@ one, adds a wheel-speed conversion node, and makes the four streams verifiable
 and recordable together. A second independent IMU would require a model change
 and a new sensor pose; that is not part of this branch.
 
+Both experiment scenes (`full` and `empty`) spawn the same Waffle Pi model at
+the same pose. Camera, LiDAR, IMU and wheel joint-state topics are therefore
+identical; only the world model differs. Run the same `wheel_speed` +
+`sensor_sync` pipeline for either scene.
+
 ## Topics
 
 | Topic | Type | Nominal rate | Source |
