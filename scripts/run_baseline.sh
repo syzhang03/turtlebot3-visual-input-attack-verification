@@ -7,12 +7,13 @@ case "$MODE" in
   drive) ENABLED=true ;;
   *) echo 'Usage: bash scripts/run_baseline.sh [observe|drive]' >&2; exit 2 ;;
 esac
+CONFIG="${BASELINE_CONFIG:-$PROJECT_DIR/configs/baseline_white_line.yaml}"
 source /opt/ros/jazzy/setup.bash
 source "${TB3_WS:-$HOME/turtlebot3_ws}/install/setup.bash"
 source "$PROJECT_DIR/install/setup.bash"
 export ROS_DOMAIN_ID="${ROS_DOMAIN_ID:-33}"
 cd "$PROJECT_DIR"
 exec ros2 run tb3_visual_baseline baseline --ros-args \
-  --params-file "$PROJECT_DIR/configs/baseline_white_line.yaml" \
+  --params-file "$CONFIG" \
   -p image_topic:=/camera/image_raw -p image_reliability:=best_effort \
   -p enabled:="$ENABLED"

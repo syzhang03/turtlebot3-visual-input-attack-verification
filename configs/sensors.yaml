@@ -1,0 +1,27 @@
+wheel_speed:
+  ros__parameters:
+    use_sim_time: true
+    joint_states_topic: /joint_states
+    wheel_speed_topic: /wheel_speed
+    left_joint: wheel_left_joint
+    right_joint: wheel_right_joint
+    wheel_radius: 0.033
+    publish_rate: 30.0
+
+sensor_sync:
+  ros__parameters:
+    use_sim_time: true
+    image_topic: /camera/image_raw
+    scan_topic: /scan
+    imu_topic: /imu
+    wheel_speed_topic: /wheel_speed
+    status_topic: /sensor_sync/status
+    left_joint: wheel_left_joint
+    right_joint: wheel_right_joint
+    wheel_radius: 0.033
+    # 0.20 s at 1.0 m/s is 0.20 m; it covers the 10 Hz LiDAR period and the
+    # camera jitter observed in the VM without silently dropping whole scans.
+    sync_tolerance: 0.20
+    staleness: 0.50
+    rate: 20.0
+    output_dir: ~/sensor-results

@@ -9,6 +9,11 @@ Issue #9 adds the integrated consistency monitor on `defense/camera-lidar-monito
 
 The `defense/lidar-only` work adds an independent LiDAR controller for [Issue #7](https://github.com/syzhang03/turtlebot3-visual-input-attack-verification/issues/7). Build/run instructions and limitations are in [docs/lidar-only.md](docs/lidar-only.md); development evidence is in [results/lidar-only-2026-11-05](results/lidar-only-2026-11-05/README.md). This controller does not use camera inputs.
 
+## Empty-road scene and four-sensor bring-up
+
+The `feature/empty-road-four-sensors` branch adds an empty-road variant of the experiment scene (`scripts/start_scene.sh empty`) and makes the existing IMU and wheel joint states first-class: a `/wheel_speed` topic, a passive four-sensor liveness check, a synchronised CSV logger and a bag recorder. See [docs/empty-road-scene.md](docs/empty-road-scene.md) and [docs/four-sensors.md](docs/four-sensors.md). The pinned Waffle Pi model already provides the IMU and wheel joint states; this branch does not add a second physical IMU.
+
+
 ## 1. Question and Motivation
 
 ### Security Question
