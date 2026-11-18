@@ -15,7 +15,8 @@ except ImportError:
 
 
 @unittest.skipUnless(HAS_ROS, 'Requires real ROS and cv_bridge')
-class FusionRosTests(unittest.TestCase):
+class FusionRosFixture(unittest.TestCase):
+    extra_parameters = ()
     image_reliability = 'best_effort'
 
     def setUp(self):
@@ -25,7 +26,7 @@ class FusionRosTests(unittest.TestCase):
                       'scan_topic:=/fusion_test/scan', 'odom_topic:=/fusion_test/odom',
                       'image_topic:=/fusion_test/image', f'image_reliability:={self.image_reliability}', 'speed:=0.1',
                       'sensor_timeout_wall:=0.5', 'pair_timeout:=0.4',
-                      f'log_dir:={self.directory.name}']:
+                      f'log_dir:={self.directory.name}', *self.extra_parameters]:
             args += ['-p', value]
         rclpy.init(args=args)
         self.node = CameraLidarMonitor()
@@ -48,7 +49,7 @@ class FusionRosTests(unittest.TestCase):
         rclpy.shutdown()
         self.directory.cleanup()
 
-    def pump(self, duration, distance=math.inf, red=False, camera=True):
+    def pump(self, duration, distance=math.inf, red=False, camera=True, lidar=True):
         deadline = time.monotonic()+duration
         while time.monotonic() < deadline:
             stamp = self.peer.get_clock().now().to_msg()
@@ -62,7 +63,8 @@ class FusionRosTests(unittest.TestCase):
             scan.range_min, scan.range_max = .12, 3.5
             scan.ranges = [math.inf]*360
             scan.ranges[0] = distance
-            self.scans.publish(scan)
+            if lidar:
+                self.scans.publish(scan)
             if camera:
                 image = Image()
                 image.header.stamp = stamp
@@ -76,6 +78,8 @@ class FusionRosTests(unittest.TestCase):
                 self.images.publish(image)
             for _ in range(6): self.executor.spin_once(timeout_sec=.005)
 
+
+class FusionRosTests(FusionRosFixture):
     def test_normal_pairing_and_single_command_owner(self):
         self.pump(.6)
         self.assertEqual(self.node.controller.state, 'RUNNING')
@@ -113,3 +117,36 @@ class FusionRosTests(unittest.TestCase):
 class FusionReliableRosTests(FusionRosTests):
     """Run the same guard, pairing and timeout checks with reliable image delivery."""
     image_reliability = 'reliable'
+
+
+class ThreeStateRosTests(FusionRosFixture):
+    extra_parameters = ('three_state_enabled:=true', 'restricted_speed:=0.05',
+                        'restricted_timeout:=0.8')
+
+    def enter_restricted(self):
+        self.pump(.5)
+        self.assertEqual(self.node.controller.state, 'RUNNING')
+        self.pump(.4, camera=False)
+        self.assertEqual(self.node.controller.state, 'RESTRICTED')
+
+    def test_short_camera_gap_recovers_after_agreeing_pairs(self):
+        self.enter_restricted()
+        self.pump(.35)
+        self.assertEqual(self.node.controller.state, 'RUNNING')
+
+    def test_lidar_loss_stops_while_restricted(self):
+        self.enter_restricted()
+        self.pump(.65, camera=False, lidar=False)
+        self.assertEqual(self.node.controller.state, 'SENSOR_TIMEOUT')
+
+    def test_lidar_obstacle_stops_while_restricted(self):
+        self.enter_restricted()
+        self.pump(.2, distance=.3, camera=False)
+        self.assertEqual(self.node.controller.state, 'OBSTACLE_STOP')
+
+    def test_camera_gap_is_bounded_and_stop_stays_latched(self):
+        self.enter_restricted()
+        self.pump(.9, camera=False)
+        self.assertEqual(self.node.controller.state, 'SENSOR_TIMEOUT')
+        self.pump(.4)
+        self.assertEqual(self.node.controller.state, 'SENSOR_TIMEOUT')
