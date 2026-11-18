@@ -1,0 +1,21 @@
+scene,profile,noise,n,reliability_observed,noise_received,anomaly_alerts,restricted,false_stops,stop_judged,successful_task,completed_route,premature_stops,clearance_violations,clearance_indeterminate,minimum_lower_bound_m,minimum_stopped_lower_bound_m,mean_empty_completion_sim_s,final_states
+empty,clean,off,10,10,0,1,6,0,10,10,10,0,0,0,,,5.0652,{'GOAL_REACHED': 10}
+empty,clean,on,10,10,10,0,9,0,10,10,10,0,0,0,,,5.4914000000000005,{'GOAL_REACHED': 10}
+empty,camera-latency,off,10,10,0,0,10,0,10,10,10,0,0,0,,,5.525399999999999,{'GOAL_REACHED': 10}
+empty,camera-latency,on,10,10,10,0,10,0,10,10,10,0,0,0,,,5.6222,{'GOAL_REACHED': 10}
+empty,camera-visor,off,10,10,0,0,6,0,10,10,10,0,0,0,,,5.2779,{'GOAL_REACHED': 10}
+empty,camera-visor,on,10,10,10,0,9,0,10,9,9,1,0,0,,,5.348777777777778,"{'GOAL_REACHED': 9, 'SENSOR_TIMEOUT': 1}"
+empty,lidar-unavailable,off,10,10,0,0,2,0,10,0,0,10,0,0,,,,{'SENSOR_TIMEOUT': 10}
+empty,lidar-unavailable,on,10,10,10,0,4,0,10,0,0,10,0,0,,,,{'SENSOR_TIMEOUT': 10}
+empty,both-unavailable,off,10,10,0,0,10,2,10,0,0,10,0,0,,,,{'SENSOR_TIMEOUT': 10}
+empty,both-unavailable,on,10,10,10,0,10,1,10,0,0,10,0,0,,,,{'SENSOR_TIMEOUT': 10}
+obstacle,clean,off,10,10,0,0,6,0,10,10,0,0,0,0,0.7469824337307129,0.7478611730391511,,{'OBSTACLE_STOP': 10}
+obstacle,clean,on,10,10,9,0,4,1,10,8,0,0,0,0,0.8479605975408269,0.857536430385341,,"{'SENSOR_TIMEOUT': 2, 'OBSTACLE_STOP': 8}"
+obstacle,camera-latency,off,10,10,0,0,10,0,10,10,0,0,0,0,0.7788615411736302,0.7860500673576276,,{'OBSTACLE_STOP': 10}
+obstacle,camera-latency,on,10,10,10,0,10,0,10,10,0,0,0,0,0.8566470385235607,0.8672111932360755,,{'OBSTACLE_STOP': 10}
+obstacle,camera-visor,off,10,10,0,9,6,9,10,0,0,0,0,0,2.095888342687798,2.1054721916997523,,"{'ANOMALY_STOP': 9, 'SENSOR_TIMEOUT': 1}"
+obstacle,camera-visor,on,10,10,10,9,3,10,10,0,0,0,0,0,2.098231609895179,2.109127975111199,,"{'SENSOR_TIMEOUT': 2, 'ANOMALY_STOP': 8}"
+obstacle,lidar-unavailable,off,10,10,0,0,5,0,10,0,0,0,0,0,1.8578289963045258,1.8674000488466145,,{'SENSOR_TIMEOUT': 10}
+obstacle,lidar-unavailable,on,10,10,10,0,5,1,10,0,0,0,0,0,1.8629912071083103,1.8725622908960455,,{'SENSOR_TIMEOUT': 10}
+obstacle,both-unavailable,off,10,10,0,0,10,1,10,0,0,0,0,0,2.0360704694647205,2.037082134527894,,{'SENSOR_TIMEOUT': 10}
+obstacle,both-unavailable,on,10,10,10,0,10,3,10,0,0,0,0,0,2.0314929786161766,2.040327160862174,,{'SENSOR_TIMEOUT': 10}
