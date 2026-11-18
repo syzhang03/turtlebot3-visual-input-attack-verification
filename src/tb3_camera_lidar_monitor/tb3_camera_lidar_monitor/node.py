@@ -21,13 +21,30 @@ class FusionController(Controller):
     TERMINAL = Controller.TERMINAL | {'ANOMALY_STOP', 'VISUAL_STOP'}
 
 
+class ThreeStateController(FusionController):
+    def __init__(self, restricted_speed):
+        super().__init__()
+        self.restricted_speed = restricted_speed
+        self.restricted = False
+
+    def step(self, enabled, ready, fresh, usable, blocked, goal_reached, speed):
+        target = min(speed, self.restricted_speed) if self.restricted else speed
+        command = super().step(enabled, ready, fresh, usable, blocked, goal_reached, target)
+        if command and self.restricted:
+            self.state = 'RESTRICTED'
+        return command
+
+
 class CameraLidarMonitor(LidarBaseline):
     def __init__(self):
         super().__init__('camera_lidar_monitor')
         defaults = dict(image_topic='/attack/image_raw', image_reliability='best_effort', visual_stop_threshold=.4,
                         visual_verify_threshold=.06, roi_top=.25, verify_near=2.57,
                         verify_far=2.91, pair_tolerance=.12, pair_timeout=.6,
-                        confirmations=3, calibration_mode=False, record_image_acceptance=False)
+                        confirmations=3, calibration_mode=False, record_image_acceptance=False,
+                        three_state_enabled=False, restricted_speed=.35,
+                        restricted_camera_age_sim=.25, restricted_timeout=2.0,
+                        recovery_pairs=3)
         self.visual_cfg = {k: self.declare_parameter(k, v, ParameterDescriptor(read_only=True)).value
                            for k, v in defaults.items()}
         for key in ('visual_stop_threshold', 'visual_verify_threshold', 'roi_top'):
@@ -41,6 +58,19 @@ class CameraLidarMonitor(LidarBaseline):
                                           self.visual_cfg['pair_tolerance'],
                                           self.visual_cfg['confirmations'], self.visual_cfg['pair_timeout'])
         self.controller = FusionController()
+        if self.visual_cfg['three_state_enabled']:
+            for key in ('restricted_speed', 'restricted_camera_age_sim', 'restricted_timeout'):
+                value = self.visual_cfg[key]
+                if not math.isfinite(value) or value <= 0:
+                    raise ValueError(key)
+            if self.visual_cfg['restricted_speed'] >= self.cfg['speed']:
+                raise ValueError('Restricted speed must be lower than nominal speed')
+            if self.visual_cfg['recovery_pairs'] < 1 or self.visual_cfg['calibration_mode']:
+                raise ValueError('Three-state operation requires recovery pairs and active monitoring')
+            self.controller = ThreeStateController(self.visual_cfg['restricted_speed'])
+        self.restricted_since = None
+        self.recovery_pair_count = 0
+        self.last_recovery_pair = None
         self.bridge = CvBridge()
         self.image_stamp = self.image_at = self.pair_at = None
         self.alerts = self.create_publisher(String, '/defense/consistency', 10)
@@ -98,6 +128,19 @@ class CameraLidarMonitor(LidarBaseline):
     def record(self, pairs):
         for pair in pairs:
             self.pair_at = time.monotonic()
+            if self.restricted_since is not None:
+                stamp = max(pair['image_stamp'], pair['scan_stamp'])
+                recovery_start = self.restricted_since[1]
+                if (pair['direction'] == 'AGREE' and not pair['alert']
+                        and min(pair['image_stamp'], pair['scan_stamp']) >= recovery_start):
+                    if (self.last_recovery_pair is None or
+                            stamp - self.last_recovery_pair > self.visual_cfg['pair_timeout']):
+                        self.recovery_pair_count = 0
+                    self.last_recovery_pair = stamp
+                    self.recovery_pair_count += 1
+                else:
+                    self.recovery_pair_count = 0
+                    self.last_recovery_pair = None
             pair['red_ratio'] = self.ratios.get(pair['image_stamp'])
             self.pair_writer.writerow(pair)
             self.pair_log.flush()
@@ -130,7 +173,30 @@ class CameraLidarMonitor(LidarBaseline):
                 max_stamp_age_sim=self.cfg['max_stamp_age_sim'], pair_timeout=self.visual_cfg['pair_timeout'])
             self.get_logger().warning('INPUT_FRESHNESS_FAILED: ' + json.dumps(snapshot))
             self.timeout_diagnostic_logged = True
-        return ready, fresh
+        if not self.visual_cfg['three_state_enabled']:
+            return ready, fresh
+
+        camera_fresh = (self.image_at is not None
+                        and wall - self.image_at <= self.cfg['sensor_timeout_wall']
+                        and -.05 <= sim-self.image_stamp <= self.visual_cfg['restricted_camera_age_sim'])
+        if self.restricted_since is None and self.controller.started and not camera_fresh:
+            self.restricted_since = (wall, sim)
+            self.recovery_pair_count = 0
+            self.last_recovery_pair = None
+        if self.restricted_since is not None:
+            started_wall, started_sim = self.restricted_since
+            if max(wall-started_wall, sim-started_sim) >= self.visual_cfg['restricted_timeout']:
+                self.controller.stop('SENSOR_TIMEOUT')
+                return ready, False
+            if fresh and camera_fresh and self.recovery_pair_count >= self.visual_cfg['recovery_pairs']:
+                self.restricted_since = None
+            else:
+                # The parent tick still enforces LiDAR and odometry freshness,
+                # obstacle clearance, command ownership and the route endpoint.
+                self.controller.restricted = True
+                return ready, True
+        self.controller.restricted = False
+        return ready, fresh and camera_fresh
 
 
 def main(args=None):

@@ -1,0 +1,9 @@
+{
+  "trials": 200,
+  "sha256": "b4e36af8e13715d9a46f7142014cc975fbe4f05faff8a2949162dfbcfc37f4f5",
+  "excluded": [
+    "full-rate or per-trial camera imagery",
+    "raw bit-exact noise payload arrays",
+    "Gazebo startup logs"
+  ]
+}
