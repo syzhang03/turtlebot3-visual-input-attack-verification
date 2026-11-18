@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>tb3_lidar_attack</name><version>0.1.0</version>
+  <description>Logged LiDAR range-bias injection for controlled Gazebo experiments.</description>
+  <maintainer email="maintainer@example.com">DASE7508 team</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_python</buildtool_depend>
+  <exec_depend>rclpy</exec_depend><exec_depend>rcl_interfaces</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>launch</exec_depend><exec_depend>launch_ros</exec_depend>
+  <test_depend>python3-pytest</test_depend>
+  <test_depend>tb3_lidar_baseline</test_depend>
+  <test_depend>tb3_camera_lidar_monitor</test_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

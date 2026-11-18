@@ -19,6 +19,18 @@ def stopping_distance(speed, clearance, reaction_time, deceleration):
     return clearance + speed * reaction_time + speed * speed / (2 * deceleration)
 
 
+def configured_stop_distance(speed, clearance, reaction_time, deceleration,
+                             mode='dynamic', fixed_distance=1.0):
+    """Select a braking-model distance or an explicitly calibrated scene boundary."""
+    if mode not in ('dynamic', 'fixed'):
+        raise ValueError('stop_distance_mode must be dynamic or fixed')
+    if not math.isfinite(fixed_distance) or fixed_distance <= 0:
+        raise ValueError('fixed_stop_distance must be finite and positive')
+    if mode == 'fixed':
+        return fixed_distance
+    return stopping_distance(speed, clearance, reaction_time, deceleration)
+
+
 def corridor_scan(ranges, angle_min, angle_increment, range_min, range_max,
                   tx, ty, yaw, half_width, front_extent, lookahead,
                   allow_positive_infinity=True):

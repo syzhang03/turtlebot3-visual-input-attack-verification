@@ -5,7 +5,7 @@ import unittest
 try:
     import rclpy
     from rclpy.executors import SingleThreadedExecutor
-    from rclpy.qos import qos_profile_sensor_data
+    from rclpy.qos import QoSProfile, ReliabilityPolicy, qos_profile_sensor_data
     from sensor_msgs.msg import Image, LaserScan
     from nav_msgs.msg import Odometry
     from tb3_camera_lidar_monitor.node import CameraLidarMonitor
@@ -16,19 +16,23 @@ except ImportError:
 
 @unittest.skipUnless(HAS_ROS, 'Requires real ROS and cv_bridge')
 class FusionRosTests(unittest.TestCase):
+    image_reliability = 'best_effort'
+
     def setUp(self):
         self.directory = tempfile.TemporaryDirectory()
         args = ['--ros-args']
         for value in ['enabled:=true', 'use_sim_time:=false', 'cmd_topic:=/fusion_test/cmd',
                       'scan_topic:=/fusion_test/scan', 'odom_topic:=/fusion_test/odom',
-                      'image_topic:=/fusion_test/image', 'speed:=0.1',
+                      'image_topic:=/fusion_test/image', f'image_reliability:={self.image_reliability}', 'speed:=0.1',
                       'sensor_timeout_wall:=0.5', 'pair_timeout:=0.4',
                       f'log_dir:={self.directory.name}']:
             args += ['-p', value]
         rclpy.init(args=args)
         self.node = CameraLidarMonitor()
         self.peer = rclpy.create_node('fusion_test_peer')
-        self.images = self.peer.create_publisher(Image, '/fusion_test/image', qos_profile_sensor_data)
+        qos = (QoSProfile(depth=1, reliability=ReliabilityPolicy.RELIABLE)
+               if self.image_reliability == 'reliable' else qos_profile_sensor_data)
+        self.images = self.peer.create_publisher(Image, '/fusion_test/image', qos)
         self.scans = self.peer.create_publisher(LaserScan, '/fusion_test/scan', qos_profile_sensor_data)
         self.odoms = self.peer.create_publisher(Odometry, '/fusion_test/odom', qos_profile_sensor_data)
         self.executor = SingleThreadedExecutor()
@@ -104,3 +108,8 @@ class FusionRosTests(unittest.TestCase):
         self.images.publish(Image())  # Zero stamp is older than the accepted clock.
         for _ in range(20): self.executor.spin_once(timeout_sec=.01)
         self.assertEqual(self.node.controller.state, 'FAULT')
+
+
+class FusionReliableRosTests(FusionRosTests):
+    """Run the same guard, pairing and timeout checks with reliable image delivery."""
+    image_reliability = 'reliable'

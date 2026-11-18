@@ -17,7 +17,7 @@ from nav_msgs.msg import Odometry
 from sensor_msgs.msg import LaserScan
 from tf2_ros import Buffer, TransformListener, TransformException
 
-from .core import Controller, ScanResult, corridor_scan, stopping_distance, wrap
+from .core import Controller, ScanResult, corridor_scan, configured_stop_distance, wrap
 
 
 def yaw(q):
@@ -37,6 +37,7 @@ class LidarBaseline(Node):
             base_frame='base_footprint', speed=1.0, goal_distance=4.0,
             enable_goal_stop=True, front_extent=0.15, corridor_half_width=0.20,
             min_clearance=0.35, reaction_time=0.30, braking_deceleration=1.0,
+            stop_distance_mode='dynamic', fixed_stop_distance=1.0,
             sensor_timeout_wall=2.0, max_stamp_age_sim=0.5, control_period=0.05,
             allow_positive_infinity=True, heading_gain=1.0, max_angular_speed=0.3,
             max_trial_seconds=120.0, log_dir='~/lidar-results')
@@ -82,10 +83,13 @@ class LidarBaseline(Node):
         self.wall_clock = Clock(clock_type=ClockType.STEADY_TIME)
         self.create_timer(self.cfg['control_period'], self.tick, clock=self.wall_clock)
         self.get_logger().info(f'Logs: {self.run_dir}; enabled={self.cfg["enabled"]}')
+        self.get_logger().info(f'LiDAR stop: mode={self.cfg["stop_distance_mode"]}; '
+                               f'threshold={self.threshold:.4f}m; speed={self.cfg["speed"]}')
 
     def stop_threshold(self, speed):
-        return stopping_distance(speed, self.cfg['min_clearance'],
-                                 self.cfg['reaction_time'], self.cfg['braking_deceleration'])
+        return configured_stop_distance(speed, self.cfg['min_clearance'],
+                                        self.cfg['reaction_time'], self.cfg['braking_deceleration'],
+                                        self.cfg['stop_distance_mode'], self.cfg['fixed_stop_distance'])
 
     def accept_stamp(self, msg, previous):
         stamp = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9

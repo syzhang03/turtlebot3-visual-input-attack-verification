@@ -1,0 +1,20 @@
+# Recorded profile from the operator's 2026-11-14 calibration/console reports.
+# Reproduce only with the same scene, robot collision/TF geometry and ROI.
+# This is a frozen reference, not a newly measured calibration on this machine.
+# Copy to configs/aligned_stop.yaml in a fresh clone; validate clean first.
+camera_lidar_monitor:
+  ros__parameters:
+    stop_distance_mode: fixed
+    fixed_stop_distance: 0.788
+    visual_stop_threshold: 0.4
+    visual_verify_threshold: 0.4
+    verify_near: 0.71
+    verify_far: 0.87
+    speed: 1.0
+    enable_goal_stop: false
+    calibration_mode: false
+    front_extent: 0.15
+    corridor_half_width: 0.2
+    base_frame: base_footprint
+    roi_top: 0.25
+    pair_tolerance: 0.06

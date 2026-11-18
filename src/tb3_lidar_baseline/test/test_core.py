@@ -1,7 +1,7 @@
 import math
 import unittest
 
-from tb3_lidar_baseline.core import Controller, corridor_scan, stopping_distance
+from tb3_lidar_baseline.core import Controller, corridor_scan, stopping_distance, configured_stop_distance
 
 
 class GeometryTests(unittest.TestCase):
@@ -55,6 +55,23 @@ class GeometryTests(unittest.TestCase):
     def test_larger_speed_requires_more_stopping_distance(self):
         self.assertAlmostEqual(stopping_distance(1.0, .35, .3, 1.0), 1.15)
         self.assertGreater(stopping_distance(1.2, .35, .3, 1.0), 1.15)
+
+    def test_fixed_boundary_is_not_added_to_dynamic_braking_distance(self):
+        for speed in (.3, 1., 1.2):
+            distance = configured_stop_distance(speed, .35, .3, 1., 'fixed', .77)
+            self.assertEqual(distance, .77)
+            c = Controller()
+            self.assertEqual(c.step(True, True, True, True, .78 <= distance, False, speed), speed)
+            self.assertEqual(c.step(True, True, True, True, .77 <= distance, False, speed), 0.)
+            self.assertEqual(c.state, 'OBSTACLE_STOP')
+
+    def test_default_remains_dynamic_and_bad_fixed_configuration_fails(self):
+        self.assertAlmostEqual(configured_stop_distance(1., .35, .3, 1.), 1.15)
+        for value in (0., -1., math.nan, math.inf):
+            with self.assertRaises(ValueError):
+                configured_stop_distance(1., .35, .3, 1., 'fixed', value)
+        with self.assertRaises(ValueError):
+            configured_stop_distance(1., .35, .3, 1., 'typo', .77)
 
 
 class ControlTests(unittest.TestCase):
