@@ -1,0 +1,13 @@
+{
+  "trial_count": 200,
+  "groups": 20,
+  "pairs": 100,
+  "unique_trial_ids": true,
+  "all_valid": true,
+  "false_stops": 28,
+  "scheduled_noise": 100,
+  "exposed_noise": 99,
+  "reference_group_metrics": "all 20 groups match on n, success, false stops, restricted and alert trials",
+  "obstacle_trials_above_0_35_m": 100,
+  "obstacle_trials_with_clearance": 100
+}
