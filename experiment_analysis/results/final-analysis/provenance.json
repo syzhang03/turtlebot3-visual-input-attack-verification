@@ -1,0 +1,8 @@
+{
+  "input": "trials.csv",
+  "input_sha256": "05d61d6e6147322bf0618db3701b549aed9d09f145edff8f34413e261258258b",
+  "script_sha256": "78e0dd9e5c4543bcf0db045dc36f42d7aa3bcb101ae18d55e0668488fa0d984f",
+  "python": "3.9.13",
+  "matplotlib": "3.9.4",
+  "activity": "Secondary analysis of supplied frozen CSV; no new simulation trials."
+}
